@@ -314,9 +314,11 @@ nav a:hover, nav a.active {
 
 .ribbon {
   display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   gap: 12px !important;
   width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
 }
 
 .ribbon-item {
@@ -351,6 +353,9 @@ nav a:hover, nav a.active {
 
 /* Section Styles */
 .section {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
   padding: 35px 4%;
 }
 
@@ -395,7 +400,8 @@ nav a:hover, nav a.active {
 
 .dept-card {
   position: relative;
-  height: 280px;
+  height: auto;
+  aspect-ratio: 4 / 5;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border-color);
@@ -440,7 +446,8 @@ nav a:hover, nav a.active {
 
 .product-img {
   position: relative;
-  height: 240px;
+  height: auto;
+  aspect-ratio: 4 / 5;
   background-color: #141418;
 }
 
@@ -548,6 +555,9 @@ footer {
 }
 
 .footer-grid {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
   gap: 24px;
@@ -605,6 +615,9 @@ footer {
 }
 
 .bottom-bar {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
   border-top: 1px solid var(--border-color);
   padding-top: 12px;
   display: flex;
@@ -647,4 +660,50 @@ footer {
   .hero-title { font-size: 1.4rem; }
   .product-img { height: 150px; }
   .dept-card { height: 160px; }
+}
+
+/* ================= LANDING PAGE RESPONSIVE OVERRIDES ================= */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .section { padding-inline: 24px; }
+  .ribbon-wrapper { padding-inline: 24px; }
+  .dept-card, .product-img { aspect-ratio: 4 / 5; }
+  .section-title { font-size: 0.95rem; }
+}
+
+@media (max-width: 768px) {
+  .top-bar { padding: 7px 14px; font-size: 0.5rem; }
+  .top-bar-right { font-size: 0.5rem; gap: 4px; }
+  header { top: 24px; padding: 10px 14px; }
+  .logo { font-size: 0.82rem; letter-spacing: 1.5px; }
+  .btn-login { padding: 5px 12px; font-size: 0.58rem; }
+  .hero-slider-wrapper { height: 72vh; min-height: 430px; }
+  .hero-title { font-size: clamp(1.55rem, 6.5vw, 2rem); line-height: 1.08; max-width: 92vw; }
+  .hero-desc { max-width: 340px; font-size: 0.6rem; line-height: 1.5; }
+  .section { max-width: 100%; padding: 28px 14px; }
+  .section-header { align-items: flex-end; gap: 12px; }
+  .section-title { font-size: 0.95rem; letter-spacing: 1.2px; }
+  .section-tag { font-size: 0.52rem; letter-spacing: 1.2px; }
+  .section-link { font-size: 0.52rem; white-space: nowrap; }
+  .ribbon-wrapper { padding: 0 14px 24px; }
+  .ribbon { grid-template-columns: 1fr !important; gap: 8px !important; }
+  .ribbon-item { padding: 14px 16px; }
+  .departments-grid, .products-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .dept-card, .product-img { height: auto; aspect-ratio: 4 / 5; }
+  .dept-title { font-size: 0.78rem; }
+  .product-title-overlay { font-size: 0.68rem; padding: 6px 9px; }
+  .product-info { padding: 10px 12px; }
+  .product-price-label { font-size: 0.55rem; }
+  .product-price { font-size: 0.8rem; }
+  .swatch { width: 8px; height: 8px; }
+  footer { padding: 30px 14px 16px; }
+  .footer-grid { grid-template-columns: 1fr !important; gap: 24px; }
+  .bottom-bar { gap: 8px; text-align: center; }
+}
+
+@media (max-width: 420px) {
+  .hero-slider-wrapper { min-height: 410px; }
+  .hero-title { font-size: 1.45rem; }
+  .section { padding-inline: 12px; }
+  .ribbon-wrapper { padding-inline: 12px; }
+  .dept-card, .product-img { aspect-ratio: 4 / 5; }
 }
