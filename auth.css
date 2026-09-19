@@ -1,11 +1,11 @@
-/* Auth Luxury Styling - Exact Original Match */
+/* Auth Luxury Styling - Exact Original Match & HD Crisp */
 :root {
   --bg-dark: #070709;
   --bg-light: #ffffff;
   --text-dark: #111827;
   --text-muted: #6b7280;
-  --accent-gold: #d4a373;
-  --accent-gold-hover: #bc8a5f;
+  --accent-gold: #dca855;
+  --accent-gold-hover: #c89544;
   --border-color: #d1d5db;
   --radius-sm: 6px;
   --transition: all 0.2s ease;
@@ -34,33 +34,33 @@ body.auth-body {
   min-height: 100vh;
 }
 
-/* Left Image Banner */
+/* Left Image Banner (Exact Original Image match) */
 .auth-banner {
-  background-image: linear-gradient(to bottom, rgba(8,8,10,0.2) 0%, rgba(8,8,10,0.6) 70%, rgba(8,8,10,0.85) 100%), url('assets/landing/hero-1.jpg');
+  background-image: linear-gradient(to bottom, rgba(8,8,10,0.1) 0%, rgba(8,8,10,0.5) 70%, rgba(8,8,10,0.85) 100%), url('assets/landing/hero-1.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 50px;
+  padding: 60px;
   color: #ffffff;
 }
 
 .auth-banner-content {
-  max-width: 420px;
+  max-width: 450px;
 }
 
 .auth-brand {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   margin-bottom: 4px;
 }
 
 .auth-tagline {
-  font-size: 0.7rem;
-  letter-spacing: 1.5px;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--accent-gold);
   font-weight: 700;
@@ -69,7 +69,7 @@ body.auth-body {
 /* Right Form Wrapper - Exactly Centered & Slim */
 .auth-form-wrapper {
   background-color: var(--bg-light);
-  padding: 40px 20px;
+  padding: 40px 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,10 +79,10 @@ body.auth-body {
   max-height: 100vh;
 }
 
-/* Inner container to restrict width to exact original size */
+/* Inner container to restrict width to exact original proportions */
 .auth-form-wrapper > * {
   width: 100%;
-  max-width: 400px;
+  max-width: 390px;
 }
 
 .back-home-btn {
@@ -91,7 +91,7 @@ body.auth-body {
   gap: 6px;
   font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   color: var(--text-dark);
   border: 1px solid var(--border-color);
   padding: 6px 14px;
@@ -233,8 +233,8 @@ body.auth-body {
 /* Submit Button */
 .btn-submit {
   width: 100%;
-  background-color: #d4a373;
-  color: #ffffff;
+  background-color: var(--accent-gold);
+  color: #070709;
   border: none;
   padding: 10.5px;
   border-radius: var(--radius-sm);
@@ -244,10 +244,11 @@ body.auth-body {
   cursor: pointer;
   transition: var(--transition);
   margin-top: 6px;
+  box-shadow: 0 4px 12px rgba(220, 168, 85, 0.25);
 }
 
 .btn-submit:hover {
-  background-color: #bc8a5f;
+  background-color: var(--accent-gold-hover);
 }
 
 .form-switch-text {

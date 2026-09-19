@@ -12,7 +12,7 @@
 <body class="auth-body">
 
   <div class="auth-container">
-    <!-- Left Banner Side -->
+    <!-- Left Banner Side (Exact Original Image & Branding) -->
     <div class="auth-banner">
       <div class="auth-banner-content">
         <h1 class="auth-brand">SOGO REVIEWS</h1>
@@ -25,7 +25,7 @@
       
       <!-- Back to Home -->
       <a href="index.html" class="back-home-btn">
-        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         BACK TO HOME
       </a>
 
@@ -50,7 +50,7 @@
               <a href="#" class="forgot-link">Forgot password?</a>
             </div>
             <div class="password-wrap">
-              <input type="password" id="loginPass" placeholder="••••••••••••" required>
+              <input type="password" id="loginPass" placeholder="" required>
               <button type="button" class="eye-btn" onclick="togglePassword('loginPass', this)">
                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
               </button>
@@ -135,10 +135,10 @@
       const input = document.getElementById(fieldId);
       if (input.type === "password") {
         input.type = "text";
-        btn.style.color = "var(--accent-gold)";
+        btn.style.color = "#d4a373";
       } else {
         input.type = "password";
-        btn.style.color = "#8e8e98";
+        btn.style.color = "#6b7280";
       }
     }
   </script>
