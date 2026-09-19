@@ -11,15 +11,15 @@
   <style>
     :root {
       --bg-dark: #08080a;
-      --bg-card: #121216;
-      --bg-card-hover: #181820;
+      --bg-card: #111115;
+      --bg-card-hover: #16161c;
       --accent: #dca855;
       --accent-hover: #c89544;
       --text-main: #ffffff;
       --text-muted: #8e8e98;
       --border-color: #1e1e26;
       --radius-sm: 6px;
-      --radius-md: 12px;
+      --radius-md: 16px;
       --radius-lg: 20px;
     }
 
@@ -140,10 +140,11 @@
     /* Hero Section */
     .hero-slider-wrapper {
       position: relative;
-      height: 90vh;
-      min-height: 600px;
+      height: 85vh;
+      min-height: 580px;
       width: 100%;
       overflow: hidden;
+      background-color: var(--bg-dark);
     }
 
     .hero-slide {
@@ -156,7 +157,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 120px 20px 80px;
+      padding: 120px 20px 100px;
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -167,16 +168,17 @@
       z-index: 1;
     }
 
+    /* Dark Fade at Bottom of Hero for Smooth Transition to Ribbon */
     .hero-slide-1 {
-      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(8, 8, 10, 0.2) 50%, rgba(8, 8, 10, 0.5) 100%), url('assets/landing/hero-1.jpg');
+      background-image: linear-gradient(to bottom, rgba(8,8,10,0.4) 0%, rgba(8,8,10,0.1) 40%, rgba(8,8,10,0.95) 90%, #08080a 100%), url('assets/landing/hero-1.jpg');
     }
 
     .hero-slide-2 {
-      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(8, 8, 10, 0.2) 50%, rgba(8, 8, 10, 0.5) 100%), url('assets/landing/hero-2.jpg');
+      background-image: linear-gradient(to bottom, rgba(8,8,10,0.4) 0%, rgba(8,8,10,0.1) 40%, rgba(8,8,10,0.95) 90%, #08080a 100%), url('assets/landing/hero-2.jpg');
     }
 
     .hero-slide-3 {
-      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(8, 8, 10, 0.2) 50%, rgba(8, 8, 10, 0.5) 100%), url('assets/landing/hero-3.jpg');
+      background-image: linear-gradient(to bottom, rgba(8,8,10,0.4) 0%, rgba(8,8,10,0.1) 40%, rgba(8,8,10,0.95) 90%, #08080a 100%), url('assets/landing/hero-3.jpg');
     }
 
     .hero-subtitle {
@@ -254,22 +256,22 @@
     .slider-arrow.prev { left: 20px; }
     .slider-arrow.next { right: 20px; }
 
-    /* Hero Slider Indicator Bars */
+    /* Exact Original Hero Slider Indicator Bars */
     .hero-slider-bars {
       position: absolute;
-      bottom: 50px;
+      bottom: 25px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 10px;
+      gap: 12px;
       z-index: 50;
       align-items: center;
     }
 
     .slider-bar {
-      width: 28px;
+      width: 32px;
       height: 3px;
-      background-color: rgba(255, 255, 255, 0.25);
+      background-color: rgba(255, 255, 255, 0.2);
       border-radius: 2px;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -277,49 +279,59 @@
 
     .slider-bar.active {
       background-color: var(--accent);
-      width: 42px;
+      width: 44px;
       height: 3px;
     }
 
-    /* Original Highlights Ribbon */
-    .ribbon {
-      display: grid !important;
-      grid-template-columns: repeat(3, 1fr) !important;
-      gap: 16px !important;
-      padding: 0 5%;
-      margin-top: -25px;
+    /* Original Matching Ribbon Highlights Section */
+    .ribbon-wrapper {
+      background-color: #08080a;
+      padding: 0 5% 40px;
       position: relative;
       z-index: 30;
     }
 
+    .ribbon {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 18px !important;
+      width: 100%;
+    }
+
     .ribbon-item {
-      background: rgba(18, 18, 22, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 18px 22px;
+      background: #111115;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 24px 28px;
       border-radius: var(--radius-md);
-      backdrop-filter: blur(12px);
+      transition: border-color 0.3s;
+    }
+
+    .ribbon-item:hover {
+      border-color: rgba(220, 168, 85, 0.3);
     }
 
     .ribbon-accent-line {
-      width: 20px;
+      width: 28px;
       height: 2px;
       background-color: var(--accent);
-      margin-bottom: 10px;
+      margin-bottom: 16px;
       border-radius: 1px;
     }
 
     .ribbon-item h4 {
-      font-size: 0.72rem;
-      letter-spacing: 1.5px;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 8px;
       font-weight: 700;
+      color: var(--accent);
     }
 
     .ribbon-item p {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
-      line-height: 1.4;
+      line-height: 1.5;
+      font-weight: 400;
     }
 
     /* Section Styles */
@@ -671,7 +683,7 @@
       <a href="auth.html" class="btn-primary">Shop Collection &rarr;</a>
     </div>
 
-    <!-- Slider Bars -->
+    <!-- Slider Indicator Bars -->
     <div class="hero-slider-bars">
       <div class="slider-bar active" onclick="goToSlide(0)"></div>
       <div class="slider-bar" onclick="goToSlide(1)"></div>
@@ -679,22 +691,24 @@
     </div>
   </div>
 
-  <!-- Highlights Ribbon Cards -->
-  <div class="ribbon">
-    <div class="ribbon-item">
-      <div class="ribbon-accent-line"></div>
-      <h4>Quality Apparel</h4>
-      <p>High-quality fabrics and construction for every piece.</p>
-    </div>
-    <div class="ribbon-item">
-      <div class="ribbon-accent-line"></div>
-      <h4>Trending Styles</h4>
-      <p>Stay ahead of the curve with our curated collections.</p>
-    </div>
-    <div class="ribbon-item">
-      <div class="ribbon-accent-line"></div>
-      <h4>Fast Delivery</h4>
-      <p>Get your orders quickly with our streamlined shipping.</p>
+  <!-- Highlights Ribbon Cards Section -->
+  <div class="ribbon-wrapper">
+    <div class="ribbon">
+      <div class="ribbon-item">
+        <div class="ribbon-accent-line"></div>
+        <h4>Quality Apparel</h4>
+        <p>High-quality fabrics and construction for every piece.</p>
+      </div>
+      <div class="ribbon-item">
+        <div class="ribbon-accent-line"></div>
+        <h4>Trending Styles</h4>
+        <p>Stay ahead of the curve with our curated collections.</p>
+      </div>
+      <div class="ribbon-item">
+        <div class="ribbon-accent-line"></div>
+        <h4>Fast Delivery</h4>
+        <p>Get your orders quickly with our streamlined shipping.</p>
+      </div>
     </div>
   </div>
 
