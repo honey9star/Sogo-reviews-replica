@@ -42,7 +42,7 @@
       text-decoration: none;
     }
 
-    /* 1. Square 1: Top Bar (Transparent & 24/7 Support) */
+    /* Top Bar */
     .top-bar {
       background: rgba(10, 10, 12, 0.6);
       backdrop-filter: blur(8px);
@@ -139,19 +139,45 @@
       color: var(--accent);
     }
 
-    /* Hero Section */
-    .hero {
+    /* Interactive Hero Slider Section */
+    .hero-slider-wrapper {
       position: relative;
       height: 72vh;
       min-height: 480px;
-      background: linear-gradient(to top, var(--bg-dark), rgba(10, 10, 12, 0.2)), 
-            url('assets/landing/hero-1.jpg') center/cover no-repeat;
+      overflow: hidden;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       padding: 0 20px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .hero-slide-1 {
+      background-image: linear-gradient(to top, var(--bg-dark), rgba(10, 10, 12, 0.2)), url('assets/landing/hero-1.jpg');
+    }
+
+    .hero-slide-2 {
+      background-image: linear-gradient(to top, var(--bg-dark), rgba(10, 10, 12, 0.2)), url('assets/landing/hero-2.jpg');
+    }
+
+    .hero-slide-3 {
+      background-image: linear-gradient(to top, var(--bg-dark), rgba(10, 10, 12, 0.2)), url('assets/landing/hero-3.jpg');
     }
 
     .hero-subtitle {
@@ -199,26 +225,62 @@
       transform: translateY(-2px);
     }
 
-    /* 2. Square 2: Hero Slider Indicator Bars */
-    .hero-slider-bars {
+    /* Slider Arrows */
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: #fff;
       display: flex;
-      gap: 6px;
-      margin-top: 36px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .slider-arrow:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    .slider-arrow.prev { left: 20px; }
+    .slider-arrow.next { right: 20px; }
+
+    /* Hero Slider Indicator Bars */
+    .hero-slider-bars {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
     }
 
     .slider-bar {
-      width: 24px;
-      height: 3px;
-      background-color: rgba(255, 255, 255, 0.2);
+      width: 30px;
+      height: 4px;
+      background-color: rgba(255, 255, 255, 0.25);
       border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
     .slider-bar.active {
       background-color: var(--accent);
-      width: 32px;
+      width: 45px;
+      box-shadow: 0 0 8px rgba(220, 168, 85, 0.6);
     }
 
-    /* 3. Square 3: Highlights Ribbon (Matching Theme & Size) */
+    /* Highlights Ribbon */
     .ribbon {
       display: grid !important;
       grid-template-columns: repeat(3, 1fr) !important;
@@ -226,7 +288,7 @@
       padding: 0 5%;
       margin-top: -30px;
       position: relative;
-      z-index: 10;
+      z-index: 20;
     }
 
     .ribbon-item {
@@ -291,7 +353,7 @@
       color: var(--text-main);
     }
 
-    /* Signature Departments (4 Columns) */
+    /* Signature Departments */
     .departments-grid {
       display: grid !important;
       grid-template-columns: repeat(4, 1fr) !important;
@@ -335,7 +397,7 @@
       text-transform: uppercase;
     }
 
-    /* Products Grid (4 Columns x 2 Rows) */
+    /* Products Grid */
     .products-grid {
       display: grid !important;
       grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
@@ -384,7 +446,7 @@
       color: #fff;
     }
 
-    /* 4. Square 4: Product Bottom Card & Color Swatches */
+    /* Product Bottom Card & Swatches */
     .product-info {
       padding: 10px 14px;
       background-color: #14141a;
@@ -433,7 +495,7 @@
     .swatch-blue { background-color: #3b82f6; }
     .swatch-green { background-color: #22c55e; }
 
-    /* 5. Square 5: Live Chat Floating Button */
+    /* Live Chat Floating Button */
     .floating-chat-btn {
       position: fixed;
       bottom: 18px;
@@ -544,11 +606,11 @@
 </head>
 <body>
 
-  <!-- Square 1: Top Bar with Transparent Theme & 24/7 Support -->
+  <!-- Top Bar -->
   <div class="top-bar">
     <div class="top-bar-left">CURRENCY: <span>USD</span></div>
     <div class="top-bar-right">
-      <span class="status-dot"></span> Online Support 24/7
+      <span class="status-dot"></span> Live chat support • 24/7
     </div>
   </div>
 
@@ -569,22 +631,46 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-subtitle">Curated by SOGO Reviews</div>
-    <h1 class="hero-title">Elevated Womenswear</h1>
-    <p class="hero-desc">Upgrade your wardrobe with our latest arrivals and exclusive collections for a superior fashion presentation.</p>
-    <a href="auth.html" class="btn-primary">Shop Collection &rarr;</a>
+  <!-- Interactive 3-Slide Hero Section -->
+  <div class="hero-slider-wrapper">
+    
+    <!-- Navigation Arrows -->
+    <button class="slider-arrow prev" onclick="moveSlide(-1)">&lt;</button>
+    <button class="slider-arrow next" onclick="moveSlide(1)">&gt;</button>
 
-    <!-- Square 2: Hero Slider Indicator Bars -->
-    <div class="hero-slider-bars">
-      <div class="slider-bar active"></div>
-      <div class="slider-bar"></div>
-      <div class="slider-bar"></div>
+    <!-- Slide 1 -->
+    <div class="hero-slide hero-slide-1 active">
+      <div class="hero-subtitle">Curated by SOGO Reviews</div>
+      <h1 class="hero-title">Elevated Womenswear</h1>
+      <p class="hero-desc">Upgrade your wardrobe with our latest arrivals and exclusive collections for a superior fashion presentation.</p>
+      <a href="auth.html" class="btn-primary">Shop Collection &rarr;</a>
     </div>
-  </section>
 
-  <!-- Square 3: Highlights Ribbon -->
+    <!-- Slide 2 -->
+    <div class="hero-slide hero-slide-2">
+      <div class="hero-subtitle">Curated by SOGO Reviews</div>
+      <h1 class="hero-title">Private Seasonal Edit</h1>
+      <p class="hero-desc">Upgrade your wardrobe with our latest arrivals and exclusive collections for a superior fashion presentation.</p>
+      <a href="auth.html" class="btn-primary">Shop Collection &rarr;</a>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="hero-slide hero-slide-3">
+      <div class="hero-subtitle">Curated by SOGO Reviews</div>
+      <h1 class="hero-title">Statement Silhouettes</h1>
+      <p class="hero-desc">Upgrade your wardrobe with our latest arrivals and exclusive collections for a superior fashion presentation.</p>
+      <a href="auth.html" class="btn-primary">Shop Collection &rarr;</a>
+    </div>
+
+    <!-- Indicator Bars -->
+    <div class="hero-slider-bars">
+      <div class="slider-bar active" onclick="goToSlide(0)"></div>
+      <div class="slider-bar" onclick="goToSlide(1)"></div>
+      <div class="slider-bar" onclick="goToSlide(2)"></div>
+    </div>
+  </div>
+
+  <!-- Highlights Ribbon -->
   <div class="ribbon">
     <div class="ribbon-item">
       <h4>Quality Apparel</h4>
@@ -648,7 +734,6 @@
       <a href="#" class="section-link">Shop Collection &rarr;</a>
     </div>
 
-    <!-- Square 4: Products Grid with Price Label and Color Swatches -->
     <div class="products-grid">
       <!-- Item 1 -->
       <div class="product-card">
@@ -845,10 +930,55 @@
     </div>
   </footer>
 
-  <!-- Square 5: Live Chat Floating Button -->
+  <!-- Live Chat Floating Button -->
   <button class="floating-chat-btn" onclick="window.location.href='auth.html'">
     <span>&#128172;</span> LIVE CHAT
   </button>
+
+  <!-- Hero Slider Script -->
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const bars = document.querySelectorAll('.slider-bar');
+    let autoSlideInterval;
+
+    function showSlide(index) {
+      if (index >= slides.length) currentSlide = 0;
+      else if (index < 0) currentSlide = slides.length - 1;
+      else currentSlide = index;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+      });
+
+      bars.forEach((bar, i) => {
+        bar.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    function moveSlide(step) {
+      showSlide(currentSlide + step);
+      resetAutoSlide();
+    }
+
+    function goToSlide(index) {
+      showSlide(index);
+      resetAutoSlide();
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 5000);
+    }
+
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+    }
+
+    startAutoSlide();
+  </script>
 
 </body>
 </html>
