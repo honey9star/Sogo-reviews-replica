@@ -519,7 +519,7 @@ nav a:hover, nav a.active {
 .swatch-black { background-color: #0f172a; }
 .swatch-gold { background-color: #dca855; }
 
-/* Floating Live Chat Button */
+/* Floating Live Chat Button (Web View: Has text) */
 .floating-chat-btn {
   position: fixed;
   bottom: 16px;
@@ -527,9 +527,9 @@ nav a:hover, nav a.active {
   background-color: var(--accent-gold);
   color: #000;
   border: none;
-  padding: 6px 12px;
+  padding: 8px 16px;
   border-radius: 50px;
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -537,13 +537,13 @@ nav a:hover, nav a.active {
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   z-index: 999;
 }
 
 .floating-chat-btn svg {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   fill: currentColor;
 }
 
@@ -653,4 +653,23 @@ footer {
   
   .footer-grid { grid-template-columns: 1fr; gap: 20px; }
   .bottom-bar { flex-direction: column; gap: 5px; text-align: center; }
+
+  /* Mobile view mein chat button ko sirf circular icon banana */
+  .floating-chat-btn {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .floating-chat-btn .chat-text {
+    display: none;
+  }
+
+  .floating-chat-btn svg {
+    width: 18px;
+    height: 18px;
+  }
 }
