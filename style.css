@@ -1,4 +1,4 @@
-/* Dark Luxury Theme - Fixed Zoom & Standard Proportions */
+/* Dark Luxury Theme - Exact Proportions & Scale Correction */
 :root {
   --bg-dark: #08080a;
   --bg-card: #111115;
@@ -13,7 +13,6 @@
   --radius-lg: 16px;
 }
 
-/* Base Styling */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -21,7 +20,7 @@
 }
 
 html {
-  font-size: 16px; /* Standard browser base size taaki zoom out na lage */
+  font-size: 16px;
 }
 
 body {
@@ -41,9 +40,9 @@ a {
 
 /* Top Bar */
 .top-bar {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.7);
-  padding: 10px 5%;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 12px 5%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -55,7 +54,7 @@ a {
   width: 100%;
   z-index: 101;
   background: linear-gradient(to bottom, rgba(8, 8, 10, 0.95), rgba(8, 8, 10, 0));
-  letter-spacing: 1.2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -76,12 +75,12 @@ a {
 
 /* Header Navigation */
 header {
-  padding: 18px 5%;
+  padding: 20px 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  top: 32px;
+  top: 36px;
   left: 0;
   width: 100%;
   z-index: 100;
@@ -89,22 +88,22 @@ header {
 
 .logo {
   font-weight: 800;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 nav {
   display: flex;
-  gap: 24px;
+  gap: 28px;
 }
 
 nav a {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.8);
   transition: color 0.3s;
 }
 
@@ -114,9 +113,9 @@ nav a:hover, nav a.active {
 
 .btn-login {
   border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 6px 18px;
+  padding: 8px 22px;
   border-radius: 50px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -132,8 +131,8 @@ nav a:hover, nav a.active {
 /* Hero Section & Slider */
 .hero-slider-wrapper {
   position: relative;
-  height: 85vh;
-  min-height: 550px;
+  height: 88vh;
+  min-height: 600px;
   width: 100%;
   overflow: hidden;
   background-color: var(--bg-dark);
@@ -149,7 +148,7 @@ nav a:hover, nav a.active {
   justify-content: flex-end;
   align-items: center;
   text-align: center;
-  padding: 0 20px 80px;
+  padding: 0 20px 90px;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -176,13 +175,13 @@ nav a:hover, nav a.active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 750px;
-  margin-bottom: 15px;
+  max-width: 850px;
+  margin-bottom: 20px;
 }
 
 .hero-subtitle {
-  font-size: 0.75rem;
-  letter-spacing: 2px;
+  font-size: 0.8rem;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--accent-gold);
   margin-bottom: 8px;
@@ -190,18 +189,18 @@ nav a:hover, nav a.active {
 }
 
 .hero-title {
-  font-size: 2.8rem;
+  font-size: 3.2rem;
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   line-height: 1.1;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .hero-desc {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 520px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 580px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   margin-bottom: 24px;
@@ -211,9 +210,9 @@ nav a:hover, nav a.active {
 .btn-gold-box {
   background-color: var(--accent-gold);
   color: #000000;
-  padding: 12px 24px;
+  padding: 14px 28px;
   border-radius: var(--radius-sm);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -232,8 +231,8 @@ nav a:hover, nav a.active {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
@@ -244,7 +243,7 @@ nav a:hover, nav a.active {
   cursor: pointer;
   z-index: 50;
   transition: all 0.3s;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .slider-arrow:hover {
@@ -253,13 +252,13 @@ nav a:hover, nav a.active {
   border-color: var(--accent-gold);
 }
 
-.slider-arrow.prev { left: 24px; }
-.slider-arrow.next { right: 24px; }
+.slider-arrow.prev { left: 28px; }
+.slider-arrow.next { right: 28px; }
 
 /* Indicator Bars */
 .hero-slider-bars {
   position: absolute;
-  bottom: 24px;
+  bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -269,7 +268,7 @@ nav a:hover, nav a.active {
 }
 
 .slider-bar {
-  width: 30px;
+  width: 35px;
   height: 3px;
   background-color: rgba(255, 255, 255, 0.25);
   border-radius: 2px;
@@ -279,13 +278,13 @@ nav a:hover, nav a.active {
 
 .slider-bar.active {
   background-color: var(--accent-gold);
-  width: 45px;
+  width: 50px;
 }
 
 /* Ribbon Highlights */
 .ribbon-wrapper {
   background-color: #08080a;
-  padding: 0 5% 40px;
+  padding: 0 5% 50px;
   position: relative;
   z-index: 30;
 }
@@ -293,21 +292,21 @@ nav a:hover, nav a.active {
 .ribbon {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1450px;
   margin-inline: auto;
 }
 
 .ribbon-item {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  padding: 24px;
+  padding: 28px;
   border-radius: var(--radius-md);
 }
 
 .ribbon-accent-line {
-  width: 25px;
+  width: 28px;
   height: 2px;
   background-color: var(--accent-gold);
   margin-bottom: 12px;
@@ -315,16 +314,16 @@ nav a:hover, nav a.active {
 }
 
 .ribbon-item h4 {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-weight: 700;
   color: var(--accent-gold);
 }
 
 .ribbon-item p {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
   line-height: 1.5;
 }
@@ -332,27 +331,27 @@ nav a:hover, nav a.active {
 /* Section Styles */
 .section {
   width: 100%;
-  max-width: 1300px;
+  max-width: 1450px;
   margin-inline: auto;
-  padding: 50px 5%;
+  padding: 60px 5%;
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 24px;
+  margin-bottom: 30px;
 }
 
 .section-title {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
 .section-tag {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--accent-gold);
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -361,7 +360,7 @@ nav a:hover, nav a.active {
 }
 
 .section-link {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.8px;
   text-transform: uppercase;
@@ -377,7 +376,7 @@ nav a:hover, nav a.active {
 .departments-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 24px;
   width: 100%;
 }
 
@@ -406,21 +405,21 @@ nav a:hover, nav a.active {
   background: linear-gradient(to top, rgba(8,8,10,0.85) 0%, transparent 60%);
   display: flex;
   align-items: flex-end;
-  padding: 20px;
+  padding: 24px;
 }
 
 .dept-title {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
-/* Products Grid Layout - Exactly 4 Columns */
+/* Products Grid Layout - Exactly 4 Columns with Larger Cards */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px 20px;
+  gap: 30px 24px;
   width: 100%;
 }
 
@@ -434,7 +433,7 @@ nav a:hover, nav a.active {
   overflow: hidden;
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .product-img {
@@ -457,10 +456,10 @@ nav a:hover, nav a.active {
 
 .product-action-icon {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
-  width: 32px;
-  height: 32px;
+  bottom: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
   background: rgba(8, 8, 10, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
@@ -471,15 +470,15 @@ nav a:hover, nav a.active {
 }
 
 .product-action-icon svg {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   stroke: currentColor;
   stroke-width: 2;
   fill: none;
 }
 
 .product-title-bar {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -491,12 +490,12 @@ nav a:hover, nav a.active {
 .product-info-pill {
   background-color: #ffffff;
   color: #0f172a;
-  padding: 10px 14px;
+  padding: 12px 16px;
   border-radius: var(--radius-md);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .product-price-box {
@@ -505,7 +504,7 @@ nav a:hover, nav a.active {
 }
 
 .product-price-label {
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   color: #64748b;
   letter-spacing: 0.8px;
   text-transform: uppercase;
@@ -513,20 +512,20 @@ nav a:hover, nav a.active {
 }
 
 .product-price {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 800;
   color: #0f172a;
 }
 
 .color-swatches {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
 }
 
 .swatch {
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.15);
 }
@@ -539,14 +538,14 @@ nav a:hover, nav a.active {
 /* Floating Live Chat Button */
 .floating-chat-btn {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 28px;
+  right: 28px;
   background-color: var(--accent-gold);
   color: #000;
   border: none;
-  padding: 12px 20px;
+  padding: 14px 24px;
   border-radius: 50px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -573,17 +572,17 @@ nav a:hover, nav a.active {
 footer {
   background-color: #050507;
   border-top: 1px solid var(--border-color);
-  padding: 60px 5% 25px;
+  padding: 70px 5% 30px;
 }
 
 .footer-grid {
   width: 100%;
-  max-width: 1300px;
+  max-width: 1450px;
   margin-inline: auto;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
-  gap: 30px;
-  margin-bottom: 40px;
+  gap: 35px;
+  margin-bottom: 45px;
 }
 
 .footer-brand h3 {
@@ -596,11 +595,11 @@ footer {
 .footer-brand p {
   font-size: 0.78rem;
   color: var(--text-muted);
-  max-width: 280px;
+  max-width: 300px;
 }
 
 .footer-col h4 {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   margin-bottom: 14px;
@@ -648,13 +647,13 @@ footer {
 
 .bottom-bar {
   width: 100%;
-  max-width: 1300px;
+  max-width: 1450px;
   margin-inline: auto;
   border-top: 1px solid var(--border-color);
   padding-top: 20px;
   display: flex;
   justify-content: space-between;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
@@ -662,11 +661,11 @@ footer {
 @media (max-width: 1024px) {
   .departments-grid, .products-grid { 
     grid-template-columns: repeat(2, 1fr); 
-    gap: 16px;
+    gap: 18px;
   }
   .ribbon { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
-  .hero-title { font-size: 2.2rem; }
+  .hero-title { font-size: 2.4rem; }
 }
 
 @media (max-width: 768px) {
