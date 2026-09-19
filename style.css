@@ -1,4 +1,4 @@
-/* Dark Luxury Theme - Final Edge-to-Edge Fluid Scale */
+/* Dark Luxury Theme - Full Width Spread Correction */
 :root {
   --bg-dark: #08080a;
   --bg-card: #111115;
@@ -20,11 +20,11 @@
 html, body {
   width: 100%;
   overflow-x: hidden;
-  background-color: var(--bg-dark);
 }
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-dark);
   color: var(--text-main);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -39,7 +39,7 @@ a {
 .top-bar {
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.75);
-  padding: 12px 2.5%;
+  padding: 12px 4%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -70,7 +70,7 @@ a {
 
 /* Header Navigation */
 header {
-  padding: 20px 2.5%;
+  padding: 20px 4%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -276,7 +276,7 @@ nav a:hover, nav a.active {
 /* Ribbon Highlights */
 .ribbon-wrapper {
   background-color: #08080a;
-  padding: 0 2.5% 40px;
+  padding: 0 4% 40px;
   width: 100%;
 }
 
@@ -314,10 +314,10 @@ nav a:hover, nav a.active {
   color: var(--text-muted);
 }
 
-/* Section Styles - Full Width Liquid Spread */
+/* Section Styles - Full Width Spread */
 .section {
   width: 100%;
-  padding: 50px 2.5%;
+  padding: 50px 4%;
 }
 
 .section-header {
@@ -556,7 +556,7 @@ nav a:hover, nav a.active {
 footer {
   background-color: #050507;
   border-top: 1px solid var(--border-color);
-  padding: 70px 2.5% 30px;
+  padding: 70px 4% 30px;
   width: 100%;
 }
 
