@@ -1,4 +1,4 @@
-/* Dark Luxury Theme - Exact Proportions & Scale Correction */
+/* Dark Luxury Theme - Fixed Width & Margin Proportions */
 :root {
   --bg-dark: #08080a;
   --bg-card: #111115;
@@ -42,7 +42,7 @@ a {
 .top-bar {
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.75);
-  padding: 12px 5%;
+  padding: 12px 3%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -75,7 +75,7 @@ a {
 
 /* Header Navigation */
 header {
-  padding: 20px 5%;
+  padding: 20px 3%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -281,10 +281,10 @@ nav a:hover, nav a.active {
   width: 50px;
 }
 
-/* Ribbon Highlights */
+/* Ribbon Highlights - Expanded to full width */
 .ribbon-wrapper {
   background-color: #08080a;
-  padding: 0 5% 50px;
+  padding: 0 2% 40px;
   position: relative;
   z-index: 30;
 }
@@ -292,16 +292,16 @@ nav a:hover, nav a.active {
 .ribbon {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 20px;
   width: 100%;
-  max-width: 1450px;
+  max-width: 1700px;
   margin-inline: auto;
 }
 
 .ribbon-item {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  padding: 28px;
+  padding: 24px;
   border-radius: var(--radius-md);
 }
 
@@ -328,19 +328,19 @@ nav a:hover, nav a.active {
   line-height: 1.5;
 }
 
-/* Section Styles */
+/* Section Styles - Expanded Width & Minimized Side Margins */
 .section {
   width: 100%;
-  max-width: 1450px;
+  max-width: 1700px;
   margin-inline: auto;
-  padding: 60px 5%;
+  padding: 50px 2%;
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .section-title {
@@ -376,7 +376,7 @@ nav a:hover, nav a.active {
 .departments-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 20px;
   width: 100%;
 }
 
@@ -415,11 +415,11 @@ nav a:hover, nav a.active {
   text-transform: uppercase;
 }
 
-/* Products Grid Layout - Exactly 4 Columns with Larger Cards */
+/* Products Grid Layout - Full Width 4 Columns */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px 24px;
+  gap: 24px 20px;
   width: 100%;
 }
 
@@ -572,12 +572,12 @@ nav a:hover, nav a.active {
 footer {
   background-color: #050507;
   border-top: 1px solid var(--border-color);
-  padding: 70px 5% 30px;
+  padding: 70px 3% 30px;
 }
 
 .footer-grid {
   width: 100%;
-  max-width: 1450px;
+  max-width: 1700px;
   margin-inline: auto;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
@@ -647,7 +647,7 @@ footer {
 
 .bottom-bar {
   width: 100%;
-  max-width: 1450px;
+  max-width: 1700px;
   margin-inline: auto;
   border-top: 1px solid var(--border-color);
   padding-top: 20px;
@@ -669,8 +669,8 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .top-bar { font-size: 0.6rem; padding: 8px 4%; }
-  header { padding: 12px 16px; top: 28px; }
+  .top-bar { font-size: 0.6rem; padding: 8px 3%; }
+  header { padding: 12px 14px; top: 28px; }
   nav { display: none; }
   .hero-slider-wrapper { height: 75vh; min-height: 480px; }
   .hero-title { font-size: 1.7rem; }
