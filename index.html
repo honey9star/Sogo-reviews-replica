@@ -10,17 +10,17 @@
   <link rel="stylesheet" href="style.css">
   <style>
     :root {
-      --bg-dark: #0a0a0c;
+      --bg-dark: #08080a;
       --bg-card: #121216;
-      --bg-card-hover: #1a1a20;
+      --bg-card-hover: #181820;
       --accent: #dca855;
       --accent-hover: #c89544;
       --text-main: #ffffff;
-      --text-muted: #8e8e96;
-      --border-color: #1e1e24;
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 24px;
+      --text-muted: #8e8e98;
+      --border-color: #1e1e26;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
     }
 
     * {
@@ -35,6 +35,7 @@
       color: var(--text-main);
       line-height: 1.5;
       position: relative;
+      overflow-x: hidden;
     }
 
     a {
@@ -42,25 +43,7 @@
       text-decoration: none;
     }
 
-    /* Fullscreen Hero Section Wrapper */
-    .hero-slider-wrapper {
-      position: relative;
-      height: 100vh;
-      min-height: 650px;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    /* Header Overlay (Transparent Top Bar & Nav) */
-    .header-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      background: linear-gradient(to bottom, rgba(10, 10, 12, 0.8) 0%, rgba(10, 10, 12, 0) 100%);
-    }
-
+    /* Top Bar */
     .top-bar {
       font-size: 0.68rem;
       color: var(--text-muted);
@@ -69,6 +52,12 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 101;
+      background: linear-gradient(to bottom, rgba(8, 8, 10, 0.9), rgba(8, 8, 10, 0));
     }
 
     .top-bar-left span {
@@ -92,11 +81,17 @@
       display: inline-block;
     }
 
+    /* Header Navigation */
     header {
-      padding: 18px 5%;
+      padding: 16px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: absolute;
+      top: 36px;
+      left: 0;
+      width: 100%;
+      z-index: 100;
     }
 
     .logo {
@@ -108,7 +103,7 @@
 
     nav {
       display: flex;
-      gap: 22px;
+      gap: 24px;
     }
 
     nav a {
@@ -126,7 +121,7 @@
 
     .btn-login {
       border: 1px solid rgba(255, 255, 255, 0.25);
-      padding: 6px 18px;
+      padding: 6px 20px;
       border-radius: 50px;
       font-size: 0.7rem;
       font-weight: 600;
@@ -134,6 +129,7 @@
       text-transform: uppercase;
       transition: all 0.3s;
       background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(4px);
     }
 
     .btn-login:hover {
@@ -141,7 +137,15 @@
       color: var(--accent);
     }
 
-    /* Hero Slides (No Top Cut Fix) */
+    /* Hero Section */
+    .hero-slider-wrapper {
+      position: relative;
+      height: 90vh;
+      min-height: 600px;
+      width: 100%;
+      overflow: hidden;
+    }
+
     .hero-slide {
       position: absolute;
       inset: 0;
@@ -152,9 +156,9 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 100px 20px 100px;
+      padding: 120px 20px 80px;
       background-size: cover;
-      background-position: center top; /* Keeps head/face visible */
+      background-position: center center;
       background-repeat: no-repeat;
     }
 
@@ -164,19 +168,19 @@
     }
 
     .hero-slide-1 {
-      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(10, 10, 12, 0.15) 50%, rgba(10, 10, 12, 0.4) 100%), url('assets/landing/hero-1.jpg');
+      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(8, 8, 10, 0.2) 50%, rgba(8, 8, 10, 0.5) 100%), url('assets/landing/hero-1.jpg');
     }
 
     .hero-slide-2 {
-      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(10, 10, 12, 0.15) 50%, rgba(10, 10, 12, 0.4) 100%), url('assets/landing/hero-2.jpg');
+      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(8, 8, 10, 0.2) 50%, rgba(8, 8, 10, 0.5) 100%), url('assets/landing/hero-2.jpg');
     }
 
     .hero-slide-3 {
-      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(10, 10, 12, 0.15) 50%, rgba(10, 10, 12, 0.4) 100%), url('assets/landing/hero-3.jpg');
+      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(8, 8, 10, 0.2) 50%, rgba(8, 8, 10, 0.5) 100%), url('assets/landing/hero-3.jpg');
     }
 
     .hero-subtitle {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--accent);
@@ -185,28 +189,29 @@
     }
 
     .hero-title {
-      font-size: 3rem;
+      font-size: 3.2rem;
       font-weight: 800;
       letter-spacing: 2px;
       text-transform: uppercase;
       max-width: 850px;
-      line-height: 1.15;
+      line-height: 1.1;
       margin-bottom: 16px;
     }
 
     .hero-desc {
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.8);
-      max-width: 540px;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 580px;
       letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
+      line-height: 1.6;
     }
 
     .btn-primary {
       background-color: var(--accent);
       color: #000;
-      padding: 12px 28px;
+      padding: 12px 30px;
       border-radius: 50px;
       font-weight: 800;
       font-size: 0.72rem;
@@ -220,15 +225,15 @@
       transform: translateY(-2px);
     }
 
-    /* Slider Arrows */
+    /* Navigation Arrows */
     .slider-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 50%;
       color: #fff;
       display: flex;
@@ -236,8 +241,8 @@
       justify-content: center;
       cursor: pointer;
       z-index: 50;
-      transition: background 0.3s;
-      font-size: 0.9rem;
+      transition: all 0.3s;
+      font-size: 0.85rem;
     }
 
     .slider-arrow:hover {
@@ -246,24 +251,25 @@
       border-color: var(--accent);
     }
 
-    .slider-arrow.prev { left: 25px; }
-    .slider-arrow.next { right: 25px; }
+    .slider-arrow.prev { left: 20px; }
+    .slider-arrow.next { right: 20px; }
 
-    /* Slider Indicator Bars */
+    /* Hero Slider Indicator Bars */
     .hero-slider-bars {
       position: absolute;
-      bottom: 60px;
+      bottom: 50px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 12px;
+      gap: 10px;
       z-index: 50;
+      align-items: center;
     }
 
     .slider-bar {
-      width: 32px;
-      height: 4px;
-      background-color: rgba(255, 255, 255, 0.3);
+      width: 28px;
+      height: 3px;
+      background-color: rgba(255, 255, 255, 0.25);
       border-radius: 2px;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -271,35 +277,34 @@
 
     .slider-bar.active {
       background-color: var(--accent);
-      width: 48px;
-      box-shadow: 0 0 10px rgba(220, 168, 85, 0.7);
+      width: 42px;
+      height: 3px;
     }
 
-    /* Original Matching Ribbon Highlights */
+    /* Original Highlights Ribbon */
     .ribbon {
       display: grid !important;
       grid-template-columns: repeat(3, 1fr) !important;
       gap: 16px !important;
       padding: 0 5%;
-      margin-top: -35px;
+      margin-top: -25px;
       position: relative;
       z-index: 30;
     }
 
     .ribbon-item {
-      background: rgba(18, 18, 22, 0.92);
+      background: rgba(18, 18, 22, 0.95);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 20px 24px;
+      padding: 18px 22px;
       border-radius: var(--radius-md);
       backdrop-filter: blur(12px);
-      position: relative;
     }
 
     .ribbon-accent-line {
-      width: 24px;
+      width: 20px;
       height: 2px;
       background-color: var(--accent);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       border-radius: 1px;
     }
 
@@ -307,37 +312,37 @@
       font-size: 0.72rem;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       font-weight: 700;
     }
 
     .ribbon-item p {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
       line-height: 1.4;
     }
 
     /* Section Styles */
     .section {
-      padding: 70px 5%;
+      padding: 60px 5%;
     }
 
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .section-title {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 800;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
 
     .section-tag {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       color: var(--accent);
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -346,7 +351,7 @@
     }
 
     .section-link {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -358,7 +363,7 @@
       color: var(--text-main);
     }
 
-    /* Signature Departments */
+    /* Signature Departments (4 Columns) */
     .departments-grid {
       display: grid !important;
       grid-template-columns: repeat(4, 1fr) !important;
@@ -368,7 +373,7 @@
 
     .dept-card {
       position: relative;
-      height: 360px;
+      height: 380px;
       border-radius: var(--radius-md);
       overflow: hidden;
       border: 1px solid var(--border-color);
@@ -389,7 +394,7 @@
     .dept-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(10,10,12,0.95), transparent 60%);
+      background: linear-gradient(to top, rgba(8,8,10,0.95) 0%, transparent 60%);
       display: flex;
       align-items: flex-end;
       padding: 20px;
@@ -402,7 +407,7 @@
       text-transform: uppercase;
     }
 
-    /* Products Grid */
+    /* Products Grid (4 Columns x 2 Rows) */
     .products-grid {
       display: grid !important;
       grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
@@ -426,7 +431,7 @@
 
     .product-img {
       position: relative;
-      height: 290px;
+      height: 300px;
       background-color: #1a1a20;
     }
 
@@ -440,21 +445,21 @@
       position: absolute;
       bottom: 12px;
       left: 12px;
-      background: rgba(10, 10, 12, 0.85);
+      background: rgba(8, 8, 10, 0.85);
       backdrop-filter: blur(4px);
       padding: 5px 10px;
       border-radius: 4px;
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
       color: #fff;
     }
 
-    /* Product Bottom Card & Swatches */
+    /* Product Bottom Card & Color Dots */
     .product-info {
       padding: 10px 14px;
-      background-color: #14141a;
+      background-color: #111115;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -486,31 +491,30 @@
     }
 
     .swatch {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      cursor: pointer;
     }
 
     .swatch-white { background-color: #ffffff; }
     .swatch-black { background-color: #111111; }
     .swatch-gold { background-color: #dca855; }
-    .swatch-brown { background-color: #8b5cf6; }
-    .swatch-blue { background-color: #3b82f6; }
-    .swatch-green { background-color: #22c55e; }
+    .swatch-brown { background-color: #78350f; }
+    .swatch-blue { background-color: #2563eb; }
+    .swatch-green { background-color: #16a34a; }
 
     /* Live Chat Floating Button */
     .floating-chat-btn {
       position: fixed;
-      bottom: 18px;
-      right: 18px;
+      bottom: 20px;
+      right: 20px;
       background-color: var(--accent);
       color: #000;
       border: none;
       padding: 8px 16px;
       border-radius: 50px;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 800;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -611,34 +615,33 @@
 </head>
 <body>
 
-  <!-- Fullscreen Hero Slider & Transparent Overlay Header -->
+  <!-- Fullscreen Hero Slider Section -->
   <div class="hero-slider-wrapper">
     
-    <!-- Transparent Header Overlay -->
-    <div class="header-overlay">
-      <div class="top-bar">
-        <div class="top-bar-left">CURRENCY: <span>USD</span></div>
-        <div class="top-bar-right">
-          <span class="status-dot"></span> Live chat support • 24/7
-        </div>
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="top-bar-left">CURRENCY: <span>USD</span></div>
+      <div class="top-bar-right">
+        <span class="status-dot"></span> Live chat support • 24/7
       </div>
-
-      <header>
-        <div class="logo">SOGO REVIEWS</div>
-        <nav>
-          <a href="#" class="active">New Arrivals</a>
-          <a href="#">Collections</a>
-          <a href="#">Women</a>
-          <a href="#">Men</a>
-          <a href="#">Accessories</a>
-          <a href="#">Sale</a>
-          <a href="#">Contact Us</a>
-        </nav>
-        <div class="nav-actions">
-          <a href="auth.html" class="btn-login">Login</a>
-        </div>
-      </header>
     </div>
+
+    <!-- Header Navigation Overlay -->
+    <header>
+      <div class="logo">SOGO REVIEWS</div>
+      <nav>
+        <a href="#" class="active">New Arrivals</a>
+        <a href="#">Collections</a>
+        <a href="#">Women</a>
+        <a href="#">Men</a>
+        <a href="#">Accessories</a>
+        <a href="#">Sale</a>
+        <a href="#">Contact Us</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="auth.html" class="btn-login">Login</a>
+      </div>
+    </header>
 
     <!-- Navigation Arrows -->
     <button class="slider-arrow prev" onclick="moveSlide(-1)">&lt;</button>
@@ -676,7 +679,7 @@
     </div>
   </div>
 
-  <!-- Original Highlights Ribbon Cards -->
+  <!-- Highlights Ribbon Cards -->
   <div class="ribbon">
     <div class="ribbon-item">
       <div class="ribbon-accent-line"></div>
