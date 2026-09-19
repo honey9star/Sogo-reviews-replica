@@ -403,21 +403,25 @@ nav a:hover, nav a.active {
   text-transform: uppercase;
 }
 
-/* Products Grid */
+/* Products Grid Layout */
 .products-grid {
   display: grid !important;
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: 12px !important;
+  gap: 16px 12px !important;
   width: 100% !important;
+}
+
+.product-item-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card {
   border-radius: var(--radius-md);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
+  margin-bottom: 8px;
 }
 
 .product-img {
@@ -433,29 +437,11 @@ nav a:hover, nav a.active {
   object-fit: cover;
 }
 
-/* Exact Original Product Title Tag on Image Top-Left */
-.product-title-tag {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(8, 8, 10, 0.8);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 0.52rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #fff;
-  z-index: 2;
-}
-
 /* Product Action Arrow Icon on Image Bottom-Right */
 .product-action-icon {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
+  bottom: 10px;
+  right: 10px;
   width: 26px;
   height: 26px;
   background: rgba(8, 8, 10, 0.7);
@@ -465,7 +451,6 @@ nav a:hover, nav a.active {
   align-items: center;
   justify-content: center;
   color: #fff;
-  z-index: 2;
 }
 
 .product-action-icon svg {
@@ -476,13 +461,27 @@ nav a:hover, nav a.active {
   fill: none;
 }
 
-.product-info {
-  padding: 10px 12px;
-  background-color: var(--bg-card);
+/* Product Title Bar (Under Image, Left Aligned) */
+.product-title-bar {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 6px;
+  padding-left: 2px;
+}
+
+/* Product Info Pill Container */
+.product-info-pill {
+  background-color: #ffffff;
+  color: #0f172a;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid var(--border-color);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 .product-price-box {
@@ -491,16 +490,17 @@ nav a:hover, nav a.active {
 }
 
 .product-price-label {
-  font-size: 0.5rem;
-  color: var(--text-muted);
-  letter-spacing: 0.6px;
+  font-size: 0.48rem;
+  color: #64748b;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
+  font-weight: 700;
 }
 
 .product-price {
   font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--text-main);
+  font-weight: 800;
+  color: #0f172a;
 }
 
 .color-swatches {
@@ -513,15 +513,13 @@ nav a:hover, nav a.active {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .swatch-white { background-color: #ffffff; }
-.swatch-black { background-color: #111111; }
+.swatch-grey { background-color: #cbd5e1; }
+.swatch-black { background-color: #0f172a; }
 .swatch-gold { background-color: #dca855; }
-.swatch-brown { background-color: #78350f; }
-.swatch-blue { background-color: #2563eb; }
-.swatch-green { background-color: #16a34a; }
 
 /* Floating Live Chat Button */
 .floating-chat-btn {
@@ -634,7 +632,7 @@ footer {
 @media (max-width: 1024px) {
   .products-grid, .departments-grid { 
     grid-template-columns: repeat(2, 1fr) !important; 
-    gap: 10px !important;
+    gap: 14px 10px !important;
   }
   .ribbon { grid-template-columns: 1fr !important; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -650,7 +648,7 @@ footer {
   
   .products-grid, .departments-grid { 
     grid-template-columns: repeat(2, 1fr) !important; 
-    gap: 8px !important; 
+    gap: 12px 8px !important; 
   }
   
   .footer-grid { grid-template-columns: 1fr; gap: 20px; }
