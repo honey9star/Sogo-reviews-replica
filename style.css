@@ -90,7 +90,7 @@ header {
   font-size: 1.4rem;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  margin-left: 12px; /* Thora sa right move kiya hai */
+  margin-left: 12px;
 }
 
 nav {
@@ -171,6 +171,7 @@ nav a:hover, nav a.active {
 
 .hero-slide-3 {
   background-image: linear-gradient(to bottom, rgba(8,8,10,0.4) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-3.jpg');
+  background-position: center 30%; /* Yahan image ko neechay shift kiya hai taake face nazar aaye */
 }
 
 .hero-content-container {
