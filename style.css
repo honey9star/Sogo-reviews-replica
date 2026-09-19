@@ -1,31 +1,19 @@
-/* Dark Luxury Theme (Landing Page, Auth & Client Dashboard) */
+/* Dark Luxury Theme */
 :root {
-  --bg-dark: #0a0a0c;
-  --bg-card: #121216;
+  --bg-dark: #08080a;
+  --bg-card: #111115;
   --bg-sidebar: #0d0d12;
   --accent-gold: #dca855;
   --accent-gold-hover: #c89544;
   --text-main: #ffffff;
-  --text-muted: #8e8e9c;
-  --border-color: #22222d;
+  --text-muted: #8e8e98;
+  --border-color: #1e1e26;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
 }
 
-/* Admin Light Dashboard Theme (Master Admin Page) */
-body.admin-theme {
-  --bg-dark: #f3f4f8;
-  --bg-sidebar: #ffffff;
-  --bg-card: #ffffff;
-  --accent-purple: #6366f1;
-  --accent-purple-hover: #4f46e5;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-color: #e2e8f0;
-}
-
-/* Base Body Styling */
+/* Base Styling */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -47,45 +35,6 @@ a {
   text-decoration: none;
 }
 
-/* Sidebar Styling */
-aside, .sidebar {
-  background-color: var(--bg-sidebar);
-  border-right: 1px solid var(--border-color);
-}
-
-/* Cards & Boxes Styling */
-.card, .product-card, .stat-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-}
-
-/* Gold Primary Buttons */
-.btn-gold, .btn-primary {
-  background-color: var(--accent-gold);
-  color: #000000;
-  border: none;
-}
-
-.btn-gold:hover, .btn-primary:hover {
-  background-color: var(--accent-gold-hover);
-}
-
-/* Muted Text */
-.text-muted, p, .stat-label {
-  color: var(--text-muted);
-}
-
-/* Admin Buttons */
-.btn-purple {
-  background-color: var(--accent-purple);
-  color: #ffffff;
-}
-
-.btn-purple:hover {
-  background-color: var(--accent-purple-hover);
-}
-
 /* Top Bar */
 .top-bar {
   font-size: 0.6rem;
@@ -100,7 +49,7 @@ aside, .sidebar {
   left: 0;
   width: 100%;
   z-index: 101;
-  background: linear-gradient(to bottom, rgba(8, 8, 10, 0.8), rgba(8, 8, 10, 0));
+  background: linear-gradient(to bottom, rgba(8, 8, 10, 0.85), rgba(8, 8, 10, 0));
   letter-spacing: 1.5px;
   text-transform: uppercase;
   font-weight: 500;
@@ -177,11 +126,11 @@ nav a:hover, nav a.active {
   color: var(--accent-gold);
 }
 
-/* Hero Section */
+/* Hero Section & Slider */
 .hero-slider-wrapper {
   position: relative;
-  height: 75vh;
-  min-height: 480px;
+  height: 78vh;
+  min-height: 500px;
   width: 100%;
   overflow: hidden;
   background-color: var(--bg-dark);
@@ -194,10 +143,10 @@ nav a:hover, nav a.active {
   transition: opacity 0.8s ease-in-out;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end; /* Text ko properly neeche align karne ke liye */
   align-items: center;
   text-align: center;
-  padding: 90px 16px 70px;
+  padding: 0 16px 65px;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -209,15 +158,23 @@ nav a:hover, nav a.active {
 }
 
 .hero-slide-1 {
-  background-image: linear-gradient(to bottom, rgba(8,8,10,0.5) 0%, rgba(8,8,10,0.15) 40%, rgba(8,8,10,0.95) 88%, #08080a 100%), url('assets/landing/hero-1.jpg');
+  background-image: linear-gradient(to bottom, rgba(8,8,10,0.3) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-1.jpg');
 }
 
 .hero-slide-2 {
-  background-image: linear-gradient(to bottom, rgba(8,8,10,0.5) 0%, rgba(8,8,10,0.15) 40%, rgba(8,8,10,0.95) 88%, #08080a 100%), url('assets/landing/hero-2.jpg');
+  background-image: linear-gradient(to bottom, rgba(8,8,10,0.3) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-2.jpg');
 }
 
 .hero-slide-3 {
-  background-image: linear-gradient(to bottom, rgba(8,8,10,0.5) 0%, rgba(8,8,10,0.15) 40%, rgba(8,8,10,0.95) 88%, #08080a 100%), url('assets/landing/hero-3.jpg');
+  background-image: linear-gradient(to bottom, rgba(8,8,10,0.3) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-3.jpg');
+}
+
+.hero-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 650px;
+  margin-bottom: 10px;
 }
 
 .hero-subtitle {
@@ -225,28 +182,47 @@ nav a:hover, nav a.active {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--accent-gold);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-weight: 700;
 }
 
 .hero-title {
-  font-size: 2.2rem;
+  font-size: 2.1rem;
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  max-width: 700px;
   line-height: 1.1;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .hero-desc {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   color: rgba(255, 255, 255, 0.75);
-  max-width: 480px;
+  max-width: 440px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin-bottom: 20px;
-  line-height: 1.4;
+  margin-bottom: 16px;
+  line-height: 1.35;
+}
+
+/* Original Golden Box Button Fix */
+.btn-gold-box {
+  background-color: var(--accent-gold);
+  color: #000000;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.btn-gold-box:hover {
+  background-color: var(--accent-gold-hover);
+  transform: translateY(-1px);
 }
 
 /* Navigation Arrows */
@@ -400,7 +376,6 @@ nav a:hover, nav a.active {
 
 .dept-card {
   position: relative;
-  height: auto;
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -442,11 +417,12 @@ nav a:hover, nav a.active {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
 }
 
 .product-img {
   position: relative;
-  height: auto;
   aspect-ratio: 4 / 5;
   background-color: #141418;
 }
@@ -626,7 +602,7 @@ footer {
   color: var(--text-muted);
 }
 
-/* ================= EXACT MOBILE 2-COLUMN GRID VIEW FIX ================= */
+/* ================= MOBILE VIEW FIXES ================= */
 @media (max-width: 1024px) {
   .products-grid, .departments-grid { 
     grid-template-columns: repeat(2, 1fr) !important; 
@@ -634,76 +610,21 @@ footer {
   }
   .ribbon { grid-template-columns: 1fr !important; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
-  .hero-title { font-size: 2rem; }
+  .hero-title { font-size: 1.9rem; }
 }
 
 @media (max-width: 768px) {
   header { padding: 10px 14px; top: 24px; }
   nav { display: none; }
-  .hero-slider-wrapper { height: 68vh; min-height: 420px; }
-  .hero-title { font-size: 1.6rem; padding: 0 10px; }
-  .hero-desc { font-size: 0.62rem; padding: 0 10px; }
+  .hero-slider-wrapper { height: 70vh; min-height: 440px; }
+  .hero-title { font-size: 1.5rem; }
+  .hero-desc { font-size: 0.6rem; }
   
-  /* Force 2 Columns on Mobile for Departments & Products */
   .products-grid, .departments-grid { 
     grid-template-columns: repeat(2, 1fr) !important; 
     gap: 8px !important; 
   }
   
-  .product-img { height: 170px; }
-  .dept-card { height: 180px; }
   .footer-grid { grid-template-columns: 1fr; gap: 20px; }
   .bottom-bar { flex-direction: column; gap: 5px; text-align: center; }
-}
-
-@media (max-width: 420px) {
-  .hero-title { font-size: 1.4rem; }
-  .product-img { height: 150px; }
-  .dept-card { height: 160px; }
-}
-
-/* ================= LANDING PAGE RESPONSIVE OVERRIDES ================= */
-@media (min-width: 769px) and (max-width: 1100px) {
-  .section { padding-inline: 24px; }
-  .ribbon-wrapper { padding-inline: 24px; }
-  .dept-card, .product-img { aspect-ratio: 4 / 5; }
-  .section-title { font-size: 0.95rem; }
-}
-
-@media (max-width: 768px) {
-  .top-bar { padding: 7px 14px; font-size: 0.5rem; }
-  .top-bar-right { font-size: 0.5rem; gap: 4px; }
-  header { top: 24px; padding: 10px 14px; }
-  .logo { font-size: 0.82rem; letter-spacing: 1.5px; }
-  .btn-login { padding: 5px 12px; font-size: 0.58rem; }
-  .hero-slider-wrapper { height: 72vh; min-height: 430px; }
-  .hero-title { font-size: clamp(1.55rem, 6.5vw, 2rem); line-height: 1.08; max-width: 92vw; }
-  .hero-desc { max-width: 340px; font-size: 0.6rem; line-height: 1.5; }
-  .section { max-width: 100%; padding: 28px 14px; }
-  .section-header { align-items: flex-end; gap: 12px; }
-  .section-title { font-size: 0.95rem; letter-spacing: 1.2px; }
-  .section-tag { font-size: 0.52rem; letter-spacing: 1.2px; }
-  .section-link { font-size: 0.52rem; white-space: nowrap; }
-  .ribbon-wrapper { padding: 0 14px 24px; }
-  .ribbon { grid-template-columns: 1fr !important; gap: 8px !important; }
-  .ribbon-item { padding: 14px 16px; }
-  .departments-grid, .products-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
-  .dept-card, .product-img { height: auto; aspect-ratio: 4 / 5; }
-  .dept-title { font-size: 0.78rem; }
-  .product-title-overlay { font-size: 0.68rem; padding: 6px 9px; }
-  .product-info { padding: 10px 12px; }
-  .product-price-label { font-size: 0.55rem; }
-  .product-price { font-size: 0.8rem; }
-  .swatch { width: 8px; height: 8px; }
-  footer { padding: 30px 14px 16px; }
-  .footer-grid { grid-template-columns: 1fr !important; gap: 24px; }
-  .bottom-bar { gap: 8px; text-align: center; }
-}
-
-@media (max-width: 420px) {
-  .hero-slider-wrapper { min-height: 410px; }
-  .hero-title { font-size: 1.45rem; }
-  .section { padding-inline: 12px; }
-  .ribbon-wrapper { padding-inline: 12px; }
-  .dept-card, .product-img { aspect-ratio: 4 / 5; }
 }
