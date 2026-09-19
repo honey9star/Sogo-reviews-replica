@@ -143,7 +143,7 @@ nav a:hover, nav a.active {
   transition: opacity 0.8s ease-in-out;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Text ko properly neeche align karne ke liye */
+  justify-content: flex-end;
   align-items: center;
   text-align: center;
   padding: 0 16px 65px;
@@ -205,7 +205,6 @@ nav a:hover, nav a.active {
   line-height: 1.35;
 }
 
-/* Original Golden Box Button Fix */
 .btn-gold-box {
   background-color: var(--accent-gold);
   color: #000000;
@@ -425,6 +424,7 @@ nav a:hover, nav a.active {
   position: relative;
   aspect-ratio: 4 / 5;
   background-color: #141418;
+  overflow: hidden;
 }
 
 .product-img img {
@@ -433,23 +433,51 @@ nav a:hover, nav a.active {
   object-fit: cover;
 }
 
-.product-title-overlay {
+/* Exact Original Product Title Tag on Image Top-Left */
+.product-title-tag {
   position: absolute;
-  bottom: 8px;
-  left: 8px;
-  background: rgba(8, 8, 10, 0.85);
+  top: 12px;
+  left: 12px;
+  background: rgba(8, 8, 10, 0.8);
   backdrop-filter: blur(4px);
-  padding: 4px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
   border-radius: 4px;
-  font-size: 0.55rem;
+  font-size: 0.52rem;
   font-weight: 700;
-  letter-spacing: 0.6px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: #fff;
+  z-index: 2;
+}
+
+/* Product Action Arrow Icon on Image Bottom-Right */
+.product-action-icon {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 26px;
+  height: 26px;
+  background: rgba(8, 8, 10, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 2;
+}
+
+.product-action-icon svg {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
 }
 
 .product-info {
-  padding: 8px 10px;
+  padding: 10px 12px;
   background-color: var(--bg-card);
   display: flex;
   justify-content: space-between;
@@ -477,15 +505,15 @@ nav a:hover, nav a.active {
 
 .color-swatches {
   display: flex;
-  gap: 4px;
+  gap: 5px;
   align-items: center;
 }
 
 .swatch {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .swatch-white { background-color: #ffffff; }
