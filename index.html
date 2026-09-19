@@ -42,30 +42,33 @@
       text-decoration: none;
     }
 
-    /* 1. Transparent Header Overlay Wrapper */
-    .hero-wrapper {
+    /* Fullscreen Hero Section Wrapper */
+    .hero-slider-wrapper {
       position: relative;
+      height: 100vh;
+      min-height: 650px;
       width: 100%;
+      overflow: hidden;
     }
 
+    /* Header Overlay (Transparent Top Bar & Nav) */
     .header-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 100;
-      background: linear-gradient(to bottom, rgba(10, 10, 12, 0.75) 0%, rgba(10, 10, 12, 0) 100%);
+      background: linear-gradient(to bottom, rgba(10, 10, 12, 0.8) 0%, rgba(10, 10, 12, 0) 100%);
     }
 
-    /* Top Bar - Ultra Glass Transparent */
     .top-bar {
       font-size: 0.68rem;
       color: var(--text-muted);
-      padding: 8px 5%;
+      padding: 10px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .top-bar-left span {
@@ -89,13 +92,11 @@
       display: inline-block;
     }
 
-    /* Header Navigation - Transparent */
     header {
-      padding: 16px 5%;
+      padding: 18px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .logo {
@@ -123,13 +124,8 @@
       color: var(--text-main);
     }
 
-    .nav-actions {
-      display: flex;
-      gap: 12px;
-    }
-
     .btn-login {
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       padding: 6px 18px;
       border-radius: 50px;
       font-size: 0.7rem;
@@ -138,7 +134,6 @@
       text-transform: uppercase;
       transition: all 0.3s;
       background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(4px);
     }
 
     .btn-login:hover {
@@ -146,14 +141,7 @@
       color: var(--accent);
     }
 
-    /* Interactive Hero Slider Section */
-    .hero-slider-wrapper {
-      position: relative;
-      height: 80vh;
-      min-height: 520px;
-      overflow: hidden;
-    }
-
+    /* Hero Slides (No Top Cut Fix) */
     .hero-slide {
       position: absolute;
       inset: 0;
@@ -164,9 +152,9 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 80px 20px 60px;
+      padding: 100px 20px 100px;
       background-size: cover;
-      background-position: center;
+      background-position: center top; /* Keeps head/face visible */
       background-repeat: no-repeat;
     }
 
@@ -176,15 +164,15 @@
     }
 
     .hero-slide-1 {
-      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(10, 10, 12, 0.1) 50%, rgba(10, 10, 12, 0.4) 100%), url('assets/landing/hero-1.jpg');
+      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(10, 10, 12, 0.15) 50%, rgba(10, 10, 12, 0.4) 100%), url('assets/landing/hero-1.jpg');
     }
 
     .hero-slide-2 {
-      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(10, 10, 12, 0.1) 50%, rgba(10, 10, 12, 0.4) 100%), url('assets/landing/hero-2.jpg');
+      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(10, 10, 12, 0.15) 50%, rgba(10, 10, 12, 0.4) 100%), url('assets/landing/hero-2.jpg');
     }
 
     .hero-slide-3 {
-      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(10, 10, 12, 0.1) 50%, rgba(10, 10, 12, 0.4) 100%), url('assets/landing/hero-3.jpg');
+      background-image: linear-gradient(to top, var(--bg-dark) 0%, rgba(10, 10, 12, 0.15) 50%, rgba(10, 10, 12, 0.4) 100%), url('assets/landing/hero-3.jpg');
     }
 
     .hero-subtitle {
@@ -197,19 +185,19 @@
     }
 
     .hero-title {
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 800;
       letter-spacing: 2px;
       text-transform: uppercase;
-      max-width: 800px;
+      max-width: 850px;
       line-height: 1.15;
       margin-bottom: 16px;
     }
 
     .hero-desc {
       font-size: 0.8rem;
-      color: var(--text-muted);
-      max-width: 520px;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 540px;
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 28px;
@@ -258,13 +246,13 @@
       border-color: var(--accent);
     }
 
-    .slider-arrow.prev { left: 20px; }
-    .slider-arrow.next { right: 20px; }
+    .slider-arrow.prev { left: 25px; }
+    .slider-arrow.next { right: 25px; }
 
-    /* 2. Slider Indicator Bars (Positioned properly above ribbon) */
+    /* Slider Indicator Bars */
     .hero-slider-bars {
       position: absolute;
-      bottom: 50px;
+      bottom: 60px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -287,36 +275,46 @@
       box-shadow: 0 0 10px rgba(220, 168, 85, 0.7);
     }
 
-    /* Highlights Ribbon */
+    /* Original Matching Ribbon Highlights */
     .ribbon {
       display: grid !important;
       grid-template-columns: repeat(3, 1fr) !important;
       gap: 16px !important;
       padding: 0 5%;
-      margin-top: -25px;
+      margin-top: -35px;
       position: relative;
       z-index: 30;
     }
 
     .ribbon-item {
-      background: rgba(18, 18, 22, 0.95);
-      border: 1px solid var(--border-color);
-      padding: 16px 20px;
+      background: rgba(18, 18, 22, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 20px 24px;
       border-radius: var(--radius-md);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
+      position: relative;
+    }
+
+    .ribbon-accent-line {
+      width: 24px;
+      height: 2px;
+      background-color: var(--accent);
+      margin-bottom: 12px;
+      border-radius: 1px;
     }
 
     .ribbon-item h4 {
       font-size: 0.72rem;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       font-weight: 700;
     }
 
     .ribbon-item p {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
+      line-height: 1.4;
     }
 
     /* Section Styles */
@@ -613,8 +611,8 @@
 </head>
 <body>
 
-  <!-- Hero & Header Wrapper for Smooth Overlay -->
-  <div class="hero-wrapper">
+  <!-- Fullscreen Hero Slider & Transparent Overlay Header -->
+  <div class="hero-slider-wrapper">
     
     <!-- Transparent Header Overlay -->
     <div class="header-overlay">
@@ -642,60 +640,58 @@
       </header>
     </div>
 
-    <!-- Interactive Hero Slider Section -->
-    <div class="hero-slider-wrapper">
-      
-      <!-- Navigation Arrows -->
-      <button class="slider-arrow prev" onclick="moveSlide(-1)">&lt;</button>
-      <button class="slider-arrow next" onclick="moveSlide(1)">&gt;</button>
+    <!-- Navigation Arrows -->
+    <button class="slider-arrow prev" onclick="moveSlide(-1)">&lt;</button>
+    <button class="slider-arrow next" onclick="moveSlide(1)">&gt;</button>
 
-      <!-- Slide 1 -->
-      <div class="hero-slide hero-slide-1 active">
-        <div class="hero-subtitle">Curated by SOGO Reviews</div>
-        <h1 class="hero-title">Elevated Womenswear</h1>
-        <p class="hero-desc">Upgrade your wardrobe with our latest arrivals and exclusive collections for a superior fashion presentation.</p>
-        <a href="auth.html" class="btn-primary">Shop Collection &rarr;</a>
-      </div>
-
-      <!-- Slide 2 -->
-      <div class="hero-slide hero-slide-2">
-        <div class="hero-subtitle">Curated by SOGO Reviews</div>
-        <h1 class="hero-title">Private Seasonal Edit</h1>
-        <p class="hero-desc">Upgrade your wardrobe with our latest arrivals and exclusive collections for a superior fashion presentation.</p>
-        <a href="auth.html" class="btn-primary">Shop Collection &rarr;</a>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="hero-slide hero-slide-3">
-        <div class="hero-subtitle">Curated by SOGO Reviews</div>
-        <h1 class="hero-title">Statement Silhouettes</h1>
-        <p class="hero-desc">Upgrade your wardrobe with our latest arrivals and exclusive collections for a superior fashion presentation.</p>
-        <a href="auth.html" class="btn-primary">Shop Collection &rarr;</a>
-      </div>
-
-      <!-- Slider Bars -->
-      <div class="hero-slider-bars">
-        <div class="slider-bar active" onclick="goToSlide(0)"></div>
-        <div class="slider-bar" onclick="goToSlide(1)"></div>
-        <div class="slider-bar" onclick="goToSlide(2)"></div>
-      </div>
+    <!-- Slide 1 -->
+    <div class="hero-slide hero-slide-1 active">
+      <div class="hero-subtitle">Curated by SOGO Reviews</div>
+      <h1 class="hero-title">Elevated Womenswear</h1>
+      <p class="hero-desc">Upgrade your wardrobe with our latest arrivals and exclusive collections for a superior fashion presentation.</p>
+      <a href="auth.html" class="btn-primary">Shop Collection &rarr;</a>
     </div>
 
+    <!-- Slide 2 -->
+    <div class="hero-slide hero-slide-2">
+      <div class="hero-subtitle">Curated by SOGO Reviews</div>
+      <h1 class="hero-title">Private Seasonal Edit</h1>
+      <p class="hero-desc">Upgrade your wardrobe with our latest arrivals and exclusive collections for a superior fashion presentation.</p>
+      <a href="auth.html" class="btn-primary">Shop Collection &rarr;</a>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="hero-slide hero-slide-3">
+      <div class="hero-subtitle">Curated by SOGO Reviews</div>
+      <h1 class="hero-title">Statement Silhouettes</h1>
+      <p class="hero-desc">Upgrade your wardrobe with our latest arrivals and exclusive collections for a superior fashion presentation.</p>
+      <a href="auth.html" class="btn-primary">Shop Collection &rarr;</a>
+    </div>
+
+    <!-- Slider Bars -->
+    <div class="hero-slider-bars">
+      <div class="slider-bar active" onclick="goToSlide(0)"></div>
+      <div class="slider-bar" onclick="goToSlide(1)"></div>
+      <div class="slider-bar" onclick="goToSlide(2)"></div>
+    </div>
   </div>
 
-  <!-- Highlights Ribbon -->
+  <!-- Original Highlights Ribbon Cards -->
   <div class="ribbon">
     <div class="ribbon-item">
+      <div class="ribbon-accent-line"></div>
       <h4>Quality Apparel</h4>
-      <p>High-quality fabrics and materials in every piece.</p>
+      <p>High-quality fabrics and construction for every piece.</p>
     </div>
     <div class="ribbon-item">
-      <h4>Premium Styling</h4>
-      <p>Find tailored fits curated with sleek aesthetic cuts.</p>
+      <div class="ribbon-accent-line"></div>
+      <h4>Trending Styles</h4>
+      <p>Stay ahead of the curve with our curated collections.</p>
     </div>
     <div class="ribbon-item">
+      <div class="ribbon-accent-line"></div>
       <h4>Fast Delivery</h4>
-      <p>Get your items quickly with standard express shipping.</p>
+      <p>Get your orders quickly with our streamlined shipping.</p>
     </div>
   </div>
 
