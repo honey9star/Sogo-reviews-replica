@@ -35,7 +35,7 @@ a {
   text-decoration: none;
 }
 
-/* Top Bar */
+/* Sticky Top Bar */
 .top-bar {
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.75);
@@ -43,15 +43,17 @@ a {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 101;
-  background: linear-gradient(to bottom, rgba(8, 8, 10, 0.95), rgba(8, 8, 10, 0));
+  background: rgba(8, 8, 10, 0.95);
+  backdrop-filter: blur(8px);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .top-bar-right {
@@ -68,17 +70,19 @@ a {
   display: inline-block;
 }
 
-/* Header Navigation */
+/* Sticky Header Navigation */
 header {
-  padding: 20px 4%;
+  padding: 18px 4%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
-  top: 36px;
+  position: fixed;
+  top: 45px;
   left: 0;
   width: 100%;
   z-index: 100;
+  background: rgba(8, 8, 10, 0.9);
+  backdrop-filter: blur(8px);
 }
 
 .logo {
@@ -131,6 +135,7 @@ nav a:hover, nav a.active {
   width: 100%;
   overflow: hidden;
   background-color: var(--bg-dark);
+  padding-top: 100px; /* Header ke fixed hone ki wajah se spacing */
 }
 
 .hero-slide {
@@ -154,15 +159,15 @@ nav a:hover, nav a.active {
 }
 
 .hero-slide-1 {
-  background-image: linear-gradient(to bottom, rgba(8,8,10,0.3) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-1.jpg');
+  background-image: linear-gradient(to bottom, rgba(8,8,10,0.5) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-1.jpg');
 }
 
 .hero-slide-2 {
-  background-image: linear-gradient(to bottom, rgba(8,8,10,0.3) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-2.jpg');
+  background-image: linear-gradient(to bottom, rgba(8,8,10,0.5) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-2.jpg');
 }
 
 .hero-slide-3 {
-  background-image: linear-gradient(to bottom, rgba(8,8,10,0.3) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-3.jpg');
+  background-image: linear-gradient(to bottom, rgba(8,8,10,0.5) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-3.jpg');
 }
 
 .hero-content-container {
@@ -223,7 +228,7 @@ nav a:hover, nav a.active {
 /* Navigation Arrows */
 .slider-arrow {
   position: absolute;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%);
   width: 44px;
   height: 44px;
@@ -653,7 +658,7 @@ footer {
   .top-bar { font-size: 0.6rem; padding: 8px 3%; }
   header { padding: 12px 14px; top: 28px; }
   nav { display: none; }
-  .hero-slider-wrapper { height: 75vh; min-height: 480px; }
+  .hero-slider-wrapper { height: 75vh; min-height: 480px; padding-top: 80px; }
   .hero-title { font-size: 1.7rem; }
   
   .departments-grid, .products-grid { 
