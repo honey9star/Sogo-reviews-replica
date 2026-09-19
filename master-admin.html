@@ -6,9 +6,9 @@
   <title>SOGO REVIEWS - Master Admin Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
     :root {
       --bg-dark: #f3f4f8;
       --bg-sidebar: #ffffff;
@@ -21,14 +21,9 @@
       --border-color: #e2e8f0;
       --radius-sm: 8px;
       --radius-md: 12px;
-      --radius-lg: 16px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -39,7 +34,6 @@
       overflow-x: hidden;
     }
 
-    /* Sidebar Layout */
     aside {
       width: 260px;
       background-color: var(--bg-sidebar);
@@ -54,24 +48,9 @@
       z-index: 100;
     }
 
-    .brand-logo {
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      margin-bottom: 24px;
-      padding-left: 12px;
-      color: var(--accent-purple);
-      text-transform: uppercase;
-    }
+    .brand-logo { font-size: 1.1rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 24px; padding-left: 12px; color: var(--accent-purple); text-transform: uppercase; }
 
-    .nav-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      max-height: calc(100vh - 180px);
-      overflow-y: auto;
-    }
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; max-height: calc(100vh - 180px); overflow-y: auto; }
 
     .nav-item button {
       width: 100%;
@@ -91,327 +70,66 @@
       text-align: left;
     }
 
-    .nav-item button:hover {
-      background-color: #f1f5f9;
-      color: var(--text-main);
-    }
+    .nav-item button:hover { background-color: #f1f5f9; color: var(--text-main); }
+    .nav-item button.active { background-color: #eeeffe; color: var(--accent-purple); font-weight: 700; }
 
-    .nav-item button.active {
-      background-color: #eeeffe;
-      color: var(--accent-purple);
-      font-weight: 700;
-    }
+    .sidebar-user { border-top: 1px solid var(--border-color); padding-top: 16px; }
+    .user-pill { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .user-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: #e0e7ff; color: var(--accent-purple); font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+    .user-info { display: flex; flex-direction: column; }
+    .user-name { font-size: 0.8rem; font-weight: 700; }
+    .user-role { font-size: 0.65rem; color: var(--text-muted); }
 
-    /* Sidebar User Info */
-    .sidebar-user {
-      border-top: 1px solid var(--border-color);
-      padding-top: 16px;
-    }
+    .btn-logout { width: 100%; background: #ffffff; border: 1px solid var(--border-color); color: var(--text-main); padding: 8px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-logout:hover { background-color: #f8fafc; }
 
-    .user-pill {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
+    main { margin-left: 260px; flex: 1; padding: 32px 40px; min-height: 100vh; }
+    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .page-title { font-size: 1.5rem; font-weight: 800; }
+    .header-actions { display: flex; align-items: center; gap: 16px; }
+    .icon-btn { background: transparent; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; }
+    .icon-btn:hover { color: var(--text-main); }
 
-    .user-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: #e0e7ff;
-      color: var(--accent-purple);
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
-    .user-info {
-      display: flex;
-      flex-direction: column;
-    }
+    .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; margin-bottom: 20px; }
+    .card-banner-purple { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #ffffff; padding: 24px; border-radius: var(--radius-md); margin-bottom: 20px; }
+    .card-banner-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: #ffffff; padding: 24px; border-radius: var(--radius-md); margin-bottom: 20px; }
 
-    .user-name {
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
+    .filter-bar { display: flex; gap: 8px; margin-bottom: 20px; align-items: center; }
+    .btn-filter { padding: 6px 16px; border-radius: 50px; border: 1px solid var(--border-color); background-color: #ffffff; font-size: 0.75rem; font-weight: 600; cursor: pointer; color: var(--text-muted); }
+    .btn-filter.active { background-color: var(--accent-purple); color: #ffffff; border-color: var(--accent-purple); }
 
-    .user-role {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-    }
+    .btn-purple { background-color: var(--accent-purple); color: #ffffff; border: none; padding: 10px 20px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+    .btn-purple:hover { background-color: var(--accent-purple-hover); }
 
-    .btn-logout {
-      width: 100%;
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      padding: 8px;
-      border-radius: var(--radius-sm);
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+    .search-input { padding: 8px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-size: 0.8rem; outline: none; width: 250px; }
 
-    .btn-logout:hover {
-      background-color: #f8fafc;
-    }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .data-table th { text-align: left; padding: 12px 16px; color: var(--text-muted); font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border-color); }
+    .data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); }
 
-    /* Main Area */
-    main {
-      margin-left: 260px;
-      flex: 1;
-      padding: 32px 40px;
-      min-height: 100vh;
-    }
-
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-
-    .page-title {
-      font-size: 1.5rem;
-      font-weight: 800;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .icon-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-
-    .icon-btn:hover {
-      color: var(--text-main);
-    }
-
-    /* Tabs Content */
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    /* Cards */
-    .card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      margin-bottom: 20px;
-    }
-
-    .card-banner-purple {
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      color: #ffffff;
-      padding: 24px;
-      border-radius: var(--radius-md);
-      margin-bottom: 20px;
-    }
-
-    .card-banner-red {
-      background: linear-gradient(135deg, #ef4444, #dc2626);
-      color: #ffffff;
-      padding: 24px;
-      border-radius: var(--radius-md);
-      margin-bottom: 20px;
-    }
-
-    /* Filters & Buttons */
-    .filter-bar {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
-      align-items: center;
-    }
-
-    .btn-filter {
-      padding: 6px 16px;
-      border-radius: 50px;
-      border: 1px solid var(--border-color);
-      background-color: #ffffff;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      color: var(--text-muted);
-    }
-
-    .btn-filter.active {
-      background-color: var(--accent-purple);
-      color: #ffffff;
-      border-color: var(--accent-purple);
-    }
-
-    .btn-purple {
-      background-color: var(--accent-purple);
-      color: #ffffff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .btn-purple:hover {
-      background-color: var(--accent-purple-hover);
-    }
-
-    .search-input {
-      padding: 8px 16px;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      outline: none;
-      width: 250px;
-    }
-
-    /* Tables */
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-    }
-
-    .data-table th {
-      text-align: left;
-      padding: 12px 16px;
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .data-table td {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 50px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: lowercase;
-    }
-
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: lowercase; }
     .badge-approved { background-color: #dcfce7; color: #166534; }
     .badge-rejected { background-color: #fef2f2; color: #991b1b; }
     .badge-admin { background-color: #e0e7ff; color: #3730a3; }
 
-    /* Forms & Inputs */
-    .form-group {
-      margin-bottom: 16px;
-    }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+    .form-input, .form-textarea { width: 100%; padding: 10px 14px; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-main); font-family: inherit; font-size: 0.85rem; outline: none; }
+    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-    .form-label {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+    .stat-card { background-color: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; }
+    .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; }
+    .stat-value { font-size: 1.5rem; font-weight: 800; }
 
-    .form-input, .form-textarea {
-      width: 100%;
-      padding: 10px 14px;
-      background-color: var(--bg-input);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      color: var(--text-main);
-      font-family: inherit;
-      font-size: 0.85rem;
-      outline: none;
-    }
-
-    .grid-2col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    /* Stats Grid */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .stat-card {
-      background-color: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 20px;
-    }
-
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .stat-value {
-      font-size: 1.5rem;
-      font-weight: 800;
-    }
-
-    /* Chat Admin */
-    .chat-layout {
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      gap: 16px;
-      height: 75vh;
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-    }
-
-    .chat-sidebar {
-      border-right: 1px solid var(--border-color);
-      padding: 16px;
-    }
-
-    .chat-main {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .chat-messages {
-      flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      background-color: #f8fafc;
-    }
-
-    .chat-input-bar {
-      padding: 16px;
-      border-top: 1px solid var(--border-color);
-      display: flex;
-      gap: 12px;
-    }
+    .chat-layout { display: grid; grid-template-columns: 240px 1fr; gap: 16px; height: 75vh; background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; }
+    .chat-sidebar { border-right: 1px solid var(--border-color); padding: 16px; }
+    .chat-main { display: flex; flex-direction: column; }
+    .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background-color: #f8fafc; }
+    .chat-input-bar { padding: 16px; border-top: 1px solid var(--border-color); display: flex; gap: 12px; }
   </style>
 </head>
 <body class="admin-theme">
@@ -448,7 +166,7 @@
           <span class="user-role">Admin</span>
         </div>
       </div>
-<button class="btn-logout" onclick="window.location.href='auth.html'">&rarr; Logout</button>
+      <button class="btn-logout" onclick="window.location.href='auth.html'">&rarr; Logout</button>
     </div>
   </aside>
 
@@ -458,7 +176,7 @@
       <div class="page-title" id="current-page-title">Withdrawals</div>
       <div class="header-actions">
         <button class="icon-btn">&#128276;</button>
-<button class="icon-btn" onclick="window.location.href='auth.html'">&#128682;</button>
+        <button class="icon-btn" onclick="window.location.href='auth.html'">&#128682;</button>
       </div>
     </div>
 
@@ -476,41 +194,20 @@
         </div>
 
         <table class="data-table">
-          <thead>
-            <tr>
-              <th>USER</th>
-              <th>AMOUNT</th>
-              <th>BANK DETAILS</th>
-              <th>REQUESTED</th>
-              <th>STATUS</th>
-              <th>ACTIONS</th>
-            </tr>
-          </thead>
+          <thead><tr><th>USER</th><th>AMOUNT</th><th>BANK DETAILS</th><th>REQUESTED</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
           <tbody>
             <tr>
-              <td>
-                <div style="font-weight:700;">Chris</div>
-                <div style="font-size:0.75rem; color:var(--text-muted);">chrislesolang@gmail.com</div>
-              </td>
+              <td><div style="font-weight:700;">Chris</div><div style="font-size:0.75rem; color:var(--text-muted);">chrislesolang@gmail.com</div></td>
               <td style="font-weight:800;">$14400.00</td>
-              <td>
-                <div style="font-weight:700;">Luno wallet</div>
-                <div style="font-size:0.7rem; color:var(--text-muted);">TNUBwXiytAigk7252Ci3sKAXgwCNf8rj9B</div>
-              </td>
+              <td><div style="font-weight:700;">Luno wallet</div><div style="font-size:0.7rem; color:var(--text-muted);">TNUBwXiytAigk7252Ci3sKAXgwCNf8rj9B</div></td>
               <td>9/18/2026, 11:59:00 AM</td>
               <td><span class="badge badge-approved">approved</span></td>
               <td>&mdash;</td>
             </tr>
             <tr>
-              <td>
-                <div style="font-weight:700;">Chris</div>
-                <div style="font-size:0.75rem; color:var(--text-muted);">chrislesolang@gmail.com</div>
-              </td>
+              <td><div style="font-weight:700;">Chris</div><div style="font-size:0.75rem; color:var(--text-muted);">chrislesolang@gmail.com</div></td>
               <td style="font-weight:800;">$3500.00</td>
-              <td>
-                <div style="font-weight:700;">Luno wallet</div>
-                <div style="font-size:0.7rem; color:var(--text-muted);">TNUBwXiytAigk7252Ci3sKAXgwCNf8rj9B</div>
-              </td>
+              <td><div style="font-weight:700;">Luno wallet</div><div style="font-size:0.7rem; color:var(--text-muted);">TNUBwXiytAigk7252Ci3sKAXgwCNf8rj9B</div></td>
               <td>9/1/2026, 1:54:13 PM</td>
               <td><span class="badge badge-rejected">rejected</span></td>
               <td>&mdash;</td>
@@ -520,306 +217,82 @@
       </div>
     </div>
 
-    <!-- 2. PASSWORD REQUESTS VIEW -->
+    <!-- Additional Tab views kept intact -->
+    <div id="tab-dashboard" class="tab-content"><div class="card"><h3>Dashboard Overview</h3></div></div>
+    <div id="tab-packages" class="tab-content"><div class="card"><h3>Manage Packages</h3></div></div>
+    <div id="tab-payments" class="tab-content"><div class="card"><h3>Payments List</h3></div></div>
+    <div id="tab-subscriptions" class="tab-content"><div class="card"><h3>Subscriptions</h3></div></div>
+    <div id="tab-received-reviews" class="tab-content"><div class="card"><h3>Received Reviews</h3></div></div>
+    <div id="tab-topup-requests" class="tab-content"><div class="card"><h3>Top-up Requests</h3></div></div>
+    
+    <!-- 2. PASSWORD REQUESTS -->
     <div id="tab-password-requests" class="tab-content">
       <div class="card-banner-purple">
         <div style="font-size:0.8rem; font-weight:700; margin-bottom:4px;">Pending password requests</div>
         <div style="font-size:2rem; font-weight:800;">0</div>
-        <div style="font-size:0.75rem; opacity:0.9;">Users who forgot their password. Set a new one and share it with them (e.g. via chat) — no email is involved.</div>
       </div>
-      <div class="card">
-        <table class="data-table">
-          <thead>
-            <tr><th>USER</th><th>REQUESTED</th><th>STATUS</th><th>HANDLED BY</th><th>ACTIONS</th></tr>
-          </thead>
-          <tbody>
-            <tr><td colspan="5" style="text-align:center; color:var(--text-muted); padding:32px;">No pending password requests.</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <div class="card"><table class="data-table"><thead><tr><th>USER</th><th>REQUESTED</th><th>STATUS</th></tr></thead><tbody><tr><td colspan="3" style="text-align:center; padding:32px;">No pending requests.</td></tr></tbody></table></div>
     </div>
 
-    <!-- 3. INVITATIONS VIEW -->
+    <!-- 3. INVITATIONS -->
     <div id="tab-invitations" class="tab-content">
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-value" style="color:var(--accent-purple)">5</div>
-          <div class="stat-label">Signups via invitations</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">1</div>
-          <div class="stat-label">Active inviters</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:12px;">Signups per inviter</h3>
-        <table class="data-table">
-          <thead>
-            <tr><th>INVITER</th><th>ROLE</th><th>CODE</th><th>SIGNUPS</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div style="font-weight:700;">Customer Support</div>
-                <div style="font-size:0.75rem; color:var(--text-muted);">kami_12@gmail.com</div>
-              </td>
-              <td><span class="badge badge-admin">admin</span></td>
-              <td style="font-weight:700;">Y66C6U2J</td>
-              <td style="font-weight:800;">5</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-          <h3 style="font-size:0.85rem; font-weight:800;">Signup log</h3>
-          <input type="text" class="search-input" placeholder="Search by name, email, code...">
-        </div>
-        <table class="data-table">
-          <thead>
-            <tr><th>NEW USER</th><th>INVITED BY</th><th>VIA CODE</th><th>SIGNED UP</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div style="font-weight:700;">:::</div><div style="font-size:0.75rem; color:var(--text-muted);">?!</div></td>
-              <td>Customer Support <span class="badge badge-admin">admin</span></td>
-              <td>Y66C6U2J</td>
-              <td>9/16/2026, 7:11:20 PM</td>
-            </tr>
-            <tr>
-              <td><div style="font-weight:700;">Chris</div><div style="font-size:0.75rem; color:var(--text-muted);">chrislesolang@gmail.com</div></td>
-              <td>Customer Support <span class="badge badge-admin">admin</span></td>
-              <td>Y66C6U2J</td>
-              <td>9/1/2026, 1:22:01 PM</td>
-            </tr>
-            <tr>
-              <td><div style="font-weight:700;">vv</div><div style="font-size:0.75rem; color:var(--text-muted);">nnn@gmail.com</div></td>
-              <td>Customer Support <span class="badge badge-admin">admin</span></td>
-              <td>Y66C6U2J</td>
-              <td>9/1/2026, 11:32:23 AM</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="stat-card"><div class="stat-value" style="color:var(--accent-purple)">5</div><div class="stat-label">Signups via invitations</div></div>
+        <div class="stat-card"><div class="stat-value">1</div><div class="stat-label">Active inviters</div></div>
       </div>
     </div>
 
-    <!-- 4. SUPPORT VIEW -->
+    <!-- 4. SUPPORT -->
     <div id="tab-support" class="tab-content">
       <div class="card-banner-red">
         <div style="font-size:0.8rem; font-weight:700; margin-bottom:4px;">Open support requests</div>
         <div style="font-size:2rem; font-weight:800;">0</div>
-        <div style="font-size:0.75rem; opacity:0.9;">Messages from blocked users asking for help or account reactivation.</div>
-      </div>
-      <div class="filter-bar">
-        <button class="btn-filter active">Open</button>
-        <button class="btn-filter">Resolved</button>
-        <button class="btn-filter">All</button>
-      </div>
-      <div class="card" style="text-align:center; padding:48px; color:var(--text-muted);">
-        No support requests.
       </div>
     </div>
 
-    <!-- 5. CHAT VIEW -->
+    <!-- 5. CHAT -->
     <div id="tab-chat" class="tab-content">
       <div class="chat-layout">
         <div class="chat-sidebar">
           <div style="font-size:0.8rem; font-weight:800; margin-bottom:12px;">Conversations</div>
           <div style="padding:10px; background:#f1f5f9; border-radius:6px; font-size:0.8rem; font-weight:700; margin-bottom:6px; cursor:pointer;">Chris</div>
-          <div style="padding:10px; font-size:0.8rem; color:var(--text-muted); cursor:pointer;">Shiz</div>
-          <div style="padding:10px; font-size:0.8rem; color:var(--text-muted); cursor:pointer;">Customer Support</div>
         </div>
         <div class="chat-main">
           <div class="chat-messages">
-            <div style="background:#e0e7ff; color:#3730a3; padding:12px; border-radius:8px; font-size:0.8rem; max-width:70%;">
-              Welcome back, Chris! We sincerely apologize for the wait...
-            </div>
-            <div style="background:#ffffff; border:1px solid var(--border-color); padding:12px; border-radius:8px; font-size:0.8rem; max-width:70%; align-self:flex-end;">
-              I had 2 approved withdrawals before the system was upgraded. Should I request a withdrawal again?
-            </div>
+            <div style="background:#e0e7ff; color:#3730a3; padding:12px; border-radius:8px; font-size:0.8rem; max-width:70%;">Welcome back, Chris!</div>
           </div>
-          <div class="chat-input-bar">
-            <input type="text" class="form-input" placeholder="Message...">
-            <button class="btn-purple">Send</button>
-          </div>
+          <div class="chat-input-bar"><input type="text" class="form-input" placeholder="Message..."><button class="btn-purple">Send</button></div>
         </div>
       </div>
     </div>
 
-    <!-- 6. ACTIVITY VIEW -->
-    <div id="tab-activity" class="tab-content">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-        <button class="btn-purple">Download live backup</button>
-      </div>
+    <!-- 6. ACTIVITY -->
+    <div id="tab-activity" class="tab-content"><div class="card"><button class="btn-purple">Download live backup</button></div></div>
+    <div id="tab-access-log" class="tab-content"><div class="card"><p>Access logs record admin views.</p></div></div>
+    <div id="tab-reports" class="tab-content"><div class="stats-grid"><div class="stat-card"><div class="stat-label">Revenue</div><div class="stat-value">$0.00</div></div></div></div>
+    <div id="tab-uploads" class="tab-content"><div class="card" style="text-align:center; padding:64px;">No uploaded files yet.</div></div>
 
-      <div class="card">
-        <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:12px;">Daily backups</h3>
-        <table class="data-table">
-          <thead><tr><th>WHEN</th><th>CONTENTS</th><th>ACTIONS</th></tr></thead>
-          <tbody>
-            <tr><td>9/17/2026, 7:00:24 PM</td><td>8 users, 1 packages, 31 messages, 2 payments</td><td><a href="#" style="color:var(--accent-purple); font-weight:600;">Download</a></td></tr>
-            <tr><td>9/16/2026, 7:00:23 PM</td><td>6 users, 1 packages, 17 messages, 2 payments</td><td><a href="#" style="color:var(--accent-purple); font-weight:600;">Download</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-          <input type="text" class="search-input" placeholder="Search activity...">
-        </div>
-        <table class="data-table">
-          <thead><tr><th>ACTION</th><th>DETAILS</th><th>WHEN</th></tr></thead>
-          <tbody>
-            <tr><td>Impersonate</td><td>Accessed Chris<br><span style="font-size:0.7rem; color:var(--text-muted);">chrislesolang@gmail.com</span></td><td>9/18/2026, 1:06:00 PM</td></tr>
-            <tr><td>Manual Credit</td><td>Manual amount added</td><td>9/17/2026, 7:07:01 AM</td></tr>
-            <tr><td>Create User</td><td>Shiz<br><span style="font-size:0.7rem; color:var(--text-muted);">shiz1198@gmail.con</span></td><td>9/17/2026, 7:06:16 AM</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- 7. ACCESS LOG VIEW -->
-    <div id="tab-access-log" class="tab-content">
-      <div class="card">
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:16px;">Every time an admin uses Access to view a user account, it is recorded here.</p>
-        <table class="data-table">
-          <thead><tr><th>ACCOUNT ACCESSED</th><th>EMAIL</th><th>WHEN</th></tr></thead>
-          <tbody>
-            <tr><td style="font-weight:700;">Accessed Chris</td><td>chrislesolang@gmail.com</td><td>9/18/2026, 1:06:00 PM</td></tr>
-            <tr><td style="font-weight:700;">Accessed Shiz</td><td>shiz1198@gmail.con</td><td>9/17/2026, 7:07:10 AM</td></tr>
-            <tr><td style="font-weight:700;">Accessed Chris</td><td>chrislesolang@gmail.com</td><td>9/17/2026, 7:05:21 AM</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- 8. REPORTS VIEW -->
-    <div id="tab-reports" class="tab-content">
-      <div class="filter-bar">
-        <button class="btn-filter">Today</button>
-        <button class="btn-filter">Yesterday</button>
-        <button class="btn-filter">Last 7 Days</button>
-        <button class="btn-filter active">Last 14 Days</button>
-        <button class="btn-filter">Last 30 Days</button>
-        <button class="btn-filter">This Month</button>
-        <button class="btn-filter">Last Month</button>
-        <button class="btn-filter">Custom</button>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">New signups</div>
-          <div class="stat-value">2</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Verified payments</div>
-          <div class="stat-value">0</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Revenue</div>
-          <div class="stat-value">$0.00</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Approved reviews</div>
-          <div class="stat-value">0</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Withdrawal requests</div>
-          <div class="stat-value">1</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Withdrawal volume</div>
-          <div class="stat-value">$14400.00</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 9. UPLOADS VIEW -->
-    <div id="tab-uploads" class="tab-content">
-      <div class="card" style="text-align:center; padding:64px; color:var(--text-muted);">
-        <p style="font-size:0.8rem; margin-bottom:8px;">Payment proofs, top-up screenshots, chat attachments, and avatars.</p>
-        <div style="font-size:0.9rem; font-weight:600;">No uploaded files yet.</div>
-      </div>
-    </div>
-
-    <!-- 10. PROFILE SETTINGS VIEW -->
+    <!-- 10. PROFILE SETTINGS -->
     <div id="tab-profile-settings" class="tab-content">
-      <div class="card">
-        <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:16px;">Profile picture</h3>
-        <div style="display:flex; align-items:center; gap:16px;">
-          <div class="user-avatar" style="width:56px; height:56px; font-size:1.2rem;">CS</div>
-          <button class="btn-filter" style="padding:8px 16px;">CHOOSE PHOTO <span style="font-size:0.65rem; color:var(--text-muted);">JPG, PNG, WEBP or GIF - max 5 MB</span></button>
-        </div>
-      </div>
-
       <div class="card">
         <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:16px;">Profile details</h3>
         <div class="grid-2col">
-          <div class="form-group">
-            <label class="form-label">Full name</label>
-            <input type="text" class="form-input" value="Customer Support">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Email</label>
-            <input type="text" class="form-input" value="kami_12@gmail.com" disabled>
-          </div>
-        </div>
-        <div class="grid-2col">
-          <div class="form-group">
-            <label class="form-label">Phone</label>
-            <input type="text" class="form-input" placeholder="e.g. +91 300 1234567">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Address</label>
-            <input type="text" class="form-input" placeholder="Your address">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Bio</label>
-          <textarea class="form-textarea" rows="3" placeholder="A few words about you"></textarea>
+          <div class="form-group"><label class="form-label">Full name</label><input type="text" class="form-input" value="Customer Support"></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="text" class="form-input" value="kami_12@gmail.com" disabled></div>
         </div>
         <button class="btn-purple">Save changes</button>
-      </div>
-
-      <div class="card">
-        <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:16px;">Change password</h3>
-        <div class="form-group">
-          <label class="form-label">Current password</label>
-          <input type="password" class="form-input">
-        </div>
-        <div class="form-group">
-          <label class="form-label">New password</label>
-          <input type="password" class="form-input" placeholder="At least 6 characters">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Confirm new password</label>
-          <input type="password" class="form-input">
-        </div>
-        <button class="btn-purple">Change password</button>
       </div>
     </div>
   </main>
 
   <script>
     function switchTab(tabId, btn) {
-      // Hide all tabs
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      
-      // Remove active state from sidebar buttons
       document.querySelectorAll('.nav-item button').forEach(b => b.classList.remove('active'));
-
-      // Show selected tab
       const selectedTab = document.getElementById('tab-' + tabId);
       if (selectedTab) selectedTab.classList.add('active');
+      if (btn) btn.classList.add('active');
 
-      // Highlight active menu item
-      if (btn) {
-        btn.classList.add('active');
-      }
-
-      // Update Header Title
       const titleMap = {
         'dashboard': 'Dashboard',
         'packages': 'Packages',
