@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* =========================================================
-       SOGO REVIEWS - ULTRA 3D PREMIUM DARK GOLDEN THEME
+       SOGO REVIEWS - ULTRA 3D PREMIUM DARK GOLDEN THEME (MOBILE READY)
        ========================================================= */
 
     :root {
@@ -26,7 +26,6 @@
       --gold-light: #f7d58b;
       --gold-dark: #8c641d;
       --gold-gradient-3d: linear-gradient(135deg, #fce3a6 0%, #dca855 45%, #a8792a 100%);
-      --gold-glow-3d: 0 8px 25px rgba(220, 168, 85, 0.25);
 
       /* Status & Accents */
       --text-main: #ffffff;
@@ -65,11 +64,29 @@
       -webkit-font-smoothing: antialiased;
       display: flex;
       min-height: 100vh;
+      position: relative;
     }
 
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    /* Mobile Overlay */
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     /* 3D Sidebar Styling */
@@ -86,6 +103,7 @@
       top: 0;
       bottom: 0;
       z-index: 100;
+      transition: var(--transition);
     }
 
     .brand-logo {
@@ -97,6 +115,25 @@
       padding-left: 10px;
       color: var(--gold-primary) !important;
       text-shadow: 0 0 15px rgba(220, 168, 85, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close-sidebar-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .close-sidebar-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2;
     }
 
     .nav-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
@@ -180,9 +217,34 @@
     .btn-logout:hover { background-color: rgba(239, 68, 68, 0.12); color: #ef4444; border-color: rgba(239, 68, 68, 0.3); transform: translateY(-1px); }
 
     /* Main Area */
-    main { margin-left: 250px; flex: 1; padding: 28px 40px; min-height: 100vh; }
+    main { margin-left: 250px; flex: 1; padding: 28px 40px; min-height: 100vh; transition: var(--transition); }
 
     .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+    
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mobile-toggle-btn {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--gold-primary);
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      box-shadow: var(--shadow-3d-card);
+    }
+
+    .mobile-toggle-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
     .page-title { 
       font-family: 'Outfit', sans-serif !important;
       font-size: 1.4rem; 
@@ -280,6 +342,7 @@
       font-size: 0.75rem; 
       margin-top: 8px; 
       justify-content: space-between; 
+      word-break: break-all;
     }
 
     /* 3D Gold Buttons */
@@ -300,7 +363,7 @@
       align-items: center;
       justify-content: center;
     }
-    .btn-copy { padding: 5px 12px; font-size: 0.68rem; }
+    .btn-copy { padding: 5px 12px; font-size: 0.68rem; flex-shrink: 0; }
     .btn-copy:hover, .btn-gold:hover { 
       filter: brightness(1.15); 
       transform: translateY(-2px);
@@ -387,7 +450,12 @@
     .package-price { font-family: 'Outfit', sans-serif !important; font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; color: var(--gold-primary); }
     .package-meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 18px; }
 
-    /* 3D Inputs */
+    /* Table Container for horizontal scrolling on tiny screens */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
     .form-group { margin-bottom: 14px; }
     .form-label { display: block; font-size: 0.72rem; font-weight: 700; color: var(--gold-primary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
     .form-input, .form-textarea { 
@@ -409,7 +477,7 @@
     }
     .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-    .data-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; min-width: 500px; }
     .data-table th { text-align: left; padding: 12px 14px; color: var(--gold-primary); font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border-subtle); }
     .data-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-main); }
 
@@ -417,45 +485,137 @@
     .chat-header { padding: 14px 22px; border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 12px; }
     .chat-status { font-size: 0.62rem; color: #22c55e; }
     .chat-messages { flex: 1; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-    .msg-bubble { background: var(--bg-input); border: 1px solid var(--border-subtle); padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.82rem; max-width: 60%; box-shadow: inset 0 1px 2px rgba(0,0,0,0.5); }
+    .msg-bubble { background: var(--bg-input); border: 1px solid var(--border-subtle); padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.82rem; max-width: 80%; box-shadow: inset 0 1px 2px rgba(0,0,0,0.5); }
     .chat-footer { padding: 14px; border-top: 1px solid var(--border-subtle); display: flex; gap: 12px; }
 
-    /* Floating Widget Button 3D */
-    .floating-chat-btn {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      background: var(--gold-gradient-3d);
-      color: #000;
-      border: none;
-      padding: 14px 24px;
-      border-radius: 50px;
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      box-shadow: var(--shadow-3d-btn), 0 0 20px rgba(220, 168, 85, 0.4);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      z-index: 999;
-      transition: var(--transition);
-    }
-    .floating-chat-btn:hover { transform: scale(1.05) translateY(-2px); }
+    /* =========================================================
+       RESPONSIVE & MOBILE BREAKPOINTS
+       ========================================================= */
 
     @media (max-width: 1024px) {
-      .quick-nav-grid, .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .home-bottom-grid { grid-template-columns: 1fr; }
+      aside {
+        transform: translateX(-100%);
+      }
+
+      aside.open {
+        transform: translateX(0);
+      }
+
+      .close-sidebar-btn {
+        display: block;
+      }
+
+      main {
+        margin-left: 0;
+        padding: 20px 16px;
+      }
+
+      .mobile-toggle-btn {
+        display: flex;
+      }
+
+      .quick-nav-grid, .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .home-bottom-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .reviews-status-bar {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-top {
+        margin-bottom: 16px;
+      }
+
+      .page-title {
+        font-size: 1.1rem;
+      }
+
+      .user-header-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 18px;
+      }
+
+      .user-header-card > div:last-child {
+        text-align: left !important;
+        width: 100%;
+      }
+
+      .balance-amount {
+        font-size: 1.6rem;
+      }
+
+      .quick-nav-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 14px;
+      }
+
+      .stat-value {
+        font-size: 1.1rem;
+      }
+
+      .reviews-status-bar {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .grid-2col {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .chat-box {
+        height: 75vh;
+      }
+
+      .chat-footer {
+        flex-direction: column;
+      }
+
+      .chat-footer .btn-gold {
+        width: 100% !important;
+      }
+
+      .msg-bubble {
+        max-width: 90%;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Mobile Background Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
   <!-- Sidebar -->
-  <aside>
+  <aside id="sidebar">
     <div>
-      <div class="brand-logo">SOGO REVIEWS</div>
+      <div class="brand-logo">
+        <span>SOGO REVIEWS</span>
+        <button class="close-sidebar-btn" onclick="closeSidebar()">
+          <svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
       <ul class="nav-list">
         <li class="nav-item"><button class="active" onclick="switchTab('dashboard', this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Dashboard</button></li>
         <li class="nav-item"><button onclick="switchTab('packages', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg> Packages</button></li>
@@ -482,7 +642,12 @@
   <!-- Main Content -->
   <main>
     <div class="header-top">
-      <div class="page-title" id="current-page-title">HOME</div>
+      <div class="header-left">
+        <button class="mobile-toggle-btn" onclick="openSidebar()">
+          <svg viewBox="0 0 24 24" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="page-title" id="current-page-title">HOME</div>
+      </div>
       <div class="header-actions-box">
         <button class="header-action-btn" title="Notifications" onclick="alert('No new notifications')">
           <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
@@ -550,7 +715,7 @@
               <button class="btn-copy">Copy</button>
             </div>
             <div class="invite-code-pill" style="margin-top:6px;">
-              <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:260px;">https://sogoreview.online/register?ref=E6UZ86AS</span>
+              <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:220px;">https://sogoreview.online/register?ref=E6UZ86AS</span>
               <button class="btn-copy">Copy</button>
             </div>
           </div>
@@ -646,13 +811,15 @@
 
       <div class="card">
         <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:14px;">Transaction History</h3>
-        <table class="data-table">
-          <thead><tr><th>TYPE</th><th>DETAILS</th><th>AMOUNT</th><th>DATE</th></tr></thead>
-          <tbody>
-            <tr><td>Manual</td><td>Manual amount added</td><td style="color:#ef4444;">$-2500.00</td><td>9/17/2026, 7:07:01 AM</td></tr>
-            <tr><td>Manual</td><td>Manual amount added</td><td style="color:#22c55e;">+$6000.00</td><td>9/17/2026, 7:06:35 AM</td></tr>
-          </tbody>
-        </table>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead><tr><th>TYPE</th><th>DETAILS</th><th>AMOUNT</th><th>DATE</th></tr></thead>
+            <tbody>
+              <tr><td>Manual</td><td>Manual amount added</td><td style="color:#ef4444;">$-2500.00</td><td>9/17/2026, 7:07:01 AM</td></tr>
+              <tr><td>Manual</td><td>Manual amount added</td><td style="color:#22c55e;">+$6000.00</td><td>9/17/2026, 7:06:35 AM</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -660,17 +827,19 @@
     <div id="tab-reviews" class="tab-content">
       <div class="card">
         <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:14px;">Packages to review</h3>
-        <div style="display:flex; gap:8px; margin-bottom:18px;">
+        <div style="display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;">
           <button class="btn-gold" style="width:auto; padding:6px 14px; font-size:0.68rem;">All (0)</button>
-          <button class="quick-nav-btn" style="padding:6px 14px; font-size:0.68rem;">Approved (0)</button>
-          <button class="quick-nav-btn" style="padding:6px 14px; font-size:0.68rem;">Pending (0)</button>
+          <button class="quick-nav-btn" style="padding:6px 14px; font-size:0.68rem; flex-direction:row;">Approved (0)</button>
+          <button class="quick-nav-btn" style="padding:6px 14px; font-size:0.68rem; flex-direction:row;">Pending (0)</button>
         </div>
-        <table class="data-table">
-          <thead><tr><th>PRODUCT</th><th>PACKAGE</th><th>RATING</th><th>STATUS</th><th>COMMISSION</th><th>SUBMITTED</th></tr></thead>
-          <tbody>
-            <tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:30px;">No reviews submitted yet.</td></tr>
-          </tbody>
-        </table>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead><tr><th>PRODUCT</th><th>PACKAGE</th><th>RATING</th><th>STATUS</th><th>COMMISSION</th><th>SUBMITTED</th></tr></thead>
+            <tbody>
+              <tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:30px;">No reviews submitted yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -720,7 +889,7 @@
         </div>
         <div class="chat-footer">
           <input type="text" class="form-input" placeholder="Type a message...">
-          <button class="btn-gold" style="width:auto; padding:0 22px;">SEND</button>
+          <button class="btn-gold" style="width:auto; padding:10px 22px;">SEND</button>
         </div>
       </div>
     </div>
@@ -739,6 +908,16 @@
   </main>
 
   <script>
+    function openSidebar() {
+      document.getElementById('sidebar').classList.add('open');
+      document.getElementById('sidebarOverlay').classList.add('active');
+    }
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('active');
+    }
+
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.nav-item button').forEach(b => b.classList.remove('active'));
@@ -762,6 +941,8 @@
         'profile': 'PROFILE SETTINGS'
       };
       document.getElementById('current-page-title').innerText = titleMap[tabId] || 'DASHBOARD';
+      
+      closeSidebar();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
