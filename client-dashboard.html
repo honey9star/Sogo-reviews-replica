@@ -9,51 +9,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* =========================================================
-       SOGO REVIEWS - ULTRA 3D PREMIUM DARK GOLDEN THEME (MOBILE READY)
+       SOGO REVIEWS - ULTRA 3D PREMIUM DARK GOLDEN THEME
        ========================================================= */
 
     :root {
-      /* Deep Realistic Dark Backgrounds */
       --bg-deep: #0a0a0d;
       --bg-sidebar: #060608;
       --bg-card: linear-gradient(145deg, #13131a 0%, #0d0d12 100%);
       --bg-card-hover: linear-gradient(145deg, #1a1a24 0%, #111117 100%);
-      --bg-input: #08080c;
+      --bg-input: #121218;
 
-      /* Metallic 3D Gold Palette */
       --gold-primary: #e5b85c;
       --gold-secondary: #c99839;
       --gold-light: #f7d58b;
       --gold-dark: #8c641d;
       --gold-gradient-3d: linear-gradient(135deg, #fce3a6 0%, #dca855 45%, #a8792a 100%);
 
-      /* Status & Accents */
       --text-main: #ffffff;
       --text-muted: #838394;
       --border-subtle: rgba(220, 168, 85, 0.16);
       --border-strong: rgba(220, 168, 85, 0.4);
 
-      /* Realistic 3D Shadows */
-      --shadow-3d-card: 0 12px 30px -5px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 -1px 2px rgba(0, 0, 0, 0.9);
-      --shadow-3d-card-hover: 0 18px 40px -5px rgba(0, 0, 0, 0.95), 0 0 20px rgba(220, 168, 85, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.15);
-      --shadow-3d-btn: 0 6px 18px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+      --shadow-3d-card: 0 12px 30px -5px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+      --shadow-3d-btn: 0 6px 18px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 
       --radius-sm: 8px;
       --radius-md: 14px;
-      --radius-lg: 18px;
       --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      width: 100%;
-      overflow-x: hidden;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; overflow-x: hidden; }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -61,47 +47,24 @@
       background-image: radial-gradient(circle at 50% 0%, rgba(220, 168, 85, 0.05) 0%, transparent 60%);
       color: var(--text-main) !important;
       line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
       display: flex;
       min-height: 100vh;
       position: relative;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
-    /* Mobile Overlay */
-    .sidebar-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(4px);
-      z-index: 99;
-      opacity: 0;
-      pointer-events: none;
-      transition: var(--transition);
-    }
-
-    .sidebar-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* 3D Sidebar Styling */
+    /* Sidebar - Desktop */
     aside {
       width: 250px;
       background: var(--bg-sidebar) !important;
       border-right: 1px solid var(--border-subtle) !important;
-      box-shadow: 10px 0 30px rgba(0,0,0,0.5);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: 24px 14px;
       position: fixed;
-      top: 0;
-      bottom: 0;
+      top: 0; bottom: 0; left: 0;
       z-index: 100;
       transition: var(--transition);
     }
@@ -114,26 +77,6 @@
       margin-bottom: 30px;
       padding-left: 10px;
       color: var(--gold-primary) !important;
-      text-shadow: 0 0 15px rgba(220, 168, 85, 0.3);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .close-sidebar-btn {
-      display: none;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    .close-sidebar-btn svg {
-      width: 20px;
-      height: 20px;
-      stroke: currentColor;
-      stroke-width: 2;
     }
 
     .nav-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
@@ -158,45 +101,26 @@
       text-align: left;
     }
 
-    .nav-item button svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
-
-    .nav-item button:hover { 
-      background: rgba(220, 168, 85, 0.06) !important; 
-      color: var(--gold-light) !important; 
-      border-color: rgba(220, 168, 85, 0.2);
-      transform: translateX(3px);
-    }
-
-    .nav-item button.active { 
-      background: var(--gold-gradient-3d) !important; 
-      color: #0a0a0d !important; 
+    .nav-item button svg { width: 16px; height: 16px; fill: currentColor; }
+    .nav-item button:hover { color: var(--gold-light) !important; background: rgba(220, 168, 85, 0.06); }
+    .nav-item button.active {
+      background: var(--gold-gradient-3d) !important;
+      color: #0a0a0d !important;
       font-weight: 800 !important;
-      box-shadow: var(--shadow-3d-btn), 0 0 15px rgba(220, 168, 85, 0.3) !important;
-      border: none !important;
+      box-shadow: var(--shadow-3d-btn);
     }
 
     .sidebar-user { border-top: 1px solid var(--border-subtle); padding-top: 16px; }
     .user-pill { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    .user-avatar { 
-      width: 36px; 
-      height: 36px; 
-      border-radius: 50%; 
-      background: var(--gold-gradient-3d) !important; 
-      color: #000; 
-      font-weight: 800; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      font-size: 0.9rem; 
-      box-shadow: var(--shadow-3d-btn);
+    .user-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--gold-gradient-3d);
+      color: #000;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem;
     }
-    .user-info { display: flex; flex-direction: column; }
-    .user-name { font-size: 0.8rem; font-weight: 800; color: var(--text-main); }
-    .user-role { font-size: 0.65rem; color: var(--gold-primary); font-weight: 600; }
 
     .btn-logout {
       width: 100%;
@@ -208,484 +132,320 @@
       font-size: 0.72rem;
       font-weight: 700;
       cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    /* Main Container */
+    main {
+      margin-left: 250px;
+      flex: 1;
+      padding: 24px 32px;
+      min-height: 100vh;
+      padding-bottom: 90px;
+    }
+
+    .header-top {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 6px;
-      transition: var(--transition);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
-    }
-    .btn-logout:hover { background-color: rgba(239, 68, 68, 0.12); color: #ef4444; border-color: rgba(239, 68, 68, 0.3); transform: translateY(-1px); }
-
-    /* Main Area */
-    main { margin-left: 250px; flex: 1; padding: 28px 40px; min-height: 100vh; transition: var(--transition); }
-
-    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
-    
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      margin-bottom: 22px;
     }
 
-    .mobile-toggle-btn {
-      display: none;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      color: var(--gold-primary);
-      padding: 8px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      box-shadow: var(--shadow-3d-card);
-    }
-
-    .mobile-toggle-btn svg {
-      width: 20px;
-      height: 20px;
-      stroke: currentColor;
-      stroke-width: 2;
-    }
-
-    .page-title { 
-      font-family: 'Outfit', sans-serif !important;
-      font-size: 1.4rem; 
-      font-weight: 800; 
-      letter-spacing: 2px; 
-      text-transform: uppercase; 
+    .page-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
       color: var(--text-main);
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 
-    .header-actions-box {
+    .header-actions {
       display: flex;
       align-items: center;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-3d-card);
-      border-radius: 50px;
-      padding: 4px 12px;
-      gap: 12px;
+      gap: 16px;
     }
 
-    .header-action-btn {
+    .icon-btn {
       background: transparent;
       border: none;
       color: var(--text-muted);
-      font-size: 0.95rem;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       padding: 6px;
       transition: var(--transition);
     }
-    .header-action-btn:hover { color: var(--gold-primary); transform: scale(1.1); }
-    .header-action-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .icon-btn:hover { color: var(--gold-primary); }
+    .icon-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
 
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Realistic 3D Card Architecture */
-    .card { 
-      background: var(--bg-card) !important; 
-      border: 1px solid var(--border-subtle) !important; 
-      border-radius: var(--radius-md); 
-      padding: 22px; 
-      margin-bottom: 18px; 
-      box-shadow: var(--shadow-3d-card) !important;
-      transition: var(--transition);
-      position: relative;
-    }
-    .card:hover { 
-      border-color: var(--border-strong) !important; 
-      box-shadow: var(--shadow-3d-card-hover) !important;
-      transform: translateY(-2px);
+    /* Common Card Styles */
+    .card {
+      background: var(--bg-card) !important;
+      border: 1px solid var(--border-subtle) !important;
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-3d-card);
     }
 
-    .user-header-card { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      background: linear-gradient(135deg, #161620 0%, #0f0f15 100%) !important; 
-      padding: 26px; 
-      border-radius: var(--radius-md); 
-      border: 1px solid var(--border-subtle) !important; 
-      margin-bottom: 18px; 
-      box-shadow: var(--shadow-3d-card) !important;
-      position: relative;
-      overflow: hidden;
-    }
-    .user-header-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(220,168,85,0.4), transparent);
+    .user-header-card {
+      background: linear-gradient(135deg, #161620 0%, #0f0f15 100%);
+      padding: 22px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 16px;
     }
 
-    .balance-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; color: var(--gold-primary); text-transform: uppercase; margin-bottom: 4px; }
-    .balance-amount { 
-      font-family: 'Outfit', sans-serif !important;
-      font-size: 2.1rem; 
-      font-weight: 800; 
-      color: #ffffff !important; 
-      text-shadow: 0 4px 15px rgba(0,0,0,0.8);
-    }
+    .balance-title { font-size: 0.65rem; font-weight: 800; letter-spacing: 1.5px; color: var(--gold-primary); text-transform: uppercase; margin-bottom: 4px; }
+    .balance-amount { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 800; color: #fff; }
 
-    .invite-code-pill { 
-      display: flex; 
-      align-items: center; 
-      gap: 8px; 
-      background: var(--bg-input); 
-      border: 1px solid var(--border-subtle); 
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
-      padding: 8px 14px; 
-      border-radius: var(--radius-sm); 
-      font-size: 0.75rem; 
-      margin-top: 8px; 
-      justify-content: space-between; 
-      word-break: break-all;
-    }
-
-    /* 3D Gold Buttons */
-    .btn-copy, .btn-gold { 
-      background: var(--gold-gradient-3d) !important; 
-      border: none !important; 
-      color: #0a0a0d !important; 
-      font-size: 0.75rem; 
-      font-weight: 800; 
+    /* Buttons */
+    .btn-gold {
+      background: var(--gold-gradient-3d) !important;
+      border: none !important;
+      color: #0a0a0d !important;
+      font-size: 0.75rem;
+      font-weight: 800;
       letter-spacing: 1px;
       text-transform: uppercase;
-      padding: 10px 20px; 
-      border-radius: var(--radius-sm); 
-      cursor: pointer; 
-      transition: var(--transition);
-      box-shadow: var(--shadow-3d-btn) !important;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-    }
-    .btn-copy { padding: 5px 12px; font-size: 0.68rem; flex-shrink: 0; }
-    .btn-copy:hover, .btn-gold:hover { 
-      filter: brightness(1.15); 
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(220, 168, 85, 0.35) !important;
+      box-shadow: var(--shadow-3d-btn);
     }
 
-    .quick-nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
-    .quick-nav-btn { 
-      background: var(--bg-card) !important; 
-      border: 1px solid var(--border-subtle) !important; 
-      padding: 16px; 
-      border-radius: var(--radius-md); 
-      color: var(--text-main); 
-      font-size: 0.72rem; 
-      font-weight: 800; 
-      letter-spacing: 1px; 
-      text-transform: uppercase; 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      gap: 8px; 
-      cursor: pointer; 
-      transition: var(--transition); 
-      box-shadow: var(--shadow-3d-card) !important;
-    }
-    .quick-nav-btn svg { width: 18px; height: 18px; fill: none; stroke: var(--gold-primary); stroke-width: 2; }
-    .quick-nav-btn:hover { 
-      background: var(--bg-card-hover) !important; 
-      color: var(--gold-light); 
-      border-color: var(--border-strong) !important; 
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-3d-card-hover) !important;
+    .btn-copy {
+      background: #252532;
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
     }
 
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
-    .stat-card { 
-      background: var(--bg-card) !important; 
-      border: 1px solid var(--border-subtle) !important; 
-      padding: 18px; 
-      border-radius: var(--radius-md); 
-      box-shadow: var(--shadow-3d-card) !important;
-      transition: var(--transition);
+    /* Grids */
+    .quick-nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
+    .quick-nav-btn {
+      background: #161620;
+      border: 1px solid var(--border-subtle);
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
     }
-    .stat-card:hover { border-color: var(--border-strong) !important; transform: translateY(-2px); }
-    .stat-label { font-size: 0.68rem; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; font-weight: 700; }
-    .stat-value { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800; color: #ffffff !important; }
+    .quick-nav-btn svg { width: 18px; height: 18px; stroke: var(--gold-primary); fill: none; stroke-width: 2; }
 
-    .reviews-status-bar { 
-      display: grid; 
-      grid-template-columns: repeat(5, 1fr); 
-      gap: 14px; 
-      background: var(--bg-card) !important; 
-      border: 1px solid var(--border-subtle) !important; 
-      padding: 20px; 
-      border-radius: var(--radius-md); 
-      margin-bottom: 18px; 
-      box-shadow: var(--shadow-3d-card) !important;
-    }
-    .status-item { display: flex; flex-direction: column; gap: 4px; }
-    .status-item .label { font-size: 0.68rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
-    .status-item .val { font-size: 1.25rem; font-weight: 800; }
-    .val-submitted { color: var(--text-main); }
-    .val-approved { color: #22c55e; }
-    .val-pending { color: var(--gold-primary); }
-    .val-rejected { color: #ef4444; }
-    .val-rewrite { color: #38bdf8; }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 14px; border-radius: var(--radius-md); }
+    .stat-label { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 700; }
+    .stat-value { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 800; color: #fff; }
 
-    .home-bottom-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; }
-
-    .live-earnings-container { height: 240px; overflow: hidden; position: relative; }
-    .live-earnings-list { display: flex; flex-direction: column; gap: 14px; animation: smoothScroll 18s linear infinite; }
-    .live-earnings-list:hover { animation-play-state: paused; }
-    @keyframes smoothScroll { 0% { transform: translateY(0); } 100% { transform: translateY(-55%); } }
-
-    .earnings-row { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .earnings-user-date { display: flex; flex-direction: column; }
-    .earnings-name { font-size: 0.8rem; font-weight: 700; color: var(--text-main); }
-    .earnings-date { font-size: 0.62rem; color: var(--text-muted); margin-top: 2px; }
-    .earnings-amount { font-size: 0.85rem; font-weight: 800; color: var(--gold-primary) !important; }
-
-    .package-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 22px; max-width: 100%; box-shadow: var(--shadow-3d-card); }
-    .package-title { font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; color: #ffffff; }
-    .package-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
-    .package-price { font-family: 'Outfit', sans-serif !important; font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; color: var(--gold-primary); }
-    .package-meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 18px; }
-
-    /* Table Container for horizontal scrolling on tiny screens */
-    .table-wrapper {
-      width: 100%;
-      overflow-x: auto;
-    }
+    .reviews-status-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
 
     .form-group { margin-bottom: 14px; }
-    .form-label { display: block; font-size: 0.72rem; font-weight: 700; color: var(--gold-primary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .form-input, .form-textarea { 
-      width: 100%; 
-      padding: 12px 14px; 
-      background-color: var(--bg-input); 
-      border: 1px solid var(--border-subtle); 
-      border-radius: var(--radius-sm); 
-      color: var(--text-main); 
-      font-family: inherit; 
-      font-size: 0.82rem; 
-      outline: none; 
-      transition: var(--transition);
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+    .form-label { display: block; font-size: 0.7rem; font-weight: 700; color: var(--gold-primary); margin-bottom: 6px; }
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      outline: none;
+      font-size: 0.82rem;
     }
-    .form-input:focus, .form-textarea:focus { 
-      border-color: var(--gold-primary); 
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(220,168,85,0.25);
+
+    /* Floating Chat Icon */
+    .floating-chat-btn {
+      position: fixed;
+      bottom: 75px;
+      right: 18px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gold-gradient-3d);
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(220, 168, 85, 0.4);
+      z-index: 99;
+      cursor: pointer;
     }
-    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .floating-chat-btn svg { width: 22px; height: 22px; fill: none; stroke: #000; stroke-width: 2; }
 
-    .data-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; min-width: 500px; }
-    .data-table th { text-align: left; padding: 12px 14px; color: var(--gold-primary); font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border-subtle); }
-    .data-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-main); }
+    /* Mobile Bottom Navigation Bar */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 60px;
+      background: #08080c;
+      border-top: 1px solid var(--border-subtle);
+      z-index: 1000;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 8px;
+    }
 
-    .chat-box { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); height: 70vh; display: flex; flex-direction: column; box-shadow: var(--shadow-3d-card); }
-    .chat-header { padding: 14px 22px; border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 12px; }
-    .chat-status { font-size: 0.62rem; color: #22c55e; }
-    .chat-messages { flex: 1; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-    .msg-bubble { background: var(--bg-input); border: 1px solid var(--border-subtle); padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.82rem; max-width: 80%; box-shadow: inset 0 1px 2px rgba(0,0,0,0.5); }
-    .chat-footer { padding: 14px; border-top: 1px solid var(--border-subtle); display: flex; gap: 12px; }
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .bottom-nav-item svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .bottom-nav-item.active { color: var(--gold-primary); }
 
-    /* =========================================================
-       RESPONSIVE & MOBILE BREAKPOINTS
-       ========================================================= */
+    /* Notifications Modal Popup */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
 
+    .notifications-card {
+      background: #111118;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 360px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+    }
+
+    .notifications-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .notification-item {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .notification-item:last-child { border-bottom: none; }
+    .notification-title { font-size: 0.78rem; font-weight: 700; color: #22c55e; }
+    .notification-desc { font-size: 0.72rem; color: var(--text-main); margin-top: 2px; }
+    .notification-time { font-size: 0.62rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* Mobile Breakpoints */
     @media (max-width: 1024px) {
-      aside {
-        transform: translateX(-100%);
-      }
-
-      aside.open {
-        transform: translateX(0);
-      }
-
-      .close-sidebar-btn {
-        display: block;
-      }
-
-      main {
-        margin-left: 0;
-        padding: 20px 16px;
-      }
-
-      .mobile-toggle-btn {
-        display: flex;
-      }
-
-      .quick-nav-grid, .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .home-bottom-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .reviews-status-bar {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .header-top {
-        margin-bottom: 16px;
-      }
-
-      .page-title {
-        font-size: 1.1rem;
-      }
-
-      .user-header-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-        padding: 18px;
-      }
-
-      .user-header-card > div:last-child {
-        text-align: left !important;
-        width: 100%;
-      }
-
-      .balance-amount {
-        font-size: 1.6rem;
-      }
-
-      .quick-nav-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      .stat-card {
-        padding: 14px;
-      }
-
-      .stat-value {
-        font-size: 1.1rem;
-      }
-
-      .reviews-status-bar {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        padding: 14px;
-      }
-
-      .grid-2col {
-        grid-template-columns: 1fr;
-      }
-
-      .card {
-        padding: 16px;
-      }
-
-      .chat-box {
-        height: 75vh;
-      }
-
-      .chat-footer {
-        flex-direction: column;
-      }
-
-      .chat-footer .btn-gold {
-        width: 100% !important;
-      }
-
-      .msg-bubble {
-        max-width: 90%;
-      }
+      aside { display: none; }
+      main { margin-left: 0; padding: 16px; padding-bottom: 80px; }
+      .mobile-bottom-nav { display: flex; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Mobile Background Overlay -->
-  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+  <!-- Floating Chat Button -->
+  <div class="floating-chat-btn" onclick="switchTab('chat')">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  </div>
 
-  <!-- Sidebar -->
-  <aside id="sidebar">
+  <!-- Sidebar (Desktop View) -->
+  <aside>
     <div>
-      <div class="brand-logo">
-        <span>SOGO REVIEWS</span>
-        <button class="close-sidebar-btn" onclick="closeSidebar()">
-          <svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-      </div>
+      <div class="brand-logo">SOGO REVIEWS</div>
       <ul class="nav-list">
         <li class="nav-item"><button class="active" onclick="switchTab('dashboard', this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Dashboard</button></li>
-        <li class="nav-item"><button onclick="switchTab('packages', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg> Packages</button></li>
-        <li class="nav-item"><button onclick="switchTab('my-packages', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path><path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"></path></svg> My Packages</button></li>
-        <li class="nav-item"><button onclick="switchTab('reviews', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Reviews</button></li>
-        <li class="nav-item"><button onclick="switchTab('withdraw', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Withdraw</button></li>
-        <li class="nav-item"><button onclick="switchTab('chat', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> Chat</button></li>
-        <li class="nav-item"><button onclick="switchTab('profile', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Profile Settings</button></li>
+        <li class="nav-item"><button onclick="switchTab('packages', this)"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg> Packages</button></li>
+        <li class="nav-item"><button onclick="switchTab('reviews', this)"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Reviews</button></li>
+        <li class="nav-item"><button onclick="switchTab('withdraw', this)"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Withdraw</button></li>
+        <li class="nav-item"><button onclick="switchTab('chat', this)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> Chat</button></li>
+        <li class="nav-item"><button onclick="switchTab('profile', this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Profile Settings</button></li>
       </ul>
     </div>
-
     <div class="sidebar-user">
       <div class="user-pill">
         <div class="user-avatar">S</div>
-        <div class="user-info">
-          <span class="user-name">Shiz</span>
-          <span class="user-role">User</span>
+        <div>
+          <div style="font-size:0.8rem; font-weight:800;">Shiz</div>
+          <div style="font-size:0.65rem; color:var(--gold-primary);">User</div>
         </div>
       </div>
-      <button class="btn-logout" onclick="window.location.href='auth.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Logout</button>
+      <button class="btn-logout" onclick="window.location.href='auth.html'">Logout</button>
     </div>
   </aside>
 
-  <!-- Main Content -->
+  <!-- Main Content Area -->
   <main>
     <div class="header-top">
-      <div class="header-left">
-        <button class="mobile-toggle-btn" onclick="openSidebar()">
-          <svg viewBox="0 0 24 24" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        </button>
-        <div class="page-title" id="current-page-title">HOME</div>
-      </div>
-      <div class="header-actions-box">
-        <button class="header-action-btn" title="Notifications" onclick="alert('No new notifications')">
+      <div class="page-title" id="current-page-title">HOME</div>
+      <div class="header-actions">
+        <button class="icon-btn" onclick="toggleNotificationsModal(true)" title="Notifications">
           <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
         </button>
-        <button class="header-action-btn" title="Logout" onclick="window.location.href='auth.html'">
+        <button class="icon-btn" onclick="window.location.href='auth.html'" title="Logout">
           <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
         </button>
       </div>
     </div>
 
-    <!-- 1. DASHBOARD VIEW -->
+    <!-- 1. HOME / DASHBOARD TAB -->
     <div id="tab-dashboard" class="tab-content active">
       <div class="user-header-card">
-        <div>
-          <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
-            <div class="user-avatar" style="width:46px; height:46px; font-size:1.1rem;">S</div>
-            <div>
-              <h2 style="font-size:1.05rem; font-weight:800;">SHIZ</h2>
-              <p style="font-size:0.72rem; color:var(--text-muted);">shiz1198@gmail.com</p>
-            </div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+          <div class="user-avatar" style="width:44px; height:44px; font-size:1.1rem;">S</div>
+          <div>
+            <h2 style="font-size:1rem; font-weight:800;">SHIZ</h2>
+            <p style="font-size:0.7rem; color:var(--text-muted);">shiz1198@gmail.com</p>
+            <p style="font-size:0.65rem; color:var(--text-muted);">No phone added.</p>
           </div>
-          <div class="balance-title">Available Balance</div>
-          <div class="balance-amount">USD 2500.00</div>
         </div>
-      </div>
+        <div class="balance-title">AVAILABLE BALANCE</div>
+        <div class="balance-amount">USD 2500.00</div>
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button class="btn-copy">Invitation E6UZ86AS</button>
+          <button class="btn-copy" onclick="alert('Code Copied!')">Copy</button>
+        </div>
 
-      <div class="quick-nav-grid">
-        <div class="quick-nav-btn" onclick="switchTab('chat')">
-          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> Chat
-        </div>
-        <div class="quick-nav-btn" onclick="switchTab('packages')">
-          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg> Packages
-        </div>
-        <div class="quick-nav-btn" onclick="alert('Referral link copied!')">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Invite
-        </div>
-        <div class="quick-nav-btn" onclick="switchTab('withdraw')">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Withdraw
+        <div class="quick-nav-grid">
+          <div class="quick-nav-btn" onclick="switchTab('chat')">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> Chat
+          </div>
+          <div class="quick-nav-btn" onclick="switchTab('packages')">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg> Packages
+          </div>
+          <div class="quick-nav-btn" onclick="alert('Referral link copied!')">
+            <svg viewBox="0 0 24 24"><path d="M20 12v10H4V12"></path><path d="M22 7H2v5h20V7z"></path></svg> Invite
+          </div>
+          <div class="quick-nav-btn" onclick="switchTab('withdraw')">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M12 8v8"></path></svg> Withdraw
+          </div>
         </div>
       </div>
 
@@ -696,294 +456,221 @@
         <div class="stat-card"><div class="stat-label">Referrals</div><div class="stat-value">0</div></div>
       </div>
 
-      <div style="font-size:0.75rem; font-weight:800; margin-bottom:8px; letter-spacing:1px; text-transform:uppercase;">Your Reviews</div>
+      <div style="font-size:0.75rem; font-weight:800; margin-bottom:8px;">Your Reviews</div>
       <div class="reviews-status-bar">
-        <div class="status-item"><div class="label">Submitted</div><div class="val val-submitted">0</div></div>
-        <div class="status-item"><div class="label">Approved</div><div class="val val-approved">0</div></div>
-        <div class="status-item"><div class="label">Pending</div><div class="val val-pending">0</div></div>
-        <div class="status-item"><div class="label">Rejected</div><div class="val val-rejected">0</div></div>
-        <div class="status-item"><div class="label">Rewrite</div><div class="val val-rewrite">0</div></div>
+        <div class="stat-card"><div class="stat-label">Submitted</div><div class="stat-value">0</div></div>
+        <div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value" style="color:#22c55e;">0</div></div>
+        <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" style="color:var(--gold-primary);">0</div></div>
+        <div class="stat-card"><div class="stat-label">Rejected</div><div class="stat-value" style="color:#ef4444;">0</div></div>
       </div>
 
-      <div class="home-bottom-grid">
-        <div>
-          <div class="card">
-            <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:10px;">Invite & earn</h3>
-            <p style="font-size:0.72rem; color:var(--text-muted); margin-bottom:10px;">Share your code or link — anyone who signs up through it is tracked to you.</p>
-            <div class="invite-code-pill">
-              <span>E6UZ86AS</span>
-              <button class="btn-copy">Copy</button>
-            </div>
-            <div class="invite-code-pill" style="margin-top:6px;">
-              <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:220px;">https://sogoreview.online/register?ref=E6UZ86AS</span>
-              <button class="btn-copy">Copy</button>
-            </div>
-          </div>
+      <div class="card">
+        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:6px;">Invite & earn</h3>
+        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:12px;">Share your code or link — anyone who signs up through it is tracked to you.</p>
+        <div class="form-group"><input type="text" class="form-input" value="E6UZ86AS" readonly></div>
+        <div class="form-group"><input type="text" class="form-input" value="https://sogoreview.online/register?ref=E6UZ86AS" readonly></div>
+      </div>
 
-          <div class="card">
-            <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:14px;">Membership Packages</h3>
-            <div class="package-card" style="border:none; padding:0; box-shadow:none;">
-              <div class="package-title">Jo Malone London Timeless British Fragrance</div>
-              <div class="package-price">$100</div>
-              <div class="package-meta">20 products to review • Earn $2000.00 in commission</div>
-              <button class="btn-gold" style="width:auto; padding:10px 22px;" onclick="switchTab('packages')">Join Now</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-            <h3 style="font-size:0.8rem; font-weight:800;">Live Earnings</h3>
-            <span style="font-size:0.62rem; color:#22c55e; font-weight:700;">• LIVE</span>
-          </div>
-          <div class="live-earnings-container">
-            <div class="live-earnings-list">
-              <div class="earnings-row">
-                <div class="earnings-user-date"><span class="earnings-name">Chl***</span><span class="earnings-date">20/09/2026</span></div>
-                <div class="earnings-amount">+$40000</div>
-              </div>
-              <div class="earnings-row">
-                <div class="earnings-user-date"><span class="earnings-name">Oli***</span><span class="earnings-date">20/09/2026</span></div>
-                <div class="earnings-amount">+$6000</div>
-              </div>
-              <div class="earnings-row">
-                <div class="earnings-user-date"><span class="earnings-name">Mic***</span><span class="earnings-date">20/09/2026</span></div>
-                <div class="earnings-amount">+$30000</div>
-              </div>
-              <div class="earnings-row">
-                <div class="earnings-user-date"><span class="earnings-name">Eth***</span><span class="earnings-date">20/09/2026</span></div>
-                <div class="earnings-amount">+$2500</div>
-              </div>
-              <div class="earnings-row">
-                <div class="earnings-user-date"><span class="earnings-name">And***</span><span class="earnings-date">20/09/2026</span></div>
-                <div class="earnings-amount">+$5000</div>
-              </div>
-              <div class="earnings-row">
-                <div class="earnings-user-date"><span class="earnings-name">Pie***</span><span class="earnings-date">20/09/2026</span></div>
-                <div class="earnings-amount">+$5000</div>
-              </div>
-              <div class="earnings-row">
-                <div class="earnings-user-date"><span class="earnings-name">Mat***</span><span class="earnings-date">20/09/2026</span></div>
-                <div class="earnings-amount">+$7000</div>
-              </div>
-              <div class="earnings-row">
-                <div class="earnings-user-date"><span class="earnings-name">Adi***</span><span class="earnings-date">20/09/2026</span></div>
-                <div class="earnings-amount">+$18000</div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="card">
+        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:8px;">Membership Packages</h3>
+        <div style="font-size:0.85rem; font-weight:800; color:#fff;">Jo Malone London Timeless British Fragrance</div>
+        <div style="font-size:1.3rem; font-weight:800; color:var(--gold-primary); margin:6px 0;">$100</div>
+        <div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:12px;">20 products to review &bull; Earn $2000.00 in commission</div>
+        <button class="btn-gold" onclick="switchTab('packages')">JOIN NOW</button>
       </div>
     </div>
 
-    <!-- 2. PACKAGES VIEW -->
+    <!-- 2. PACKAGES TAB -->
     <div id="tab-packages" class="tab-content">
-      <div class="package-card">
-        <div class="package-title">Jo Malone London Timeless British Fragrance</div>
-        <div class="package-desc">Jo Malone London is a renowned British fragrance brand celebrated for its elegant, sophisticated, and distinctive scents...</div>
-        <div class="package-price">$100</div>
-        <div class="package-meta">
+      <div class="card">
+        <div style="font-size:0.9rem; font-weight:800; color:#fff; margin-bottom:8px;">Jo Malone London Timeless British Fragrance</div>
+        <p style="font-size:0.72rem; color:var(--text-muted); line-height:1.5; margin-bottom:14px;">
+          Jo Malone London is a renowned British fragrance brand celebrated for its elegant, sophisticated, and distinctive scents...
+        </p>
+        <div style="font-size:1.5rem; font-weight:800; color:var(--gold-primary); margin-bottom:10px;">$100</div>
+        <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:14px;">
           <div>&bull; 20 products to review</div>
           <div>&bull; Earn $2000.00 in commission</div>
         </div>
-        <button class="btn-gold" onclick="switchTab('my-packages')">Select package</button>
+        <button class="btn-gold" style="width:100%;" onclick="switchTab('reviews')">Select package</button>
       </div>
     </div>
 
-    <!-- 3. MY PACKAGES VIEW -->
-    <div id="tab-my-packages" class="tab-content">
-      <div class="user-header-card">
-        <div>
-          <div class="balance-title">CURRENT BALANCE</div>
-          <div class="balance-amount">$2500.00</div>
-          <div style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">Total earned: $0.00</div>
-        </div>
-        <div style="text-align:right;">
-          <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:8px;">Ready to cash out? Withdraw your earnings anytime.</div>
-          <button class="btn-gold" style="width:auto; padding:10px 22px;" onclick="switchTab('withdraw')">WITHDRAW</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:10px;">My Packages</h3>
-        <p style="font-size:0.78rem; color:var(--text-muted);">You have selected Jo Malone London Timeless British Fragrance package.</p>
-      </div>
-
-      <div class="card">
-        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:14px;">Transaction History</h3>
-        <div class="table-wrapper">
-          <table class="data-table">
-            <thead><tr><th>TYPE</th><th>DETAILS</th><th>AMOUNT</th><th>DATE</th></tr></thead>
-            <tbody>
-              <tr><td>Manual</td><td>Manual amount added</td><td style="color:#ef4444;">$-2500.00</td><td>9/17/2026, 7:07:01 AM</td></tr>
-              <tr><td>Manual</td><td>Manual amount added</td><td style="color:#22c55e;">+$6000.00</td><td>9/17/2026, 7:06:35 AM</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. REVIEWS VIEW -->
+    <!-- 3. REVIEWS TAB -->
     <div id="tab-reviews" class="tab-content">
       <div class="card">
-        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:14px;">Packages to review</h3>
-        <div style="display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;">
-          <button class="btn-gold" style="width:auto; padding:6px 14px; font-size:0.68rem;">All (0)</button>
-          <button class="quick-nav-btn" style="padding:6px 14px; font-size:0.68rem; flex-direction:row;">Approved (0)</button>
-          <button class="quick-nav-btn" style="padding:6px 14px; font-size:0.68rem; flex-direction:row;">Pending (0)</button>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+          <div>
+            <div style="font-size:0.85rem; font-weight:800;">Jo Malone London Timeless British Fragrance</div>
+            <div style="font-size:0.8rem; color:var(--gold-primary); font-weight:800;">$100</div>
+          </div>
+          <span style="background:#252530; color:#22c55e; font-size:0.65rem; padding:4px 8px; border-radius:4px; font-weight:700;">Pending Payment</span>
         </div>
-        <div class="table-wrapper">
-          <table class="data-table">
-            <thead><tr><th>PRODUCT</th><th>PACKAGE</th><th>RATING</th><th>STATUS</th><th>COMMISSION</th><th>SUBMITTED</th></tr></thead>
-            <tbody>
-              <tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:30px;">No reviews submitted yet.</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:12px;">0/20 reviewed - 0%</div>
+        <button class="btn-gold" style="padding:6px 14px; font-size:0.7rem;">Open package &rarr;</button>
+      </div>
+
+      <div style="display:flex; gap:6px; overflow-x:auto; margin-bottom:14px; padding-bottom:4px;">
+        <button class="btn-gold" style="padding:6px 12px; font-size:0.65rem;">All (0)</button>
+        <button class="btn-copy" style="font-size:0.65rem;">Approved (0)</button>
+        <button class="btn-copy" style="font-size:0.65rem;">Pending (0)</button>
+        <button class="btn-copy" style="font-size:0.65rem;">Rejected (0)</button>
       </div>
     </div>
 
-    <!-- 5. WITHDRAW VIEW -->
+    <!-- 4. WITHDRAW TAB -->
     <div id="tab-withdraw" class="tab-content">
       <div class="user-header-card">
-        <div>
-          <div class="balance-title">AVAILABLE TO WITHDRAW</div>
-          <div class="balance-amount">USD 2500.00</div>
-          <div style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">Total balance: $2500.00 &bull; Locked: $0.00</div>
-        </div>
+        <div class="balance-title">AVAILABLE TO WITHDRAW</div>
+        <div class="balance-amount">USD 2500.00</div>
+        <div style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">Total balance: $2500.00 &bull; Locked: $0.00</div>
       </div>
 
-      <div class="grid-2col">
-        <div class="card">
-          <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:10px;">Bank Details</h3>
-          <p style="font-size:0.72rem; color:var(--text-muted); margin-bottom:14px;">Where you'd like to receive your withdrawals.</p>
-          <div class="form-group"><label class="form-label">Bank name</label><input type="text" class="form-input" placeholder="e.g. HBL"></div>
-          <div class="form-group"><label class="form-label">Account holder name</label><input type="text" class="form-input" placeholder="Full name on account"></div>
-          <div class="form-group"><label class="form-label">Account number / IBAN</label><input type="text" class="form-input" placeholder="Account number"></div>
-          <button class="btn-gold" style="width:auto; padding:10px 18px;">Save bank details</button>
-        </div>
+      <div class="card" style="border-color:rgba(234, 179, 8, 0.3);">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--gold-primary); margin-bottom:4px;">Withdrawal eligibility</div>
+        <p style="font-size:0.7rem; color:var(--text-muted);">Package deposits stay locked until your reviews are completed. Finish remaining reviews — locked deposits cannot be withdrawn yet.</p>
+      </div>
 
-        <div class="card">
-          <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:10px;">Request a Withdrawal</h3>
-          <p style="font-size:0.72rem; color:var(--text-muted); margin-bottom:14px;">Funds are sent after support approval.</p>
-          <button class="btn-gold" style="opacity:0.6;">Request Withdrawal</button>
-        </div>
+      <div class="card">
+        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:12px;">Bank Details</h3>
+        <div class="form-group"><label class="form-label">Bank name</label><input type="text" class="form-input" placeholder="e.g. HBL"></div>
+        <div class="form-group"><label class="form-label">Account holder name</label><input type="text" class="form-input" placeholder="Full name on account"></div>
+        <div class="form-group"><label class="form-label">Account number / IBAN</label><input type="text" class="form-input" placeholder="Account number"></div>
+        <button class="btn-gold">Save bank details</button>
       </div>
     </div>
 
-    <!-- 6. CHAT VIEW -->
+    <!-- 5. CHAT TAB -->
     <div id="tab-chat" class="tab-content">
-      <div class="chat-box">
-        <div class="chat-header">
-          <div class="user-avatar" style="background:#eab308; color:#000;">D</div>
-          <div>
-            <div style="font-size:0.8rem; font-weight:800;">LIVE SUPPORT</div>
-            <div class="chat-status">&bull; ONLINE - 24/7</div>
+      <div class="card" style="height: 65vh; display:flex; flex-direction:column; justify-content:space-between; padding:14px;">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div class="user-avatar" style="width:32px; height:32px; font-size:0.8rem;">D</div>
+            <div>
+              <div style="font-size:0.8rem; font-weight:800;">LIVE SUPPORT</div>
+              <div style="font-size:0.6rem; color:#22c55e;">&bull; ONLINE - 24/7</div>
+            </div>
           </div>
-        </div>
-        <div class="chat-messages">
-          <div class="msg-bubble">
-            <div style="font-size:0.62rem; color:var(--text-muted); margin-bottom:4px;">CUSTOMER SUPPORT</div>
+          <div style="margin-top:14px; background:#181822; padding:10px 14px; border-radius:8px; font-size:0.75rem; max-width:85%;">
             Welcome to SOGO Reviews. How can we help?
           </div>
         </div>
-        <div class="chat-footer">
-          <input type="text" class="form-input" placeholder="Type a message...">
-          <button class="btn-gold" style="width:auto; padding:10px 22px;">SEND</button>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <button class="btn-copy" style="padding:10px;"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg></button>
+          <input type="text" class="form-input" placeholder="Type a message..." style="margin-bottom:0;">
+          <button class="btn-gold" style="padding:10px 16px;">SEND</button>
         </div>
       </div>
     </div>
 
-    <!-- 7. PROFILE SETTINGS VIEW -->
+    <!-- 6. PROFILE SETTINGS TAB -->
     <div id="tab-profile" class="tab-content">
       <div class="card">
-        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:14px;">Profile details</h3>
-        <div class="grid-2col">
-          <div class="form-group"><label class="form-label">Full name</label><input type="text" class="form-input" value="Shiz"></div>
-          <div class="form-group"><label class="form-label">Email</label><input type="text" class="form-input" value="shiz1198@gmail.com" disabled></div>
+        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:12px;">Profile picture</h3>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div class="user-avatar" style="width:48px; height:48px; font-size:1.2rem;">S</div>
+          <button class="btn-copy" style="font-size:0.7rem;">📷 CHOOSE PHOTO <span style="font-weight:400; color:var(--text-muted);">max 5 MB</span></button>
         </div>
-        <button class="btn-gold" style="width:auto; padding:10px 22px;">Save changes</button>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:12px;">Profile details</h3>
+        <div class="form-group"><label class="form-label">Full name</label><input type="text" class="form-input" value="Shiz"></div>
+        <div class="form-group"><label class="form-label">Email</label><input type="text" class="form-input" value="shiz1198@gmail.com" disabled></div>
+        <div class="form-group"><label class="form-label">Phone</label><input type="text" class="form-input" placeholder="e.g. +92 300 1234567"></div>
+        <button class="btn-gold">Save changes</button>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:12px;">Change password</h3>
+        <div class="form-group"><label class="form-label">Current password</label><input type="password" class="form-input"></div>
+        <div class="form-group"><label class="form-label">New password</label><input type="password" class="form-input"></div>
+        <button class="btn-gold">Change password</button>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:6px;">Log out everywhere</h3>
+        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:10px;">Sign out of this account on every device.</p>
+        <button class="btn-copy" style="border-color:#ef4444; color:#ef4444;">Log out all devices</button>
       </div>
     </div>
   </main>
 
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <button class="bottom-nav-item active" onclick="switchTab('dashboard', this)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      <span>HOME</span>
+    </button>
+    <button class="bottom-nav-item" onclick="switchTab('packages', this)">
+      <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+      <span>PACKAGES</span>
+    </button>
+    <button class="bottom-nav-item" onclick="switchTab('reviews', this)">
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+      <span>REVIEWS</span>
+    </button>
+    <button class="bottom-nav-item" onclick="switchTab('chat', this)">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <span>CHAT</span>
+    </button>
+    <button class="bottom-nav-item" onclick="switchTab('profile', this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      <span>PROFILE</span>
+    </button>
+  </nav>
+
+  <!-- Notifications Modal -->
+  <div class="modal-overlay" id="notificationsModal" onclick="toggleNotificationsModal(false)">
+    <div class="notifications-card" onclick="event.stopPropagation()">
+      <div class="notifications-header">
+        <span>Notifications</span>
+        <button class="icon-btn" onclick="toggleNotificationsModal(false)">✕</button>
+      </div>
+      <div class="notification-item">
+        <div class="notification-title">Balance updated</div>
+        <div class="notification-desc">$-2500.00 added to your wallet.</div>
+        <div class="notification-time">9/17/2026, 12:07:01 PM</div>
+      </div>
+      <div class="notification-item">
+        <div class="notification-title">Balance updated</div>
+        <div class="notification-desc">$-1000.00 added to your wallet.</div>
+        <div class="notification-time">9/17/2026, 12:06:48 PM</div>
+      </div>
+      <div class="notification-item">
+        <div class="notification-title">Balance updated</div>
+        <div class="notification-desc">+$6000.00 added to your wallet.</div>
+        <div class="notification-time">9/17/2026, 12:06:35 PM</div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    function openSidebar() {
-      document.getElementById('sidebar').classList.add('open');
-      document.getElementById('sidebarOverlay').classList.add('active');
-    }
-
-    function closeSidebar() {
-      document.getElementById('sidebar').classList.remove('open');
-      document.getElementById('sidebarOverlay').classList.remove('active');
-    }
-
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.nav-item button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+
       const selectedTab = document.getElementById('tab-' + tabId);
       if (selectedTab) selectedTab.classList.add('active');
-      
-      if (btn) {
-        btn.classList.add('active');
-      } else {
-        const pkgBtn = document.querySelector('button[onclick*="packages"]');
-        if (pkgBtn) pkgBtn.classList.add('active');
-      }
+
+      if (btn) btn.classList.add('active');
 
       const titleMap = {
         'dashboard': 'HOME',
         'packages': 'PACKAGES',
-        'my-packages': 'MY PACKAGES',
         'reviews': 'REVIEWS',
         'withdraw': 'WITHDRAW',
         'chat': 'CHAT',
         'profile': 'PROFILE SETTINGS'
       };
-      document.getElementById('current-page-title').innerText = titleMap[tabId] || 'DASHBOARD';
-      
-      closeSidebar();
+      document.getElementById('current-page-title').innerText = titleMap[tabId] || 'HOME';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    const sampleNames = ["Chl***", "Oli***", "Mic***", "Eth***", "And***", "Pie***", "Mat***", "Adi***", "Har***", "Rya***", "Mad***", "Emm***", "Ali***", "Zia***"];
-    const sampleAmounts = ["+$40000", "+$6000", "+$30000", "+$2500", "+$5000", "+$7000", "+$18000", "+$12000", "+$15000", "+$22000"];
-
-    function updateLiveEarnings() {
-      const list = document.querySelector('.live-earnings-list');
-      if (!list) return;
-
-      const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
-      const randomAmount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
-      const today = "20/09/2026";
-
-      const newRow = document.createElement('div');
-      newRow.className = 'earnings-row';
-      newRow.style.opacity = '0';
-      newRow.style.transform = 'translateY(-10px)';
-      newRow.style.transition = 'all 0.4s ease';
-      
-      newRow.innerHTML = `
-        <div class="earnings-user-date">
-          <span class="earnings-name">${randomName}</span>
-          <span class="earnings-date">${today}</span>
-        </div>
-        <div class="earnings-amount">${randomAmount}</div>
-      `;
-
-      list.insertBefore(newRow, list.firstChild);
-
-      setTimeout(() => {
-        newRow.style.opacity = '1';
-        newRow.style.transform = 'translateY(0)';
-      }, 50);
-
-      if (list.children.length > 10) {
-        list.removeChild(list.lastChild);
-      }
+    function toggleNotificationsModal(show) {
+      const modal = document.getElementById('notificationsModal');
+      modal.style.display = show ? 'flex' : 'none';
     }
-
-    setInterval(updateLiveEarnings, 3000);
   </script>
 </body>
 </html>
