@@ -2,674 +2,1336 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOGO REVIEWS - Client Portal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SOGO REVIEWS - Complete 7-in-1 Dashboard</title>
+  <!-- Font Awesome Icons & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
-    /* =========================================================
-       SOGO REVIEWS - ULTRA 3D PREMIUM DARK GOLDEN THEME
-       ========================================================= */
-
+    /* 3D Duo-Tone Theme Variables */
     :root {
-      --bg-deep: #0a0a0d;
-      --bg-sidebar: #060608;
-      --bg-card: linear-gradient(145deg, #13131a 0%, #0d0d12 100%);
-      --bg-card-hover: linear-gradient(145deg, #1a1a24 0%, #111117 100%);
-      --bg-input: #121218;
-
-      --gold-primary: #e5b85c;
-      --gold-secondary: #c99839;
-      --gold-light: #f7d58b;
-      --gold-dark: #8c641d;
-      --gold-gradient-3d: linear-gradient(135deg, #fce3a6 0%, #dca855 45%, #a8792a 100%);
-
+      --bg-dark: #08070c;
+      --card-gradient: linear-gradient(135deg, rgba(22, 20, 31, 0.85) 0%, rgba(14, 13, 20, 0.95) 100%);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-gold: #d9a05b;
+      --accent-gold-glow: rgba(217, 160, 91, 0.35);
       --text-main: #ffffff;
-      --text-muted: #838394;
-      --border-subtle: rgba(220, 168, 85, 0.16);
-      --border-strong: rgba(220, 168, 85, 0.4);
-
-      --shadow-3d-card: 0 12px 30px -5px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.08);
-      --shadow-3d-btn: 0 6px 18px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      --text-muted: #8b8a97;
+      --3d-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+      --3d-hover-shadow: 0 18px 35px -10px rgba(217, 160, 91, 0.25), 0 0 12px rgba(217, 160, 91, 0.15);
+      --bottom-nav-height: 65px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; overflow-x: hidden; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-deep) !important;
-      background-image: radial-gradient(circle at 50% 0%, rgba(220, 168, 85, 0.05) 0%, transparent 60%);
-      color: var(--text-main) !important;
-      line-height: 1.5;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 10%, rgba(217, 160, 91, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 90% 90%, rgba(32, 26, 52, 0.3) 0%, transparent 50%);
+      color: var(--text-main);
       display: flex;
       min-height: 100vh;
-      position: relative;
+      overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    /* Sidebar - Desktop */
-    aside {
-      width: 250px;
-      background: var(--bg-sidebar) !important;
-      border-right: 1px solid var(--border-subtle) !important;
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 260px;
+      background: rgba(12, 11, 17, 0.92);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--card-border);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 24px 14px;
+      padding: 25px 20px;
       position: fixed;
-      top: 0; bottom: 0; left: 0;
+      height: 100vh;
       z-index: 100;
-      transition: var(--transition);
     }
 
-    .brand-logo {
-      font-family: 'Outfit', sans-serif !important;
-      font-size: 1.25rem !important;
-      font-weight: 800 !important;
-      letter-spacing: 2.5px !important;
-      margin-bottom: 30px;
-      padding-left: 10px;
-      color: var(--gold-primary) !important;
+    .brand {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 35px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .brand .sogo-text {
+      color: var(--accent-gold);
+      text-shadow: 0 0 12px var(--accent-gold-glow);
+    }
 
-    .nav-item button {
-      width: 100%;
+    .brand .reviews-text {
+      color: #ffffff;
+      letter-spacing: 2px;
+    }
+
+    .nav-links { list-style: none; }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 18px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateX(4px);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(90deg, rgba(217, 160, 91, 0.2) 0%, rgba(217, 160, 91, 0.03) 100%);
+      color: var(--accent-gold);
+      border-left: 3px solid var(--accent-gold);
+    }
+
+    .sidebar-footer {
+      border-top: 1px solid var(--card-border);
+      padding-top: 18px;
+    }
+
+    .user-profile-sm {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 11px 14px;
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      font-family: inherit;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: var(--transition);
-      text-align: left;
+      margin-bottom: 16px;
     }
 
-    .nav-item button svg { width: 16px; height: 16px; fill: currentColor; }
-    .nav-item button:hover { color: var(--gold-light) !important; background: rgba(220, 168, 85, 0.06); }
-    .nav-item button.active {
-      background: var(--gold-gradient-3d) !important;
-      color: #0a0a0d !important;
-      font-weight: 800 !important;
-      box-shadow: var(--shadow-3d-btn);
-    }
-
-    .sidebar-user { border-top: 1px solid var(--border-subtle); padding-top: 16px; }
-    .user-pill { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    .user-avatar {
-      width: 38px; height: 38px;
+    .avatar {
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: var(--gold-gradient-3d);
-      color: #000;
+      background: linear-gradient(135deg, #d9a05b, #99682c);
+      color: #0c0b10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 800;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.95rem;
+      font-size: 16px;
+      box-shadow: 0 0 15px var(--accent-gold-glow);
     }
+
+    .user-info h4 { font-size: 14px; color: #fff; font-weight: 700; }
+    .user-info p { font-size: 11px; color: var(--text-muted); }
 
     .btn-logout {
       width: 100%;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      padding: 9px 12px;
-      border-radius: var(--radius-sm);
-      font-size: 0.72rem;
-      font-weight: 700;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      border-radius: 10px;
       cursor: pointer;
-      display: flex; align-items: center; gap: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-logout:hover {
+      background: rgba(231, 76, 60, 0.15);
+      border-color: rgba(231, 76, 60, 0.4);
+      color: #e74c3c;
     }
 
     /* Main Container */
-    main {
-      margin-left: 250px;
+    .main-content {
+      margin-left: 260px;
       flex: 1;
-      padding: 24px 32px;
-      min-height: 100vh;
-      padding-bottom: 90px;
+      padding: 28px 40px;
+      max-width: 1440px;
+      padding-bottom: 40px;
     }
 
-    .header-top {
+    .header-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 18px;
+      color: var(--accent-gold);
+      font-size: 18px;
+    }
+
+    .header-icons i { cursor: pointer; transition: transform 0.2s ease; }
+    .header-icons i:hover { transform: scale(1.15); }
+
+    /* View Switcher Animation */
+    .view-section { display: none; }
+    .view-section.active { display: block; animation: fadeIn 0.35s ease forwards; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2.8fr 1.2fr;
+      gap: 25px;
+    }
+
+    /* 3D Modern Cards */
+    .card {
+      background: var(--card-gradient);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 22px;
+      box-shadow: var(--3d-shadow);
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--3d-hover-shadow);
+      border-color: rgba(217, 160, 91, 0.3);
+    }
+
+    .welcome-card {
+      background: linear-gradient(135deg, rgba(28, 25, 42, 0.95) 0%, rgba(16, 15, 23, 0.98) 100%);
+    }
+
+    .balance-title {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-top: 18px;
+    }
+
+    .balance-amount {
+      font-size: 32px;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 6px 0 18px 0;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .invite-box {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+      gap: 12px;
       margin-bottom: 22px;
     }
 
-    .page-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-main);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .icon-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      padding: 6px;
-      transition: var(--transition);
-    }
-    .icon-btn:hover { color: var(--gold-primary); }
-    .icon-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
-
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    /* Common Card Styles */
-    .card {
-      background: var(--bg-card) !important;
-      border: 1px solid var(--border-subtle) !important;
-      border-radius: var(--radius-md);
-      padding: 20px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow-3d-card);
-    }
-
-    .user-header-card {
-      background: linear-gradient(135deg, #161620 0%, #0f0f15 100%);
-      padding: 22px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-subtle);
-      margin-bottom: 16px;
-    }
-
-    .balance-title { font-size: 0.65rem; font-weight: 800; letter-spacing: 1.5px; color: var(--gold-primary); text-transform: uppercase; margin-bottom: 4px; }
-    .balance-amount { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 800; color: #fff; }
-
-    /* Buttons */
-    .btn-gold {
-      background: var(--gold-gradient-3d) !important;
-      border: none !important;
-      color: #0a0a0d !important;
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 10px 20px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--shadow-3d-btn);
-    }
-
     .btn-copy {
-      background: #252532;
-      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
       color: #fff;
       padding: 6px 14px;
-      border-radius: var(--radius-sm);
-      font-size: 0.72rem;
-      font-weight: 700;
+      border-radius: 6px;
       cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.2s ease;
     }
 
-    /* Grids */
-    .quick-nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
-    .quick-nav-btn {
-      background: #161620;
-      border: 1px solid var(--border-subtle);
-      padding: 12px;
-      border-radius: var(--radius-sm);
-      color: var(--text-main);
-      font-size: 0.7rem;
-      font-weight: 700;
+    .btn-copy:hover {
+      background: var(--accent-gold);
+      color: #000;
+      box-shadow: 0 0 12px var(--accent-gold-glow);
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .action-btn {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .action-btn i { font-size: 18px; color: var(--accent-gold); }
+
+    .action-btn:hover {
+      background: rgba(217, 160, 91, 0.12);
+      color: #fff;
+      border-color: rgba(217, 160, 91, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Stats Row Grid (1 Row x 4 Columns) */
+    .stats-row-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      background: var(--card-gradient);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: var(--3d-shadow);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover { transform: translateY(-3px); border-color: rgba(217, 160, 91, 0.25); }
+    .stat-label { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; }
+    .stat-value { font-size: 20px; font-weight: 800; color: #fff; }
+
+    /* Your Reviews Grid */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .review-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+
+    .review-status { font-size: 11px; margin-bottom: 6px; font-weight: 700; }
+    .status-submitted { color: var(--text-muted); }
+    .status-approved { color: #2ecc71; }
+    .status-pending { color: #e67e22; }
+    .status-rejected { color: #e74c3c; }
+    .status-rewrite { color: #f39c12; }
+
+    /* Membership Packages Card Inner */
+    .membership-card-inner {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 14px;
+    }
+
+    .membership-title { font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+    .membership-price { font-size: 24px; font-weight: 800; color: var(--accent-gold); margin-bottom: 10px; }
+    .membership-details { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+
+    /* Gold Buttons */
+    .btn-gold {
+      background: linear-gradient(135deg, #e5b373, #bd813b);
+      color: #0c0b10;
+      border: none;
+      font-weight: 800;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px var(--accent-gold-glow);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--accent-gold-glow); }
+
+    .btn-outline-gold {
+      background: transparent;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline-gold:hover {
+      background: rgba(217, 160, 91, 0.1);
+      box-shadow: 0 0 12px var(--accent-gold-glow);
+    }
+
+    .btn-dark {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-dark:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Dropzone Upload */
+    .upload-box {
+      border: 2px dashed rgba(217, 160, 91, 0.3);
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      margin: 15px 0;
+      transition: all 0.3s ease;
+    }
+
+    .upload-box:hover {
+      border-color: var(--accent-gold);
+      background: rgba(217, 160, 91, 0.05);
+    }
+
+    /* Live Earnings Auto Scroll */
+    .live-card {
+      height: 100%;
+      max-height: 680px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .live-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .live-badge {
+      font-size: 10px;
+      color: #2ecc71;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
       gap: 6px;
+      background: rgba(46, 204, 113, 0.1);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(46, 204, 113, 0.2);
+    }
+
+    .live-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #2ecc71;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #2ecc71;
+    }
+
+    .live-scroll-container {
+      overflow: hidden;
+      flex: 1;
+      position: relative;
+    }
+
+    .live-scroll-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: autoScroll 18s linear infinite;
+    }
+
+    .live-scroll-list:hover { animation-play-state: paused; }
+
+    .live-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .live-user { font-size: 13px; font-weight: 700; color: #fff; }
+    .live-date { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+    .live-amount { color: var(--accent-gold); font-weight: 800; font-size: 14px; text-shadow: 0 0 10px var(--accent-gold-glow); }
+
+    @keyframes autoScroll {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+    /* Form Fields */
+    .input-group { display: flex; gap: 12px; margin-top: 12px; }
+
+    .input-field {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus { border-color: var(--accent-gold); box-shadow: 0 0 10px rgba(217, 160, 91, 0.15); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; position: relative; }
+    .form-group label { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+
+    .input-icon-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon-wrapper .input-field { padding-right: 40px; }
+    .input-icon-wrapper i {
+      position: absolute;
+      right: 14px;
+      color: var(--text-muted);
       cursor: pointer;
     }
-    .quick-nav-btn svg { width: 18px; height: 18px; stroke: var(--gold-primary); fill: none; stroke-width: 2; }
 
-    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
-    .stat-card { background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 14px; border-radius: var(--radius-md); }
-    .stat-label { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 700; }
-    .stat-value { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 800; color: #fff; }
-
-    .reviews-status-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
-
-    .form-group { margin-bottom: 14px; }
-    .form-label { display: block; font-size: 0.7rem; font-weight: 700; color: var(--gold-primary); margin-bottom: 6px; }
-    .form-input, .form-textarea {
-      width: 100%;
-      padding: 12px;
-      background-color: var(--bg-input);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      color: #fff;
-      outline: none;
-      font-size: 0.82rem;
+    /* Filter Tabs for Reviews */
+    .filter-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
     }
 
-    /* Floating Chat Icon */
-    .floating-chat-btn {
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: rgba(217, 160, 91, 0.15);
+      border-color: var(--accent-gold);
+      color: #fff;
+    }
+
+    /* Warning Notice Box */
+    .warning-box {
+      background: rgba(217, 160, 91, 0.08);
+      border: 1px solid rgba(217, 160, 91, 0.25);
+      border-radius: 10px;
+      padding: 14px 18px;
+      color: #e5b373;
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* Tables */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 12px;
+    }
+
+    .data-table th {
+      padding: 14px;
+      color: var(--text-muted);
+      font-weight: 700;
+      border-bottom: 1px solid var(--card-border);
+      letter-spacing: 0.5px;
+    }
+
+    .data-table td {
+      padding: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .floating-chat {
       position: fixed;
-      bottom: 75px;
-      right: 18px;
-      width: 48px;
-      height: 48px;
+      bottom: 30px;
+      right: 30px;
+      width: 55px;
+      height: 55px;
+      background: linear-gradient(135deg, #d9a05b, #b57a35);
       border-radius: 50%;
-      background: var(--gold-gradient-3d);
-      color: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 20px rgba(220, 168, 85, 0.4);
-      z-index: 99;
+      color: #0c0b10;
+      font-size: 22px;
+      box-shadow: 0 10px 25px var(--accent-gold-glow);
       cursor: pointer;
+      z-index: 99;
     }
-    .floating-chat-btn svg { width: 22px; height: 22px; fill: none; stroke: #000; stroke-width: 2; }
 
     /* Mobile Bottom Navigation Bar */
     .mobile-bottom-nav {
       display: none;
       position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 60px;
-      background: #08080c;
-      border-top: 1px solid var(--border-subtle);
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: var(--bottom-nav-height);
+      background: rgba(10, 9, 14, 0.96);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--card-border);
       z-index: 1000;
       justify-content: space-around;
       align-items: center;
-      padding: 0 8px;
+      padding: 0 5px;
+      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.8);
     }
 
     .bottom-nav-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
-      background: transparent;
-      border: none;
+      justify-content: center;
+      gap: 5px;
       color: var(--text-muted);
-      font-size: 0.6rem;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.5px;
       text-transform: uppercase;
+      text-decoration: none;
+      flex: 1;
+      height: 100%;
       cursor: pointer;
-    }
-    .bottom-nav-item svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
-    .bottom-nav-item.active { color: var(--gold-primary); }
-
-    /* Notifications Modal Popup */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(4px);
-      z-index: 2000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .modal-overlay.active { display: flex; }
-
-    .notifications-card {
-      background: #111118;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      width: 100%;
-      max-width: 360px;
-      padding: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+      transition: all 0.2s ease;
     }
 
-    .notifications-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      font-size: 0.95rem;
-      font-weight: 800;
-    }
+    .bottom-nav-item i { font-size: 18px; transition: transform 0.2s ease, color 0.2s ease; }
+    .bottom-nav-item.active { color: var(--accent-gold); }
+    .bottom-nav-item.active i { transform: translateY(-2px); text-shadow: 0 0 10px var(--accent-gold-glow); }
 
-    .notification-item {
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .notification-item:last-child { border-bottom: none; }
-    .notification-title { font-size: 0.78rem; font-weight: 700; color: #22c55e; }
-    .notification-desc { font-size: 0.72rem; color: var(--text-main); margin-top: 2px; }
-    .notification-time { font-size: 0.62rem; color: var(--text-muted); margin-top: 4px; }
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .sidebar { display: none; }
+      
+      .main-content {
+        margin-left: 0;
+        padding: 16px;
+        padding-bottom: calc(var(--bottom-nav-height) + 30px);
+      }
 
-    /* Mobile Breakpoints */
-    @media (max-width: 1024px) {
-      aside { display: none; }
-      main { margin-left: 0; padding: 16px; padding-bottom: 80px; }
+      .dashboard-grid { grid-template-columns: 1fr; gap: 15px; }
+      .stats-row-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .form-row { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+      .card { padding: 16px; margin-bottom: 16px; border-radius: 14px; }
+
+      .floating-chat {
+        bottom: calc(var(--bottom-nav-height) + 15px);
+        right: 15px;
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+      }
+
       .mobile-bottom-nav { display: flex; }
+    }
+
+    @media (max-width: 480px) {
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+      .quick-actions { gap: 8px; }
+      .action-btn { padding: 12px 6px; font-size: 11px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Chat Button -->
-  <div class="floating-chat-btn" onclick="switchTab('chat')">
-    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-  </div>
-
-  <!-- Sidebar (Desktop View) -->
-  <aside>
+  <!-- Desktop Sidebar Navigation -->
+  <aside class="sidebar">
     <div>
-      <div class="brand-logo">SOGO REVIEWS</div>
-      <ul class="nav-list">
-        <li class="nav-item"><button class="active" onclick="switchTab('dashboard', this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Dashboard</button></li>
-        <li class="nav-item"><button onclick="switchTab('packages', this)"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg> Packages</button></li>
-        <li class="nav-item"><button onclick="switchTab('reviews', this)"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Reviews</button></li>
-        <li class="nav-item"><button onclick="switchTab('withdraw', this)"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Withdraw</button></li>
-        <li class="nav-item"><button onclick="switchTab('chat', this)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> Chat</button></li>
-        <li class="nav-item"><button onclick="switchTab('profile', this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Profile Settings</button></li>
+      <div class="brand">
+        <span class="sogo-text">SOGO</span>
+        <span class="reviews-text">REVIEWS</span>
+      </div>
+      <ul class="nav-links">
+        <li class="nav-item active" onclick="switchTab('dashboard', this)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</li>
+        <li class="nav-item" onclick="switchTab('packages', this)"><i class="fa-solid fa-box"></i> Packages</li>
+        <li class="nav-item" onclick="switchTab('mypackages', this)"><i class="fa-solid fa-cubes"></i> My Packages</li>
+        <li class="nav-item" onclick="switchTab('reviews', this)"><i class="fa-solid fa-star"></i> Reviews</li>
+        <li class="nav-item" onclick="switchTab('withdraw', this)"><i class="fa-solid fa-wallet"></i> Withdraw</li>
+        <li class="nav-item" onclick="switchTab('chat', this)"><i class="fa-solid fa-message"></i> Chat</li>
+        <li class="nav-item" onclick="switchTab('profile', this)"><i class="fa-solid fa-gear"></i> Profile Settings</li>
       </ul>
     </div>
-    <div class="sidebar-user">
-      <div class="user-pill">
-        <div class="user-avatar">S</div>
-        <div>
-          <div style="font-size:0.8rem; font-weight:800;">Shiz</div>
-          <div style="font-size:0.65rem; color:var(--gold-primary);">User</div>
+    <div class="sidebar-footer">
+      <div class="user-profile-sm">
+        <div class="avatar">S</div>
+        <div class="user-info">
+          <h4>Shiz</h4>
+          <p>User</p>
         </div>
       </div>
-      <button class="btn-logout" onclick="window.location.href='auth.html'">Logout</button>
+      <button class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
     </div>
   </aside>
 
-  <!-- Main Content Area -->
-  <main>
-    <div class="header-top">
-      <div class="page-title" id="current-page-title">HOME</div>
-      <div class="header-actions">
-        <button class="icon-btn" onclick="toggleNotificationsModal(true)" title="Notifications">
-          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-        </button>
-        <button class="icon-btn" onclick="window.location.href='auth.html'" title="Logout">
-          <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-        </button>
+  <!-- Main View Container -->
+  <main class="main-content">
+    <div class="header-title">
+      <span id="pageTitle">HOME</span>
+      <div class="header-icons">
+        <i class="fa-regular fa-bell"></i>
+        <i class="fa-solid fa-right-from-bracket"></i>
       </div>
     </div>
 
-    <!-- 1. HOME / DASHBOARD TAB -->
-    <div id="tab-dashboard" class="tab-content active">
-      <div class="user-header-card">
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-          <div class="user-avatar" style="width:44px; height:44px; font-size:1.1rem;">S</div>
-          <div>
-            <h2 style="font-size:1rem; font-weight:800;">SHIZ</h2>
-            <p style="font-size:0.7rem; color:var(--text-muted);">shiz1198@gmail.com</p>
-            <p style="font-size:0.65rem; color:var(--text-muted);">No phone added.</p>
-          </div>
-        </div>
-        <div class="balance-title">AVAILABLE BALANCE</div>
-        <div class="balance-amount">USD 2500.00</div>
-        <div style="display:flex; gap:8px; margin-top:10px;">
-          <button class="btn-copy">Invitation E6UZ86AS</button>
-          <button class="btn-copy" onclick="alert('Code Copied!')">Copy</button>
-        </div>
-
-        <div class="quick-nav-grid">
-          <div class="quick-nav-btn" onclick="switchTab('chat')">
-            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> Chat
-          </div>
-          <div class="quick-nav-btn" onclick="switchTab('packages')">
-            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg> Packages
-          </div>
-          <div class="quick-nav-btn" onclick="alert('Referral link copied!')">
-            <svg viewBox="0 0 24 24"><path d="M20 12v10H4V12"></path><path d="M22 7H2v5h20V7z"></path></svg> Invite
-          </div>
-          <div class="quick-nav-btn" onclick="switchTab('withdraw')">
-            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M12 8v8"></path></svg> Withdraw
-          </div>
-        </div>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-label">Today's earnings</div><div class="stat-value">$0.00</div></div>
-        <div class="stat-card"><div class="stat-label">Today's commission</div><div class="stat-value">$0.00</div></div>
-        <div class="stat-card"><div class="stat-label">Total earnings</div><div class="stat-value">$0.00</div></div>
-        <div class="stat-card"><div class="stat-label">Referrals</div><div class="stat-value">0</div></div>
-      </div>
-
-      <div style="font-size:0.75rem; font-weight:800; margin-bottom:8px;">Your Reviews</div>
-      <div class="reviews-status-bar">
-        <div class="stat-card"><div class="stat-label">Submitted</div><div class="stat-value">0</div></div>
-        <div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value" style="color:#22c55e;">0</div></div>
-        <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" style="color:var(--gold-primary);">0</div></div>
-        <div class="stat-card"><div class="stat-label">Rejected</div><div class="stat-value" style="color:#ef4444;">0</div></div>
-      </div>
-
-      <div class="card">
-        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:6px;">Invite & earn</h3>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:12px;">Share your code or link — anyone who signs up through it is tracked to you.</p>
-        <div class="form-group"><input type="text" class="form-input" value="E6UZ86AS" readonly></div>
-        <div class="form-group"><input type="text" class="form-input" value="https://sogoreview.online/register?ref=E6UZ86AS" readonly></div>
-      </div>
-
-      <div class="card">
-        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:8px;">Membership Packages</h3>
-        <div style="font-size:0.85rem; font-weight:800; color:#fff;">Jo Malone London Timeless British Fragrance</div>
-        <div style="font-size:1.3rem; font-weight:800; color:var(--gold-primary); margin:6px 0;">$100</div>
-        <div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:12px;">20 products to review &bull; Earn $2000.00 in commission</div>
-        <button class="btn-gold" onclick="switchTab('packages')">JOIN NOW</button>
-      </div>
-    </div>
-
-    <!-- 2. PACKAGES TAB -->
-    <div id="tab-packages" class="tab-content">
-      <div class="card">
-        <div style="font-size:0.9rem; font-weight:800; color:#fff; margin-bottom:8px;">Jo Malone London Timeless British Fragrance</div>
-        <p style="font-size:0.72rem; color:var(--text-muted); line-height:1.5; margin-bottom:14px;">
-          Jo Malone London is a renowned British fragrance brand celebrated for its elegant, sophisticated, and distinctive scents...
-        </p>
-        <div style="font-size:1.5rem; font-weight:800; color:var(--gold-primary); margin-bottom:10px;">$100</div>
-        <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:14px;">
-          <div>&bull; 20 products to review</div>
-          <div>&bull; Earn $2000.00 in commission</div>
-        </div>
-        <button class="btn-gold" style="width:100%;" onclick="switchTab('reviews')">Select package</button>
-      </div>
-    </div>
-
-    <!-- 3. REVIEWS TAB -->
-    <div id="tab-reviews" class="tab-content">
-      <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
-          <div>
-            <div style="font-size:0.85rem; font-weight:800;">Jo Malone London Timeless British Fragrance</div>
-            <div style="font-size:0.8rem; color:var(--gold-primary); font-weight:800;">$100</div>
-          </div>
-          <span style="background:#252530; color:#22c55e; font-size:0.65rem; padding:4px 8px; border-radius:4px; font-weight:700;">Pending Payment</span>
-        </div>
-        <div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:12px;">0/20 reviewed - 0%</div>
-        <button class="btn-gold" style="padding:6px 14px; font-size:0.7rem;">Open package &rarr;</button>
-      </div>
-
-      <div style="display:flex; gap:6px; overflow-x:auto; margin-bottom:14px; padding-bottom:4px;">
-        <button class="btn-gold" style="padding:6px 12px; font-size:0.65rem;">All (0)</button>
-        <button class="btn-copy" style="font-size:0.65rem;">Approved (0)</button>
-        <button class="btn-copy" style="font-size:0.65rem;">Pending (0)</button>
-        <button class="btn-copy" style="font-size:0.65rem;">Rejected (0)</button>
-      </div>
-    </div>
-
-    <!-- 4. WITHDRAW TAB -->
-    <div id="tab-withdraw" class="tab-content">
-      <div class="user-header-card">
-        <div class="balance-title">AVAILABLE TO WITHDRAW</div>
-        <div class="balance-amount">USD 2500.00</div>
-        <div style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">Total balance: $2500.00 &bull; Locked: $0.00</div>
-      </div>
-
-      <div class="card" style="border-color:rgba(234, 179, 8, 0.3);">
-        <div style="font-size:0.75rem; font-weight:800; color:var(--gold-primary); margin-bottom:4px;">Withdrawal eligibility</div>
-        <p style="font-size:0.7rem; color:var(--text-muted);">Package deposits stay locked until your reviews are completed. Finish remaining reviews — locked deposits cannot be withdrawn yet.</p>
-      </div>
-
-      <div class="card">
-        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:12px;">Bank Details</h3>
-        <div class="form-group"><label class="form-label">Bank name</label><input type="text" class="form-input" placeholder="e.g. HBL"></div>
-        <div class="form-group"><label class="form-label">Account holder name</label><input type="text" class="form-input" placeholder="Full name on account"></div>
-        <div class="form-group"><label class="form-label">Account number / IBAN</label><input type="text" class="form-input" placeholder="Account number"></div>
-        <button class="btn-gold">Save bank details</button>
-      </div>
-    </div>
-
-    <!-- 5. CHAT TAB -->
-    <div id="tab-chat" class="tab-content">
-      <div class="card" style="height: 65vh; display:flex; flex-direction:column; justify-content:space-between; padding:14px;">
-        <div>
-          <div style="display:flex; align-items:center; gap:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08);">
-            <div class="user-avatar" style="width:32px; height:32px; font-size:0.8rem;">D</div>
-            <div>
-              <div style="font-size:0.8rem; font-weight:800;">LIVE SUPPORT</div>
-              <div style="font-size:0.6rem; color:#22c55e;">&bull; ONLINE - 24/7</div>
+    <!-- 1. DASHBOARD VIEW (FIT OLD CODE) -->
+    <div id="tab-dashboard" class="view-section active">
+      <div class="dashboard-grid">
+        <div class="left-col">
+          <!-- Top Balance Card -->
+          <div class="card welcome-card">
+            <div class="user-profile-sm">
+              <div class="avatar">S</div>
+              <div>
+                <h3>SHIZ</h3>
+                <p style="font-size: 11px; color: var(--text-muted);">shiz1198@gmail.com</p>
+              </div>
+            </div>
+            <div class="balance-title">AVAILABLE BALANCE</div>
+            <div class="balance-amount">USD 2500.00</div>
+            <div class="invite-box">
+              <span>Invitation E6UZB6AS</span>
+              <button class="btn-copy">Copy</button>
+            </div>
+            <div class="quick-actions">
+              <div class="action-btn" onclick="openView('chat')"><i class="fa-solid fa-message"></i> Chat</div>
+              <div class="action-btn" onclick="openView('packages')"><i class="fa-solid fa-box"></i> Packages</div>
+              <div class="action-btn" onclick="openView('dashboard')"><i class="fa-solid fa-gift"></i> Invite</div>
+              <div class="action-btn" onclick="openView('withdraw')"><i class="fa-solid fa-wallet"></i> Withdraw</div>
             </div>
           </div>
-          <div style="margin-top:14px; background:#181822; padding:10px 14px; border-radius:8px; font-size:0.75rem; max-width:85%;">
-            Welcome to SOGO Reviews. How can we help?
+
+          <!-- Stats Row Grid (1 Row x 4 Columns) -->
+          <div class="stats-row-grid">
+            <div class="stat-card"><div class="stat-label">Today's earnings</div><div class="stat-value">$0.00</div></div>
+            <div class="stat-card"><div class="stat-label">Today's commission</div><div class="stat-value">$0.00</div></div>
+            <div class="stat-card"><div class="stat-label">Total earnings</div><div class="stat-value">$0.00</div></div>
+            <div class="stat-card"><div class="stat-label">Referrals</div><div class="stat-value">0</div></div>
+          </div>
+
+          <!-- Your Reviews Card -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+              <span style="font-weight: 700; font-size: 14px;">Your Reviews</span>
+              <span style="color: var(--text-muted); font-size: 12px; cursor: pointer;" onclick="openView('reviews')">View all</span>
+            </div>
+            <div class="reviews-grid">
+              <div class="review-box"><div class="review-status status-submitted">Submitted</div><div class="stat-value">0</div></div>
+              <div class="review-box"><div class="review-status status-approved">Approved</div><div class="stat-value" style="color: #2ecc71;">0</div></div>
+              <div class="review-box"><div class="review-status status-pending">Pending</div><div class="stat-value" style="color: #e67e22;">0</div></div>
+              <div class="review-box"><div class="review-status status-rejected">Rejected</div><div class="stat-value" style="color: #e74c3c;">0</div></div>
+              <div class="review-box"><div class="review-status status-rewrite">Rewrite</div><div class="stat-value" style="color: #f39c12;">0</div></div>
+            </div>
+          </div>
+
+          <!-- Invite & Earn Card -->
+          <div class="card">
+            <div style="font-weight: 700; font-size: 14px;">Invite & earn</div>
+            <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Share your code or link — anyone who signs up through it is tracked to you.</p>
+            <div class="input-group"><input type="text" class="input-field" value="E6UZB6AS" readonly><button class="btn-copy">Copy</button></div>
+            <div class="input-group"><input type="text" class="input-field" value="https://sogoreview.online/register?ref=E6UZB6AS" readonly><button class="btn-copy">Copy</button></div>
+          </div>
+
+          <!-- Membership Packages Card -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 700; font-size: 14px;">Membership Packages</span>
+              <span style="color: var(--text-muted); font-size: 12px; cursor: pointer;" onclick="openView('packages')">View all</span>
+            </div>
+            <div class="membership-card-inner">
+              <div class="membership-title">Jo Malone London Timeless British Fragrance</div>
+              <div class="membership-price">$100</div>
+              <div class="membership-details">
+                20 products to review<br>
+                Earn $2000.00 in commission
+              </div>
+              <button class="btn-gold" onclick="openView('packages')">JOIN NOW</button>
+            </div>
           </div>
         </div>
-        <div style="display:flex; gap:8px; align-items:center;">
-          <button class="btn-copy" style="padding:10px;"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg></button>
-          <input type="text" class="form-input" placeholder="Type a message..." style="margin-bottom:0;">
-          <button class="btn-gold" style="padding:10px 16px;">SEND</button>
+
+        <!-- Right Side Live Earnings Widget -->
+        <div class="right-col">
+          <div class="card live-card">
+            <div class="live-header">
+              <span style="font-weight: 700; font-size: 14px;">Live Earnings</span>
+              <span class="live-badge">LIVE</span>
+            </div>
+            <div class="live-scroll-container">
+              <div class="live-scroll-list" id="liveEarningsList"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 6. PROFILE SETTINGS TAB -->
-    <div id="tab-profile" class="tab-content">
+    <!-- 2. PACKAGES VIEW (FIT OLD CODE - IMAGE 1) -->
+    <div id="tab-packages" class="view-section">
+      <div class="card" style="max-width: 600px;">
+        <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">Jo Malone London Timeless British Fragrance</h3>
+        <p style="font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+          Jo Malone London is a renowned British fragrance brand celebrated for its elegant, sophisticated, and distinctive scents, offering a beautiful collection of perfumes featuring fresh citrus, delicate florals, warm woods, and rich aromatic notes. With its signature minimalist luxury and carefully crafted fragrance compositions, Jo Malone London has become a favorite among fragrance lovers seeking timeless elegance and exceptional quality. Explore the brand's collection, discover your favorite fragrance, and share your honest experience to help others find a scent they'll love.
+        </p>
+        <div style="font-size: 28px; font-weight: 800; color: #ffffff; margin-bottom: 15px;">$100</div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 22px; line-height: 1.8;">
+          <i class="fa-solid fa-box" style="color: var(--accent-gold);"></i> 20 products to review<br>
+          <i class="fa-solid fa-wallet" style="color: var(--accent-gold);"></i> Earn $2000.00 in commission
+        </p>
+        <button class="btn-gold" style="width: 100%; border-radius: 8px; padding: 12px;" onclick="openView('packagereviews')">Select package</button>
+      </div>
+    </div>
+
+    <!-- 2-ALT. PACKAGE REVIEWS VIEW (FIT OLD CODE - IMAGE 2) -->
+    <div id="tab-packagereviews" class="view-section">
       <div class="card">
-        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:12px;">Profile picture</h3>
-        <div style="display:flex; align-items:center; gap:12px;">
-          <div class="user-avatar" style="width:48px; height:48px; font-size:1.2rem;">S</div>
-          <button class="btn-copy" style="font-size:0.7rem;">📷 CHOOSE PHOTO <span style="font-weight:400; color:var(--text-muted);">max 5 MB</span></button>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <h3 style="font-size: 16px; font-weight: 700;">Jo Malone London Timeless British Fragrance</h3>
+          <span style="font-size: 10px; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 4px; color: var(--text-muted);">Pending Payment</span>
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 15px;">0 of 20 products reviewed (0%)</p>
+        
+        <div class="stats-row-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 20px;">
+          <div class="stat-card">
+            <div class="stat-label">Commission</div>
+            <div class="stat-value" style="font-size: 16px;">$0.00</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Price</div>
+            <div class="stat-value" style="font-size: 16px; color: var(--accent-gold);">$100</div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 13px; font-weight: 700;">Activate this package</h4>
+        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Pay $100 and upload a screenshot. Support will verify and activate your package.</p>
+        
+        <div class="upload-box">
+          <i class="fa-solid fa-cloud-arrow-up" style="font-size: 24px; color: var(--accent-gold); margin-bottom: 8px;"></i>
+          <div style="font-size: 12px; font-weight: 700; color: #fff;">CHOOSE PAYMENT SCREENSHOT</div>
+          <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">PNG, JPG or WEBP</div>
+        </div>
+        <button class="btn-gold" style="border-radius: 6px; padding: 10px 20px;">Upload payment screenshot</button>
+      </div>
+
+      <h4 style="font-size: 14px; margin-bottom: 15px;">Products in this package</h4>
+      <div id="packageProductsList"></div>
+    </div>
+
+    <!-- 3. MY PACKAGES VIEW (FIT OLD CODE - IMAGE 3) -->
+    <div id="tab-mypackages" class="view-section">
+      <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; margin-bottom: 22px;">
+        <div class="card" style="margin-bottom: 0;">
+          <span style="font-size: 11px; color: var(--text-muted); font-weight: 700;">CURRENT BALANCE</span>
+          <h2 style="font-size: 32px; font-weight: 800; color: #fff; margin: 6px 0;">$2500.00</h2>
+          <span style="font-size: 11px; color: var(--text-muted);">Total earned: $0.00</span>
+        </div>
+        <div class="card" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: center;">
+          <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">Ready to cash out? Withdraw your earnings anytime.</p>
+          <button class="btn-gold" style="width: 100%; border-radius: 8px; text-align: center;" onclick="openView('withdraw')">WITHDRAW</button>
         </div>
       </div>
 
       <div class="card">
-        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:12px;">Profile details</h3>
-        <div class="form-group"><label class="form-label">Full name</label><input type="text" class="form-input" value="Shiz"></div>
-        <div class="form-group"><label class="form-label">Email</label><input type="text" class="form-input" value="shiz1198@gmail.com" disabled></div>
-        <div class="form-group"><label class="form-label">Phone</label><input type="text" class="form-input" placeholder="e.g. +92 300 1234567"></div>
+        <h4 style="font-size: 14px; margin-bottom: 10px;">My Packages</h4>
+        <p style="font-size: 12px; color: var(--text-muted);">You have not selected a package yet. Browse packages to get started.</p>
+      </div>
+
+      <div class="card">
+        <h4 style="font-size: 14px; margin-bottom: 15px;">Transaction History</h4>
+        <div style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>TYPE</th>
+                <th>DETAILS</th>
+                <th>AMOUNT</th>
+                <th>DATE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="color: #fff;">Manual</td>
+                <td style="color: var(--text-muted);">Manual amount added</td>
+                <td style="color: #2ecc71; font-weight: 700;">$-2500.00</td>
+                <td style="color: var(--text-muted);">9/17/2026, 7:07:01 AM</td>
+              </tr>
+              <tr>
+                <td style="color: #fff;">Manual</td>
+                <td style="color: var(--text-muted);">Manual amount added</td>
+                <td style="color: #2ecc71; font-weight: 700;">$-1000.00</td>
+                <td style="color: var(--text-muted);">9/17/2026, 7:06:48 AM</td>
+              </tr>
+              <tr>
+                <td style="color: #fff;">Manual</td>
+                <td style="color: var(--text-muted);">Manual amount added</td>
+                <td style="color: #2ecc71; font-weight: 700;">+$6000.00</td>
+                <td style="color: var(--text-muted);">9/17/2026, 7:06:35 AM</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 12px;">Showing 1-3 of 3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. REVIEWS VIEW (EXACT IMAGE A) -->
+    <div id="tab-reviews" class="view-section">
+      <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 15px;">Packages to review</h4>
+      
+      <div class="card" style="margin-bottom: 25px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+          <div>
+            <h3 style="font-size: 15px; font-weight: 700;">Jo Malone London Timeless British Fragrance</h3>
+            <div style="font-size: 13px; font-weight: 700; color: #fff; margin-top: 4px;">$100</div>
+          </div>
+          <span style="font-size: 11px; background: rgba(217, 160, 91, 0.12); color: var(--accent-gold); padding: 5px 12px; border-radius: 6px; font-weight: 700; border: 1px solid rgba(217, 160, 91, 0.2);">Pending Payment</span>
+        </div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 18px;">0/20 reviewed · 0%</div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <button class="btn-gold" onclick="openView('packagereviews')">Open package <i class="fa-solid fa-arrow-right"></i></button>
+          <button class="btn-outline-gold" onclick="openView('packagereviews')">View its reviews</button>
+        </div>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="filter-btn active">All (0)</button>
+        <button class="filter-btn">Approved (0)</button>
+        <button class="filter-btn">Pending (0)</button>
+        <button class="filter-btn">Rejected (0)</button>
+        <button class="filter-btn">Rewrite (0)</button>
+      </div>
+
+      <div class="card" style="padding: 0; overflow: hidden;">
+        <div style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>PRODUCT</th>
+                <th>PACKAGE</th>
+                <th>RATING</th>
+                <th>STATUS</th>
+                <th>COMMISSION</th>
+                <th>SUBMITTED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 45px;">No reviews found.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. WITHDRAW VIEW (EXACT IMAGE B) -->
+    <div id="tab-withdraw" class="view-section">
+      <div class="card">
+        <div style="font-size: 11px; color: var(--text-muted); font-weight: 700; letter-spacing: 0.5px;">AVAILABLE TO WITHDRAW</div>
+        <h2 style="font-size: 32px; font-weight: 800; color: #fff; margin: 6px 0;">USD 2500.00</h2>
+        <div style="font-size: 11px; color: var(--text-muted);">Total balance: $2500.00 · Locked: $0.00</div>
+      </div>
+
+      <div class="warning-box">
+        <div style="font-weight: 700; margin-bottom: 4px;">Withdrawal eligibility</div>
+        <p style="margin-bottom: 6px;">Package deposits stay locked until your reviews are completed and support releases them. You can only withdraw approved commission that is not locked.</p>
+        <p style="font-weight: 700; color: var(--accent-gold);">You still have an active or pending package. Finish remaining reviews — locked deposits cannot be withdrawn yet.</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card">
+          <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 4px;">Bank Details</h4>
+          <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 18px;">Where you'd like to receive your withdrawals.</p>
+          
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label>Bank name</label>
+            <input type="text" class="input-field" placeholder="e.g. HBL">
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label>Account holder name</label>
+            <input type="text" class="input-field" placeholder="Full name on account">
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label>Account number / IBAN</label>
+            <input type="text" class="input-field" placeholder="Account number">
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label>Bank address</label>
+            <input type="text" class="input-field" placeholder="Branch / bank address">
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label>Other information</label>
+            <input type="text" class="input-field" placeholder="Swift code, notes...">
+          </div>
+          <button class="btn-gold">Save bank details</button>
+        </div>
+
+        <div class="card">
+          <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 4px;">Request a Withdrawal</h4>
+          <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 18px;">Funds are sent after support approval.</p>
+          
+          <div class="warning-box" style="margin-bottom: 20px; font-size: 11px; padding: 12px;">
+            Please save your payment account details first (left). The amount field will unlock once they're saved.
+          </div>
+          <button class="btn-dark" style="width: 100%; opacity: 0.6; cursor: not-allowed;" disabled>Save payment details first</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 18px;">Withdrawal History</h4>
+        <div style="text-align: center; color: var(--text-muted); font-size: 12px; padding: 30px 0;">
+          No withdrawals yet.
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. CHAT VIEW (EXACT IMAGE C) -->
+    <div id="tab-chat" class="view-section">
+      <div class="card" style="min-height: 520px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--card-border);">
+            <div class="avatar" style="width: 36px; height: 36px; font-size: 14px;">O</div>
+            <div>
+              <div style="font-size: 13px; font-weight: 800; color: #fff;">LIVE SUPPORT</div>
+              <div style="font-size: 10px; color: #2ecc71; font-weight: 700;">● ONLINE · 24/7</div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 15px;">
+            <span style="font-size: 10px; color: var(--text-muted); font-weight: 700; letter-spacing: 0.5px; display: block; margin-bottom: 6px;">CUSTOMER SUPPORT</span>
+            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid var(--card-border); padding: 14px 20px; border-radius: 20px; display: inline-block; max-width: 80%; font-size: 13px; color: #fff;">
+              Welcome to SOGO Reviews. How can we help?
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: center; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 30px;">
+          <button style="background: transparent; border: none; color: var(--text-muted); font-size: 18px; padding: 0 10px; cursor: pointer;">
+            <i class="fa-solid fa-paperclip"></i>
+          </button>
+          <input type="text" class="input-field" placeholder="Type a message..." style="border: none; background: transparent; padding: 8px 0;">
+          <button class="btn-gold" style="border-radius: 20px; padding: 8px 22px;">SEND</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. PROFILE SETTINGS VIEW (EXACT IMAGE D) -->
+    <div id="tab-profile" class="view-section">
+      <div class="card">
+        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 15px;">Profile picture</h4>
+        <div style="display: flex; align-items: center; gap: 18px;">
+          <div class="avatar" style="width: 50px; height: 50px; font-size: 20px;">S</div>
+          <button class="btn-dark" style="display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-image" style="color: var(--accent-gold);"></i> CHOOSE PHOTO
+            <span style="font-size: 10px; color: var(--text-muted); font-weight: 400; margin-left: 6px;">JPG, PNG, WEBP or GIF - max 5 MB</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 18px;">Profile details</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full name</label>
+            <input type="text" class="input-field" value="Shiz">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="input-field" value="shiz1198@gmail.com" readonly>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="text" class="input-field" placeholder="e.g. +91 300 1234567">
+          </div>
+          <div class="form-group">
+            <label>Address</label>
+            <input type="text" class="input-field" placeholder="Your address">
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label>Bio</label>
+          <textarea class="input-field" rows="3" placeholder="A few words about you" style="resize: none;"></textarea>
+        </div>
         <button class="btn-gold">Save changes</button>
       </div>
 
       <div class="card">
-        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:12px;">Change password</h3>
-        <div class="form-group"><label class="form-label">Current password</label><input type="password" class="form-input"></div>
-        <div class="form-group"><label class="form-label">New password</label><input type="password" class="form-input"></div>
+        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Change password</h4>
+        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 18px;">Enter your current password, then choose a new one.</p>
+        
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Current password</label>
+          <div class="input-icon-wrapper">
+            <input type="password" class="input-field" id="currPass">
+            <i class="fa-regular fa-eye" onclick="togglePassword('currPass', this)"></i>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>New password</label>
+          <div class="input-icon-wrapper">
+            <input type="password" class="input-field" placeholder="At least 6 characters" id="newPass">
+            <i class="fa-regular fa-eye" onclick="togglePassword('newPass', this)"></i>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label>Confirm new password</label>
+          <div class="input-icon-wrapper">
+            <input type="password" class="input-field" id="confPass">
+            <i class="fa-regular fa-eye" onclick="togglePassword('confPass', this)"></i>
+          </div>
+        </div>
         <button class="btn-gold">Change password</button>
       </div>
 
       <div class="card">
-        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:6px;">Log out everywhere</h3>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:10px;">Sign out of this account on every device.</p>
-        <button class="btn-copy" style="border-color:#ef4444; color:#ef4444;">Log out all devices</button>
+        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Log out everywhere</h4>
+        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 18px;">Sign out of this account on every device.</p>
+        <button class="btn-dark">Log out all devices</button>
       </div>
     </div>
+
   </main>
+
+  <!-- Floating Live Chat Button -->
+  <div class="floating-chat" onclick="openView('chat')">
+    <i class="fa-solid fa-message"></i>
+  </div>
 
   <!-- Mobile Bottom Navigation Bar -->
   <nav class="mobile-bottom-nav">
-    <button class="bottom-nav-item active" onclick="switchTab('dashboard', this)">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+    <div class="bottom-nav-item active" onclick="switchTab('dashboard', this)">
+      <i class="fa-solid fa-border-all"></i>
       <span>HOME</span>
-    </button>
-    <button class="bottom-nav-item" onclick="switchTab('packages', this)">
-      <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-      <span>PACKAGES</span>
-    </button>
-    <button class="bottom-nav-item" onclick="switchTab('reviews', this)">
-      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-      <span>REVIEWS</span>
-    </button>
-    <button class="bottom-nav-item" onclick="switchTab('chat', this)">
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-      <span>CHAT</span>
-    </button>
-    <button class="bottom-nav-item" onclick="switchTab('profile', this)">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-      <span>PROFILE</span>
-    </button>
-  </nav>
-
-  <!-- Notifications Modal -->
-  <div class="modal-overlay" id="notificationsModal" onclick="toggleNotificationsModal(false)">
-    <div class="notifications-card" onclick="event.stopPropagation()">
-      <div class="notifications-header">
-        <span>Notifications</span>
-        <button class="icon-btn" onclick="toggleNotificationsModal(false)">✕</button>
-      </div>
-      <div class="notification-item">
-        <div class="notification-title">Balance updated</div>
-        <div class="notification-desc">$-2500.00 added to your wallet.</div>
-        <div class="notification-time">9/17/2026, 12:07:01 PM</div>
-      </div>
-      <div class="notification-item">
-        <div class="notification-title">Balance updated</div>
-        <div class="notification-desc">$-1000.00 added to your wallet.</div>
-        <div class="notification-time">9/17/2026, 12:06:48 PM</div>
-      </div>
-      <div class="notification-item">
-        <div class="notification-title">Balance updated</div>
-        <div class="notification-desc">+$6000.00 added to your wallet.</div>
-        <div class="notification-time">9/17/2026, 12:06:35 PM</div>
-      </div>
     </div>
-  </div>
-
+    <div class="bottom-nav-item" onclick="switchTab('packages', this)">
+      <i class="fa-solid fa-box"></i>
+      <span>PACKAGES</span>
+    </div>
+    <div class="bottom-nav-item" onclick="switchTab('reviews', this)">
+      <i class="fa-solid fa-star"></i>
+      <span>REVIEWS</span>
+    </div>
+    <div class="bottom-nav-item" onclick="switchTab('chat', this)">
+      <i class="fa-solid fa-message"></i>
+      <span>CHAT</span>
+    </div>
+    <div class="bottom-nav-item" onclick="switchTab('profile', this)">
+      <i class="fa-solid fa-gear"></i>
+      <span>PROFILE</span>
+    </div>
+  </nav>
+  <!-- Operational JavaScript -->
   <script>
-    function switchTab(tabId, btn) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+    function switchTab(tabId, element) {
+      // Hide all sections
+      document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+      
+      // Remove active class from all sidebar and mobile nav items
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+      document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active'));
+      
+      // Activate selected tab section
+      const targetTab = document.getElementById('tab-' + tabId);
+      if (targetTab) targetTab.classList.add('active');
 
-      const selectedTab = document.getElementById('tab-' + tabId);
-      if (selectedTab) selectedTab.classList.add('active');
-
-      if (btn) btn.classList.add('active');
-
-      const titleMap = {
-        'dashboard': 'HOME',
-        'packages': 'PACKAGES',
-        'reviews': 'REVIEWS',
-        'withdraw': 'WITHDRAW',
-        'chat': 'CHAT',
-        'profile': 'PROFILE SETTINGS'
+      // Strict mapping to avoid double-highlighting "packages" vs "mypackages"
+      const sidebarItems = document.querySelectorAll('.sidebar .nav-item');
+      const tabMap = {
+        'dashboard': 0,
+        'packages': 1,
+        'packagereviews': 1, // Opens under Packages tab
+        'mypackages': 2,
+        'reviews': 3,
+        'withdraw': 4,
+        'chat': 5,
+        'profile': 6
       };
-      document.getElementById('current-page-title').innerText = titleMap[tabId] || 'HOME';
+
+      if (tabMap[tabId] !== undefined && sidebarItems[tabMap[tabId]]) {
+        sidebarItems[tabMap[tabId]].classList.add('active');
+      }
+
+      // Mobile Bottom Nav Highlight mapping
+      const mobileNavItems = document.querySelectorAll('.bottom-nav-item');
+      const mobileMap = {
+        'dashboard': 0,
+        'packages': 1,
+        'packagereviews': 1,
+        'reviews': 2,
+        'chat': 3,
+        'profile': 4
+      };
+
+      if (mobileMap[tabId] !== undefined && mobileNavItems[mobileMap[tabId]]) {
+        mobileNavItems[mobileMap[tabId]].classList.add('active');
+      }
+
+      // Update Page Header Title
+      let titleText = tabId.toUpperCase().replace('MYPACKAGES', 'MY PACKAGES').replace('PACKAGEREVIEWS', 'PACKAGE REVIEWS');
+      document.getElementById('pageTitle').innerText = tabId === 'dashboard' ? 'HOME' : titleText;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function toggleNotificationsModal(show) {
-      const modal = document.getElementById('notificationsModal');
-      modal.style.display = show ? 'flex' : 'none';
+    function openView(tabId) {
+      switchTab(tabId);
+    }
+
+    function togglePassword(inputId, icon) {
+      const input = document.getElementById(inputId);
+      if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        input.type = "password";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+
+    // Dynamic Recent Date Generator
+    function getRecentDate(daysAgo = 0) {
+      const date = new Date();
+      date.setDate(date.getDate() - daysAgo);
+      const dd = String(date.getDate()).padStart(2, '0');
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const yyyy = date.getFullYear();
+      return `${dd}/${mm}/${yyyy}`;
+    }
+
+    // Live Earnings Auto-scroll Renderer
+    const users = ['Mat***', 'Adi***', 'Har***', 'Rya***', 'Mad***', 'Emm***', 'Fel***', 'Div***', 'Ish***', 'Rah***', 'Chi***'];
+    const amounts = ['+$7000', '+$18000', '+$30000', '+$12000', '+$25000', '+$18000', '+$1200', '+$12000', '+$35000', '+$15000'];
+    const liveList = document.getElementById('liveEarningsList');
+
+    if(liveList) {
+      let itemsHTML = '';
+      for (let i = 0; i < 20; i++) {
+        const user = users[i % users.length];
+        const amount = amounts[i % amounts.length];
+        const date = getRecentDate(i % 3);
+
+        itemsHTML += `
+          <div class="live-item">
+            <div>
+              <div class="live-user">${user}</div>
+              <div class="live-date">${date}</div>
+            </div>
+            <div class="live-amount">${amount}</div>
+          </div>
+        `;
+      }
+      liveList.innerHTML = itemsHTML + itemsHTML;
+    }
+
+// Package Reviews Products Renderer with Real Images & Original UI
+    const packageProductsList = document.getElementById('packageProductsList');
+
+    // Folder path jahan aap ki images rakhi hain
+    const imageFolderPath = 'assets/client/';
+
+    // Original Site Data Structure
+    const productsData = [
+      { name: 'Wood Sage & Sea Salt', commission: '$100.00', img: 'cmtiz26mq0001l8043yxii0gx' },
+      { name: 'Sea Salt & Bergamot', commission: '$100.00', img: 'cmtiz26mr0002l8040sfksrky' },
+      { name: 'Sea Salt Fresh Scent', commission: '$100.00', img: 'cmtiz26mr0003l804jgdlyygb' },
+      { name: 'Sea Salt & Bergamot II', commission: '$100.00', img: 'cmtiz26mr0004l804sto1lydf' },
+      { name: 'Cypress & Grapevine Cologne', commission: '$120.00', img: 'cmtiz26mr0005l804xpvu2132' },
+      { name: 'Cypress & Grapevine Cologne Intense', commission: '$120.00', img: 'cmtiz26mr0006l804h3844omc' },
+      { name: 'Car Diffuser and Scented refill', commission: '$120.00', img: 'cmtiz26mr0007l804c099hjnj' },
+      { name: 'Cypress & Grapevine II', commission: '$120.00', img: 'cmtiz26mr0008l804rebqpc6u' },
+      { name: 'Lavender & White Cedar Linen Spray', commission: '$140.00', img: 'cmtiz26mr0009l80495phl9lp' },
+      { name: 'English Orchard with English Pear', commission: '$140.00', img: 'cmtiz26mr000al804ps9pdw7w' },
+      { name: 'Amber Labdanum Cologne Intense', commission: '$140.00', img: 'cmtiz26mr000bl804mrqyy3uk' },
+      { name: 'English Pear & Sweet Pea and English Oak & Hazelnut', commission: '$140.00', img: 'cmtiz26mr000cl804ii3dt49m' },
+      { name: 'English Pear & Freesia or Garden Fresh English Pear & Sweet Pea', commission: '$160.00', img: 'cmtiz26ms000dl804vu1ntb7m' },
+      { name: 'Cypress & Grapevine', commission: '$160.00', img: 'cmtiz26ms000el804bxrg4uxg' },
+      { name: 'Amber Labdanum Cologne Intense', commission: '$120.00', img: 'cmtiz26ms000fl8040t5ja65z' },
+      { name: 'English orchard', commission: '$160.00', img: 'cmtiz26ms000gl804m54fe2ry' },
+      { name: 'New Recyclable tubes', commission: '$160.00', img: 'cmtiz26ms000hl804dniao3pb' },
+      { name: 'English lavender and cedarwood', commission: '$160.00', img: 'cmtiz26ms000il804eoc156re' },
+      { name: 'Orange Bitters', commission: '$160.00', img: 'cmtiz26ms000jl8048bs5tjwo' },
+      { name: 'Nutmeg & Ginger', commission: '$160.00', img: 'cmtiz26ms000kl804dzxq6p33' }
+    ];
+
+    if (packageProductsList) {
+      let prodHTML = '';
+      productsData.forEach((prod, index) => {
+        // Checking if extension needed (.jpg / .png or no extension)
+        const imgSrc = `${imageFolderPath}${prod.img}`;
+
+        prodHTML += `
+          <div class="card" style="padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; background: var(--card-gradient); border-radius: 14px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <img src="${imgSrc}" alt="${prod.name}" 
+                   onerror="this.onerror=null; this.src='${imgSrc}.jpg';" 
+                   style="width: 52px; height: 52px; border-radius: 10px; object-fit: cover; border: 1px solid var(--card-border); background: #16141f;" />
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: #ffffff;">${index + 1}. ${prod.name}</div>
+                <div style="font-size: 12px; color: var(--accent-gold); font-weight: 600; margin-top: 4px;">Commission ${prod.commission}</div>
+              </div>
+            </div>
+            <span style="font-size: 11px; color: var(--accent-gold); font-weight: 600; opacity: 0.85;">Locked</span>
+          </div>
+        `;
+      });
+      packageProductsList.innerHTML = prodHTML;
     }
   </script>
 </body>
