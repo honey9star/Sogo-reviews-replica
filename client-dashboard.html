@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <style>
     :root {
       --bg-dark: #0a0a0d;
@@ -22,7 +21,6 @@
       --border-color: #22222d;
       --radius-sm: 8px;
       --radius-md: 12px;
-      --radius-lg: 18px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -109,7 +107,7 @@
     .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
     .page-title { font-size: 1.25rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
     .header-actions { display: flex; align-items: center; gap: 16px; }
-    .icon-btn { background: transparent; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; position: relative; }
+    .icon-btn { background: transparent; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; }
     .icon-btn:hover { color: var(--text-main); }
 
     .tab-content { display: none; }
@@ -120,7 +118,7 @@
     .balance-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
     .balance-amount { font-size: 1.8rem; font-weight: 800; }
 
-    .invite-code-pill { display: flex; align-items: center; gap: 8px; background: var(--bg-input); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.75rem; margin-top: 8px; }
+    .invite-code-pill { display: flex; align-items: center; gap: 8px; background: var(--bg-input); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.75rem; margin-top: 8px; justify-content: space-between; }
     .btn-copy { background: var(--bg-card-hover); border: 1px solid var(--border-color); color: var(--text-main); font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; cursor: pointer; }
 
     .quick-nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
@@ -176,6 +174,60 @@
     @media (max-width: 1024px) {
       .quick-nav-grid, .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .home-bottom-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Live Earnings Ticker Styling */
+    .live-earnings-container {
+      height: 240px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .live-earnings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: smoothScroll 18s linear infinite;
+    }
+
+    .live-earnings-list:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes smoothScroll {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-55%); }
+    }
+
+    .earnings-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .earnings-user-date {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .earnings-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .earnings-date {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .earnings-amount {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--accent-gold);
     }
   </style>
 </head>
@@ -261,11 +313,11 @@
           <div class="card">
             <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:12px;">Invite & earn</h3>
             <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">Share your code or link — anyone who signs up through it is tracked to you.</p>
-            <div class="invite-code-pill" style="justify-content:space-between;">
+            <div class="invite-code-pill">
               <span>E6UZ86AS</span>
               <button class="btn-copy">Copy</button>
             </div>
-            <div class="invite-code-pill" style="justify-content:space-between;">
+            <div class="invite-code-pill" style="margin-top:8px;">
               <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:260px;">https://sogoreview.online/register?ref=E6UZ86AS</span>
               <button class="btn-copy">Copy</button>
             </div>
@@ -282,18 +334,47 @@
           </div>
         </div>
 
-        <div class="card">
+  <div class="card">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
             <h3 style="font-size:0.85rem; font-weight:800;">Live Earnings</h3>
             <span style="font-size:0.65rem; color:#4ade80; font-weight:700;">• LIVE</span>
           </div>
-          <div class="live-earnings-list">
-            <div class="earnings-row"><div>Mat***</div><div class="earnings-amount">+$7000</div></div>
-            <div class="earnings-row"><div>Adi***</div><div class="earnings-amount">+$18000</div></div>
-            <div class="earnings-row"><div>Har***</div><div class="earnings-amount">+$30000</div></div>
-            <div class="earnings-row"><div>Rya***</div><div class="earnings-amount">+$12000</div></div>
-            <div class="earnings-row"><div>Mad***</div><div class="earnings-amount">+$25000</div></div>
-            <div class="earnings-row"><div>Emm***</div><div class="earnings-amount">+$18000</div></div>
+          <div class="live-earnings-container">
+            <div class="live-earnings-list">
+              <div class="earnings-row">
+                <div class="earnings-user-date"><span class="earnings-name">Chl***</span><span class="earnings-date">20/09/2026</span></div>
+                <div class="earnings-amount">+$40000</div>
+              </div>
+              <div class="earnings-row">
+                <div class="earnings-user-date"><span class="earnings-name">Oli***</span><span class="earnings-date">20/09/2026</span></div>
+                <div class="earnings-amount">+$6000</div>
+              </div>
+              <div class="earnings-row">
+                <div class="earnings-user-date"><span class="earnings-name">Mic***</span><span class="earnings-date">20/09/2026</span></div>
+                <div class="earnings-amount">+$30000</div>
+              </div>
+              <div class="earnings-row">
+                <div class="earnings-user-date"><span class="earnings-name">Eth***</span><span class="earnings-date">20/09/2026</span></div>
+                <div class="earnings-amount">+$2500</div>
+              </div>
+              <div class="earnings-row">
+                <div class="earnings-user-date"><span class="earnings-name">And***</span><span class="earnings-date">20/09/2026</span></div>
+                <div class="earnings-amount">+$5000</div>
+              </div>
+              <div class="earnings-row">
+                <div class="earnings-user-date"><span class="earnings-name">Pie***</span><span class="earnings-date">20/09/2026</span></div>
+                <div class="earnings-amount">+$5000</div>
+              </div>
+              <!-- Infinite loop smooth effect ke liye duplicate rows -->
+              <div class="earnings-row">
+                <div class="earnings-user-date"><span class="earnings-name">Mat***</span><span class="earnings-date">20/09/2026</span></div>
+                <div class="earnings-amount">+$7000</div>
+              </div>
+              <div class="earnings-row">
+                <div class="earnings-user-date"><span class="earnings-name">Adi***</span><span class="earnings-date">20/09/2026</span></div>
+                <div class="earnings-amount">+$18000</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -309,7 +390,7 @@
           <div>&bull; 20 products to review</div>
           <div>&bull; Earn $2000.00 in commission</div>
         </div>
-        <button class="btn-gold">Select package</button>
+        <button class="btn-gold" onclick="switchTab('my-packages')">Select package</button>
       </div>
     </div>
 
@@ -329,7 +410,7 @@
 
       <div class="card">
         <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:12px;">My Packages</h3>
-        <p style="font-size:0.8rem; color:var(--text-muted);">You have not selected a package yet. Browse packages to get started.</p>
+        <p style="font-size:0.8rem; color:var(--text-muted);">You have selected Jo Malone London Timeless British Fragrance package.</p>
       </div>
 
       <div class="card">
@@ -338,7 +419,6 @@
           <thead><tr><th>TYPE</th><th>DETAILS</th><th>AMOUNT</th><th>DATE</th></tr></thead>
           <tbody>
             <tr><td>Manual</td><td>Manual amount added</td><td style="color:#f87171;">$-2500.00</td><td>9/17/2026, 7:07:01 AM</td></tr>
-            <tr><td>Manual</td><td>Manual amount added</td><td style="color:#f87171;">$-1000.00</td><td>9/17/2026, 7:06:48 AM</td></tr>
             <tr><td>Manual</td><td>Manual amount added</td><td style="color:#4ade80;">+$6000.00</td><td>9/17/2026, 7:06:35 AM</td></tr>
           </tbody>
         </table>
@@ -353,8 +433,6 @@
           <button class="btn-gold" style="width:auto; padding:6px 16px; font-size:0.7rem;">All (0)</button>
           <button class="quick-nav-btn" style="padding:6px 16px; font-size:0.7rem;">Approved (0)</button>
           <button class="quick-nav-btn" style="padding:6px 16px; font-size:0.7rem;">Pending (0)</button>
-          <button class="quick-nav-btn" style="padding:6px 16px; font-size:0.7rem;">Rejected (0)</button>
-          <button class="quick-nav-btn" style="padding:6px 16px; font-size:0.7rem;">Rewrite (0)</button>
         </div>
         <table class="data-table">
           <thead><tr><th>PRODUCT</th><th>PACKAGE</th><th>RATING</th><th>STATUS</th><th>COMMISSION</th><th>SUBMITTED</th></tr></thead>
@@ -382,18 +460,13 @@
           <div class="form-group"><label class="form-label">Bank name</label><input type="text" class="form-input" placeholder="e.g. HBL"></div>
           <div class="form-group"><label class="form-label">Account holder name</label><input type="text" class="form-input" placeholder="Full name on account"></div>
           <div class="form-group"><label class="form-label">Account number / IBAN</label><input type="text" class="form-input" placeholder="Account number"></div>
-          <div class="form-group"><label class="form-label">Bank address</label><input type="text" class="form-input" placeholder="Branch / bank address"></div>
-          <div class="form-group"><label class="form-label">Other information</label><textarea class="form-textarea" rows="2" placeholder="Swift code, notes..."></textarea></div>
           <button class="btn-gold" style="width:auto; padding:10px 20px;">Save bank details</button>
         </div>
 
         <div class="card">
           <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:12px;">Request a Withdrawal</h3>
           <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:16px;">Funds are sent after support approval.</p>
-          <div style="background:rgba(220,168,85,0.1); border:1px solid var(--accent-gold); padding:12px; border-radius:var(--radius-sm); font-size:0.75rem; color:var(--accent-gold); margin-bottom:16px;">
-            Please save your payment account details first (left). The amount field will unlock once they're saved.
-          </div>
-          <button class="btn-gold" style="opacity:0.6; cursor:not-allowed;">Save payment details first</button>
+          <button class="btn-gold" style="opacity:0.6;">Request Withdrawal</button>
         </div>
       </div>
     </div>
@@ -424,50 +497,17 @@
     <!-- 7. PROFILE SETTINGS VIEW -->
     <div id="tab-profile" class="tab-content">
       <div class="card">
-        <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:16px;">Profile picture</h3>
-        <div style="display:flex; align-items:center; gap:16px;">
-          <div class="user-avatar" style="width:56px; height:56px; font-size:1.4rem;">S</div>
-          <button class="quick-nav-btn" style="padding:8px 16px;">CHOOSE PHOTO <span style="font-size:0.65rem; color:var(--text-muted);">JPG, PNG, WEBP or GIF - max 5 MB</span></button>
-        </div>
-      </div>
-
-      <div class="card">
         <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:16px;">Profile details</h3>
         <div class="grid-2col">
           <div class="form-group"><label class="form-label">Full name</label><input type="text" class="form-input" value="Shiz"></div>
           <div class="form-group"><label class="form-label">Email</label><input type="text" class="form-input" value="shiz1198@gmail.com" disabled></div>
         </div>
-        <div class="grid-2col">
-          <div class="form-group"><label class="form-label">Phone</label><input type="text" class="form-input" placeholder="e.g. +92 300 1234567"></div>
-          <div class="form-group"><label class="form-label">Address</label><input type="text" class="form-input" placeholder="Your address"></div>
-        </div>
-        <div class="form-group"><label class="form-label">Bio</label><textarea class="form-textarea" rows="2" placeholder="A few words about you"></textarea></div>
         <button class="btn-gold" style="width:auto; padding:10px 24px;">Save changes</button>
-      </div>
-
-      <div class="card">
-        <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:16px;">Change password</h3>
-        <div class="form-group"><label class="form-label">Current password</label><input type="password" class="form-input"></div>
-        <div class="form-group"><label class="form-label">New password</label><input type="password" class="form-input" placeholder="At least 6 characters"></div>
-        <div class="form-group"><label class="form-label">Confirm new password</label><input type="password" class="form-input"></div>
-        <button class="btn-gold" style="width:auto; padding:10px 24px;">Change password</button>
       </div>
     </div>
   </main>
 
-  <!-- Floating Chat Toggle -->
   <button class="floating-chat-btn" onclick="switchTab('chat')">&#128172;</button>
-
-  <!-- Notifications Drawer Overlay -->
-  <div id="notif-drawer" class="notif-panel" style="display:none;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-      <h4 style="font-size:0.8rem;">Notifications</h4>
-      <button onclick="toggleNotifications()" style="background:none; border:none; color:var(--text-muted); cursor:pointer;">&times;</button>
-    </div>
-    <div class="notif-item"><div class="title">Balance updated</div><div>$-2500.00 added to your wallet.</div><div class="time">9/17/2026, 12:07:01 PM</div></div>
-    <div class="notif-item"><div class="title">Balance updated</div><div>$-1000.00 added to your wallet.</div><div class="time">9/17/2026, 12:06:48 PM</div></div>
-    <div class="notif-item"><div class="title">Balance updated</div><div>+$6000.00 added to your wallet.</div><div class="time">9/17/2026, 12:06:35 PM</div></div>
-  </div>
 
   <script>
     function switchTab(tabId, btn) {
@@ -489,10 +529,46 @@
       document.getElementById('current-page-title').innerText = titleMap[tabId] || 'DASHBOARD';
     }
 
-    function toggleNotifications() {
-      const drawer = document.getElementById('notif-drawer');
-      drawer.style.display = drawer.style.display === 'none' ? 'block' : 'none';
+    /* Live Earnings Smooth Ticker & Dynamic Updates */
+  const sampleNames = ["Chl***", "Oli***", "Mic***", "Eth***", "And***", "Pie***", "Mat***", "Adi***", "Har***", "Rya***", "Mad***", "Emm***", "Ali***", "Zia***"];
+  const sampleAmounts = ["+$40000", "+$6000", "+$30000", "+$2500", "+$5000", "+$7000", "+$18000", "+$12000", "+$15000", "+$22000"];
+
+  function updateLiveEarnings() {
+    const list = document.querySelector('.live-earnings-list');
+    if (!list) return;
+
+    const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+    const randomAmount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
+    const today = "20/09/2026";
+
+    const newRow = document.createElement('div');
+    newRow.className = 'earnings-row';
+    newRow.style.opacity = '0';
+    newRow.style.transform = 'translateY(-10px)';
+    newRow.style.transition = 'all 0.4s ease';
+    
+    newRow.innerHTML = `
+      <div class="earnings-user-date">
+        <span class="earnings-name">${randomName}</span>
+        <span class="earnings-date">${today}</span>
+      </div>
+      <div class="earnings-amount">${randomAmount}</div>
+    `;
+
+    list.insertBefore(newRow, list.firstChild);
+
+    setTimeout(() => {
+      newRow.style.opacity = '1';
+      newRow.style.transform = 'translateY(0)';
+    }, 50);
+
+    if (list.children.length > 10) {
+      list.removeChild(list.lastChild);
     }
+  }
+
+  // Har 3 seconds baad naya name aur amount update hoga
+  setInterval(updateLiveEarnings, 3000);
   </script>
 </body>
 </html>
