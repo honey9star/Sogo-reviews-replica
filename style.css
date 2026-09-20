@@ -1,12 +1,15 @@
-/* Dark Luxury Theme - Full Width Spread Correction */
+/* SOGO REVIEWS - Exact Luxury Dark Theme & Client Portal Styles */
 :root {
-  --bg-dark: #08080a;
-  --bg-card: #111115;
+  --bg-dark: #070709;
+  --bg-sidebar: #050507;
+  --bg-card: #0c0c10;
+  --bg-card-hover: #121218;
+  --bg-input: #101015;
   --accent-gold: #dca855;
   --accent-gold-hover: #c89544;
   --text-main: #ffffff;
-  --text-muted: #9ca3af;
-  --border-color: #1e1e26;
+  --text-muted: #737382;
+  --border-color: #1a1a24;
   --radius-sm: 8px;
   --radius-md: 12px;
 }
@@ -48,12 +51,12 @@ a {
   left: 0;
   width: 100%;
   z-index: 101;
-  background: rgba(8, 8, 10, 0.65);
+  background: rgba(7, 7, 9, 0.75);
   backdrop-filter: blur(6px);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   font-weight: 600;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .top-bar-right {
@@ -81,7 +84,7 @@ header {
   left: 0;
   width: 100%;
   z-index: 100;
-  background: rgba(8, 8, 10, 0.65);
+  background: rgba(7, 7, 9, 0.75);
   backdrop-filter: blur(8px);
 }
 
@@ -111,7 +114,6 @@ nav a:hover, nav a.active {
   color: var(--text-main);
 }
 
-/* Login Button matching original */
 .btn-login {
   border: 1px solid var(--accent-gold);
   color: var(--accent-gold);
@@ -162,16 +164,16 @@ nav a:hover, nav a.active {
 }
 
 .hero-slide-1 {
-  background-image: linear-gradient(to bottom, rgba(8,8,10,0.4) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-1.jpg');
+  background-image: linear-gradient(to bottom, rgba(7,7,9,0.4) 0%, rgba(7,7,9,0.6) 50%, rgba(7,7,9,0.98) 88%, #070709 100%), url('assets/landing/hero-1.jpg');
 }
 
 .hero-slide-2 {
-  background-image: linear-gradient(to bottom, rgba(8,8,10,0.4) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-2.jpg');
+  background-image: linear-gradient(to bottom, rgba(7,7,9,0.4) 0%, rgba(7,7,9,0.6) 50%, rgba(7,7,9,0.98) 88%, #070709 100%), url('assets/landing/hero-2.jpg');
 }
 
 .hero-slide-3 {
-  background-image: linear-gradient(to bottom, rgba(8,8,10,0.4) 0%, rgba(8,8,10,0.6) 50%, rgba(8,8,10,0.98) 88%, #08080a 100%), url('assets/landing/hero-3.jpg');
-  background-position: center 30%; /* Yahan image ko neechay shift kiya hai taake face nazar aaye */
+  background-image: linear-gradient(to bottom, rgba(7,7,9,0.4) 0%, rgba(7,7,9,0.6) 50%, rgba(7,7,9,0.98) 88%, #070709 100%), url('assets/landing/hero-3.jpg');
+  background-position: center 30%;
 }
 
 .hero-content-container {
@@ -284,7 +286,7 @@ nav a:hover, nav a.active {
 
 /* Ribbon Highlights */
 .ribbon-wrapper {
-  background-color: #08080a;
+  background-color: #070709;
   padding: 0 4% 40px;
   width: 100%;
 }
@@ -323,7 +325,7 @@ nav a:hover, nav a.active {
   color: var(--text-muted);
 }
 
-/* Section Styles - Full Width Spread */
+/* Sections */
 .section {
   width: 100%;
   padding: 50px 4%;
@@ -365,7 +367,6 @@ nav a:hover, nav a.active {
   color: var(--accent-gold);
 }
 
-/* Signature Departments - Exactly 4 Columns */
 .departments-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -395,7 +396,7 @@ nav a:hover, nav a.active {
 .dept-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(8,8,10,0.85) 0%, transparent 60%);
+  background: linear-gradient(to top, rgba(7,7,9,0.85) 0%, transparent 60%);
   display: flex;
   align-items: flex-end;
   padding: 24px;
@@ -408,7 +409,6 @@ nav a:hover, nav a.active {
   text-transform: uppercase;
 }
 
-/* Products Grid Layout - Full Width 4 Columns */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -453,7 +453,7 @@ nav a:hover, nav a.active {
   right: 14px;
   width: 34px;
   height: 34px;
-  background: rgba(8, 8, 10, 0.75);
+  background: rgba(7, 7, 9, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
@@ -563,7 +563,7 @@ nav a:hover, nav a.active {
 
 /* Footer */
 footer {
-  background-color: #050507;
+  background-color: #040406;
   border-top: 1px solid var(--border-color);
   padding: 70px 4% 30px;
   width: 100%;
@@ -647,7 +647,6 @@ footer {
   color: var(--text-muted);
 }
 
-/* ================= RESPONSIVE MEDIA QUERIES ================= */
 @media (max-width: 1024px) {
   .departments-grid, .products-grid { 
     grid-template-columns: repeat(2, 1fr); 
@@ -664,24 +663,9 @@ footer {
   nav { display: none; }
   .hero-slider-wrapper { height: 75vh; min-height: 480px; padding-top: 80px; }
   .hero-title { font-size: 1.7rem; }
-  
-  .departments-grid, .products-grid { 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 12px; 
-  }
-  
+  .departments-grid, .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .footer-grid { grid-template-columns: 1fr; gap: 24px; }
   .bottom-bar { flex-direction: column; gap: 8px; text-align: center; }
-
-  .floating-chat-btn {
-    width: 48px;
-    height: 48px;
-    padding: 0;
-    border-radius: 50%;
-    justify-content: center;
-  }
-
-  .floating-chat-btn .chat-text {
-    display: none;
-  }
+  .floating-chat-btn { width: 48px; height: 48px; padding: 0; border-radius: 50%; justify-content: center; }
+  .floating-chat-btn .chat-text { display: none; }
 }

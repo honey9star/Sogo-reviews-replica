@@ -7,31 +7,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root {
-      --bg-dark: #0a0a0d;
-      --bg-sidebar: #0d0d12;
-      --bg-card: #14141a;
-      --bg-card-hover: #1c1c24;
-      --bg-input: #1a1a22;
-      --accent-gold: #dca855;
-      --accent-gold-hover: #c89544;
-      --text-main: #ffffff;
-      --text-muted: #8e8e9c;
-      --border-color: #22222d;
-      --radius-sm: 8px;
-      --radius-md: 12px;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
+    /* Client Dashboard Specific Deep Luxury Overrides */
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-main);
       display: flex;
       min-height: 100vh;
       overflow-x: hidden;
+      background-color: var(--bg-dark);
     }
 
     aside {
@@ -41,7 +24,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 24px 16px;
+      padding: 24px 14px;
       position: fixed;
       top: 0;
       bottom: 0;
@@ -52,26 +35,26 @@
       font-size: 1.1rem;
       font-weight: 800;
       letter-spacing: 2px;
-      margin-bottom: 32px;
-      padding-left: 12px;
+      margin-bottom: 30px;
+      padding-left: 10px;
       color: var(--text-main);
     }
 
-    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
 
     .nav-item button {
       width: 100%;
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 14px;
+      padding: 10px 12px;
       background: transparent;
       border: none;
       color: var(--text-muted);
       font-family: inherit;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       border-radius: var(--radius-sm);
       cursor: pointer;
@@ -79,155 +62,149 @@
       text-align: left;
     }
 
-    .nav-item button:hover { background-color: rgba(255, 255, 255, 0.04); color: var(--text-main); }
-    .nav-item button.active { background-color: rgba(220, 168, 85, 0.12); color: var(--accent-gold); border-left: 3px solid var(--accent-gold); }
+    .nav-item button svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    .nav-item button:hover { background-color: rgba(255, 255, 255, 0.02); color: var(--text-main); }
+    
+    .nav-item button.active { 
+      background: linear-gradient(90deg, rgba(220, 168, 85, 0.15) 0%, rgba(220, 168, 85, 0.02) 100%); 
+      color: var(--accent-gold); 
+      border-left: 3px solid var(--accent-gold); 
+    }
 
     .sidebar-user { border-top: 1px solid var(--border-color); padding-top: 16px; }
-    .user-pill { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .user-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: var(--accent-gold); color: #000; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+    .user-pill { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .user-avatar { width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: #000; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
     .user-info { display: flex; flex-direction: column; }
-    .user-name { font-size: 0.8rem; font-weight: 700; }
-    .user-role { font-size: 0.65rem; color: var(--text-muted); }
+    .user-name { font-size: 0.78rem; font-weight: 700; }
+    .user-role { font-size: 0.6rem; color: var(--text-muted); }
 
     .btn-logout {
       width: 100%;
       background: transparent;
       border: 1px solid var(--border-color);
       color: var(--text-muted);
-      padding: 8px;
+      padding: 8px 10px;
       border-radius: var(--radius-sm);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 600;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       transition: all 0.2s;
     }
-    .btn-logout:hover { background-color: rgba(255, 255, 255, 0.05); color: var(--text-main); }
+    .btn-logout:hover { background-color: rgba(255, 255, 255, 0.04); color: var(--text-main); }
 
-    main { margin-left: 250px; flex: 1; padding: 32px 40px; min-height: 100vh; }
-    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    main { margin-left: 250px; flex: 1; padding: 28px 40px; min-height: 100vh; }
+    
+    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
     .page-title { font-size: 1.25rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
-    .header-actions { display: flex; align-items: center; gap: 16px; }
-    .icon-btn { background: transparent; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; }
-    .icon-btn:hover { color: var(--text-main); }
+    
+    .header-actions-box {
+      display: flex;
+      align-items: center;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      padding: 4px 10px;
+      gap: 12px;
+    }
+
+    .header-action-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      transition: color 0.2s;
+    }
+    .header-action-btn:hover { color: var(--accent-gold); }
+    .header-action-btn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; }
 
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; margin-bottom: 20px; }
-    .user-header-card { display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-card); padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 20px; }
-    .balance-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
-    .balance-amount { font-size: 1.8rem; font-weight: 800; }
+    .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px; margin-bottom: 18px; }
+    .user-header-card { display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-card); padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 18px; }
+    .balance-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+    .balance-amount { font-size: 1.75rem; font-weight: 800; }
 
-    .invite-code-pill { display: flex; align-items: center; gap: 8px; background: var(--bg-input); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.75rem; margin-top: 8px; justify-content: space-between; }
-    .btn-copy { background: var(--bg-card-hover); border: 1px solid var(--border-color); color: var(--text-main); font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; cursor: pointer; }
+    .invite-code-pill { display: flex; align-items: center; gap: 8px; background: var(--bg-input); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.72rem; margin-top: 8px; justify-content: space-between; }
+    .btn-copy { background: var(--bg-card-hover); border: 1px solid var(--border-color); color: var(--text-main); font-size: 0.68rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; cursor: pointer; }
 
-    .quick-nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
-    .quick-nav-btn { background-color: var(--bg-card); border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-md); color: var(--text-muted); font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; transition: all 0.2s; }
-    .quick-nav-btn:hover { background-color: var(--bg-card-hover); color: var(--text-main); }
+    .quick-nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+    .quick-nav-btn { background-color: var(--bg-card); border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-md); color: var(--text-muted); font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; transition: all 0.2s; }
+    .quick-nav-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .quick-nav-btn:hover { background-color: var(--bg-card-hover); color: var(--text-main); border-color: rgba(220,168,85,0.3); }
 
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
-    .stat-card { background-color: var(--bg-card); border: 1px solid var(--border-color); padding: 18px; border-radius: var(--radius-md); }
-    .stat-label { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 6px; }
-    .stat-value { font-size: 1.25rem; font-weight: 800; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+    .stat-card { background-color: var(--bg-card); border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-md); }
+    .stat-label { font-size: 0.68rem; color: var(--text-muted); margin-bottom: 6px; }
+    .stat-value { font-size: 1.2rem; font-weight: 800; }
 
-    .reviews-status-bar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; background-color: var(--bg-card); border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-md); margin-bottom: 20px; text-align: center; }
-    .status-item .label { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px; }
+    .reviews-status-bar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; background-color: var(--bg-card); border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-md); margin-bottom: 18px; }
+    .status-item { display: flex; flex-direction: column; gap: 4px; }
+    .status-item .label { font-size: 0.68rem; color: var(--text-muted); font-weight: 600; }
     .status-item .val { font-size: 1.1rem; font-weight: 800; }
+    .val-submitted { color: var(--text-main); }
+    .val-approved { color: #22c55e; }
+    .val-pending { color: #eab308; }
+    .val-rejected { color: #ef4444; }
+    .val-rewrite { color: #38bdf8; }
 
-    .home-bottom-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-    .live-earnings-list { display: flex; flex-direction: column; gap: 12px; font-size: 0.8rem; }
-    .earnings-row { display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
-    .earnings-amount { color: #4ade80; font-weight: 700; }
+    .home-bottom-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; }
+    
+    .live-earnings-container { height: 240px; overflow: hidden; position: relative; }
+    .live-earnings-list { display: flex; flex-direction: column; gap: 14px; animation: smoothScroll 18s linear infinite; }
+    .live-earnings-list:hover { animation-play-state: paused; }
+    @keyframes smoothScroll { 0% { transform: translateY(0); } 100% { transform: translateY(-55%); } }
+    
+    .earnings-row { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 6px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+    .earnings-user-date { display: flex; flex-direction: column; }
+    .earnings-name { font-size: 0.78rem; font-weight: 700; color: var(--text-main); }
+    .earnings-date { font-size: 0.62rem; color: var(--text-muted); margin-top: 2px; }
+    .earnings-amount { font-size: 0.82rem; font-weight: 800; color: var(--accent-gold); }
 
-    .package-card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; max-width: 420px; }
-    .package-title { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
-    .package-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; }
-    .package-price { font-size: 1.5rem; font-weight: 800; margin-bottom: 12px; }
-    .package-meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 20px; }
+    .package-card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px; max-width: 100%; }
+    .package-title { font-size: 0.92rem; font-weight: 800; margin-bottom: 6px; }
+    .package-desc { font-size: 0.72rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
+    .package-price { font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; }
+    .package-meta { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 18px; }
 
-    .btn-gold { width: 100%; background-color: var(--accent-gold); color: #000; border: none; padding: 12px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .btn-gold { width: 100%; background-color: var(--accent-gold); color: #000; border: none; padding: 11px; border-radius: var(--radius-sm); font-size: 0.78rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
     .btn-gold:hover { background-color: var(--accent-gold-hover); }
 
-    .form-group { margin-bottom: 16px; }
-    .form-label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
-    .form-input, .form-textarea { width: 100%; padding: 12px; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-main); font-family: inherit; font-size: 0.85rem; outline: none; }
+    .form-group { margin-bottom: 14px; }
+    .form-label { display: block; font-size: 0.72rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+    .form-input, .form-textarea { width: 100%; padding: 11px; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-main); font-family: inherit; font-size: 0.82rem; outline: none; }
     .form-input:focus, .form-textarea:focus { border-color: var(--accent-gold); }
-    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-    .data-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-    .data-table th { text-align: left; padding: 12px 16px; color: var(--text-muted); font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border-color); }
-    .data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+    .data-table th { text-align: left; padding: 12px 14px; color: var(--text-muted); font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border-color); }
+    .data-table td { padding: 12px 14px; border-bottom: 1px solid var(--border-color); }
 
     .chat-box { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); height: 70vh; display: flex; flex-direction: column; }
-    .chat-header { padding: 16px 24px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; }
-    .chat-status { font-size: 0.65rem; color: #4ade80; }
-    .chat-messages { flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-    .msg-bubble { background-color: var(--bg-input); padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.85rem; max-width: 60%; }
-    .chat-footer { padding: 16px; border-top: 1px solid var(--border-color); display: flex; gap: 12px; }
+    .chat-header { padding: 14px 22px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; }
+    .chat-status { font-size: 0.62rem; color: #22c55e; }
+    .chat-messages { flex: 1; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+    .msg-bubble { background-color: var(--bg-input); padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.82rem; max-width: 60%; }
+    .chat-footer { padding: 14px; border-top: 1px solid var(--border-color); display: flex; gap: 12px; }
 
-    .floating-chat-btn { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; background-color: var(--accent-gold); color: #000; border: none; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.5); z-index: 101; }
-    .notif-panel { position: fixed; top: 20px; right: 20px; width: 320px; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 200; }
-    .notif-item { padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.75rem; }
-    .notif-item .title { font-weight: 700; color: #4ade80; margin-bottom: 2px; }
-    .notif-item .time { font-size: 0.65rem; color: var(--text-muted); }
+    .floating-chat-btn { position: fixed; bottom: 24px; right: 24px; width: 46px; height: 46px; border-radius: 50%; background-color: var(--accent-gold); color: #000; border: none; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.5); z-index: 101; }
 
     @media (max-width: 1024px) {
       .quick-nav-grid, .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .home-bottom-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Live Earnings Ticker Styling */
-    .live-earnings-container {
-      height: 240px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .live-earnings-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      animation: smoothScroll 18s linear infinite;
-    }
-
-    .live-earnings-list:hover {
-      animation-play-state: paused;
-    }
-
-    @keyframes smoothScroll {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-55%); }
-    }
-
-    .earnings-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding-bottom: 6px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .earnings-user-date {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .earnings-name {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .earnings-date {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .earnings-amount {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--accent-gold);
     }
   </style>
 </head>
@@ -238,13 +215,13 @@
     <div>
       <div class="brand-logo">SOGO REVIEWS</div>
       <ul class="nav-list">
-        <li class="nav-item"><button class="active" onclick="switchTab('dashboard', this)"><span>&#8862;</span> Dashboard</button></li>
-        <li class="nav-item"><button onclick="switchTab('packages', this)"><span>&#9055;</span> Packages</button></li>
-        <li class="nav-item"><button onclick="switchTab('my-packages', this)"><span>&#9055;</span> My Packages</button></li>
-        <li class="nav-item"><button onclick="switchTab('reviews', this)"><span>&#9734;</span> Reviews</button></li>
-        <li class="nav-item"><button onclick="switchTab('withdraw', this)"><span>&#8618;</span> Withdraw</button></li>
-        <li class="nav-item"><button onclick="switchTab('chat', this)"><span>&#128172;</span> Chat</button></li>
-        <li class="nav-item"><button onclick="switchTab('profile', this)"><span>&#9881;</span> Profile Settings</button></li>
+        <li class="nav-item"><button class="active" onclick="switchTab('dashboard', this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Dashboard</button></li>
+        <li class="nav-item"><button onclick="switchTab('packages', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg> Packages</button></li>
+        <li class="nav-item"><button onclick="switchTab('my-packages', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path><path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"></path></svg> My Packages</button></li>
+        <li class="nav-item"><button onclick="switchTab('reviews', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Reviews</button></li>
+        <li class="nav-item"><button onclick="switchTab('withdraw', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Withdraw</button></li>
+        <li class="nav-item"><button onclick="switchTab('chat', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> Chat</button></li>
+        <li class="nav-item"><button onclick="switchTab('profile', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Profile Settings</button></li>
       </ul>
     </div>
 
@@ -256,7 +233,7 @@
           <span class="user-role">User</span>
         </div>
       </div>
-      <button class="btn-logout" onclick="window.location.href='auth.html'">&rarr; Logout</button>
+      <button class="btn-logout" onclick="window.location.href='auth.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Logout</button>
     </div>
   </aside>
 
@@ -264,9 +241,13 @@
   <main>
     <div class="header-top">
       <div class="page-title" id="current-page-title">HOME</div>
-      <div class="header-actions">
-        <button class="icon-btn" onclick="toggleNotifications()">&#128276;</button>
-        <button class="icon-btn" onclick="window.location.href='auth.html'">&#128682;</button>
+      <div class="header-actions-box">
+        <button class="header-action-btn" title="Notifications" onclick="alert('No new notifications')">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        </button>
+        <button class="header-action-btn" title="Logout" onclick="window.location.href='auth.html'">
+          <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        </button>
       </div>
     </div>
 
@@ -275,10 +256,10 @@
       <div class="user-header-card">
         <div>
           <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
-            <div class="user-avatar" style="width:48px; height:48px; font-size:1.2rem;">S</div>
+            <div class="user-avatar" style="width:46px; height:46px; font-size:1.1rem;">S</div>
             <div>
-              <h2 style="font-size:1.1rem; font-weight:800;">SHIZ</h2>
-              <p style="font-size:0.75rem; color:var(--text-muted);">shiz1198@gmail.com</p>
+              <h2 style="font-size:1.05rem; font-weight:800;">SHIZ</h2>
+              <p style="font-size:0.72rem; color:var(--text-muted);">shiz1198@gmail.com</p>
             </div>
           </div>
           <div class="balance-title">Available Balance</div>
@@ -287,10 +268,18 @@
       </div>
 
       <div class="quick-nav-grid">
-        <div class="quick-nav-btn" onclick="switchTab('chat')"><span>&#128172;</span> Chat</div>
-        <div class="quick-nav-btn" onclick="switchTab('packages')"><span>&#9055;</span> Packages</div>
-        <div class="quick-nav-btn"><span>&#128101;</span> Invite</div>
-        <div class="quick-nav-btn" onclick="switchTab('withdraw')"><span>&#8618;</span> Withdraw</div>
+        <div class="quick-nav-btn" onclick="switchTab('chat')">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> Chat
+        </div>
+        <div class="quick-nav-btn" onclick="switchTab('packages')">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg> Packages
+        </div>
+        <div class="quick-nav-btn" onclick="alert('Referral link copied!')">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Invite
+        </div>
+        <div class="quick-nav-btn" onclick="switchTab('withdraw')">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Withdraw
+        </div>
       </div>
 
       <div class="stats-grid">
@@ -300,44 +289,45 @@
         <div class="stat-card"><div class="stat-label">Referrals</div><div class="stat-value">0</div></div>
       </div>
 
+      <div style="font-size:0.75rem; font-weight:800; margin-bottom:8px; letter-spacing:1px; text-transform:uppercase;">Your Reviews</div>
       <div class="reviews-status-bar">
-        <div class="status-item"><div class="label">Submitted</div><div class="val">0</div></div>
-        <div class="status-item"><div class="label">Approved</div><div class="val" style="color:#4ade80">0</div></div>
-        <div class="status-item"><div class="label">Pending</div><div class="val" style="color:#facc15">0</div></div>
-        <div class="status-item"><div class="label">Rejected</div><div class="val" style="color:#f87171">0</div></div>
-        <div class="status-item"><div class="label">Rewrite</div><div class="val">0</div></div>
+        <div class="status-item"><div class="label">Submitted</div><div class="val val-submitted">0</div></div>
+        <div class="status-item"><div class="label">Approved</div><div class="val val-approved">0</div></div>
+        <div class="status-item"><div class="label">Pending</div><div class="val val-pending">0</div></div>
+        <div class="status-item"><div class="label">Rejected</div><div class="val val-rejected">0</div></div>
+        <div class="status-item"><div class="label">Rewrite</div><div class="val val-rewrite">0</div></div>
       </div>
 
       <div class="home-bottom-grid">
         <div>
           <div class="card">
-            <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:12px;">Invite & earn</h3>
-            <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">Share your code or link — anyone who signs up through it is tracked to you.</p>
+            <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:10px;">Invite & earn</h3>
+            <p style="font-size:0.72rem; color:var(--text-muted); margin-bottom:10px;">Share your code or link — anyone who signs up through it is tracked to you.</p>
             <div class="invite-code-pill">
               <span>E6UZ86AS</span>
               <button class="btn-copy">Copy</button>
             </div>
-            <div class="invite-code-pill" style="margin-top:8px;">
+            <div class="invite-code-pill" style="margin-top:6px;">
               <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:260px;">https://sogoreview.online/register?ref=E6UZ86AS</span>
               <button class="btn-copy">Copy</button>
             </div>
           </div>
 
           <div class="card">
-            <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:16px;">Membership Packages</h3>
-            <div class="package-card" style="width:100%; border:none; padding:0;">
+            <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:14px;">Membership Packages</h3>
+            <div class="package-card" style="border:none; padding:0;">
               <div class="package-title">Jo Malone London Timeless British Fragrance</div>
               <div class="package-price">$100</div>
               <div class="package-meta">20 products to review • Earn $2000.00 in commission</div>
-              <button class="btn-gold" style="width:auto; padding:10px 24px;" onclick="switchTab('packages')">Join Now</button>
+              <button class="btn-gold" style="width:auto; padding:10px 22px;" onclick="switchTab('packages')">Join Now</button>
             </div>
           </div>
         </div>
 
-  <div class="card">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-            <h3 style="font-size:0.85rem; font-weight:800;">Live Earnings</h3>
-            <span style="font-size:0.65rem; color:#4ade80; font-weight:700;">• LIVE</span>
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+            <h3 style="font-size:0.8rem; font-weight:800;">Live Earnings</h3>
+            <span style="font-size:0.62rem; color:#22c55e; font-weight:700;">• LIVE</span>
           </div>
           <div class="live-earnings-container">
             <div class="live-earnings-list">
@@ -365,7 +355,6 @@
                 <div class="earnings-user-date"><span class="earnings-name">Pie***</span><span class="earnings-date">20/09/2026</span></div>
                 <div class="earnings-amount">+$5000</div>
               </div>
-              <!-- Infinite loop smooth effect ke liye duplicate rows -->
               <div class="earnings-row">
                 <div class="earnings-user-date"><span class="earnings-name">Mat***</span><span class="earnings-date">20/09/2026</span></div>
                 <div class="earnings-amount">+$7000</div>
@@ -400,26 +389,26 @@
         <div>
           <div class="balance-title">CURRENT BALANCE</div>
           <div class="balance-amount">$2500.00</div>
-          <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Total earned: $0.00</div>
+          <div style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">Total earned: $0.00</div>
         </div>
         <div style="text-align:right;">
-          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">Ready to cash out? Withdraw your earnings anytime.</div>
-          <button class="btn-gold" style="width:auto; padding:10px 24px;" onclick="switchTab('withdraw')">WITHDRAW</button>
+          <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:8px;">Ready to cash out? Withdraw your earnings anytime.</div>
+          <button class="btn-gold" style="width:auto; padding:10px 22px;" onclick="switchTab('withdraw')">WITHDRAW</button>
         </div>
       </div>
 
       <div class="card">
-        <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:12px;">My Packages</h3>
-        <p style="font-size:0.8rem; color:var(--text-muted);">You have selected Jo Malone London Timeless British Fragrance package.</p>
+        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:10px;">My Packages</h3>
+        <p style="font-size:0.78rem; color:var(--text-muted);">You have selected Jo Malone London Timeless British Fragrance package.</p>
       </div>
 
       <div class="card">
-        <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:16px;">Transaction History</h3>
+        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:14px;">Transaction History</h3>
         <table class="data-table">
           <thead><tr><th>TYPE</th><th>DETAILS</th><th>AMOUNT</th><th>DATE</th></tr></thead>
           <tbody>
-            <tr><td>Manual</td><td>Manual amount added</td><td style="color:#f87171;">$-2500.00</td><td>9/17/2026, 7:07:01 AM</td></tr>
-            <tr><td>Manual</td><td>Manual amount added</td><td style="color:#4ade80;">+$6000.00</td><td>9/17/2026, 7:06:35 AM</td></tr>
+            <tr><td>Manual</td><td>Manual amount added</td><td style="color:#ef4444;">$-2500.00</td><td>9/17/2026, 7:07:01 AM</td></tr>
+            <tr><td>Manual</td><td>Manual amount added</td><td style="color:#22c55e;">+$6000.00</td><td>9/17/2026, 7:06:35 AM</td></tr>
           </tbody>
         </table>
       </div>
@@ -428,16 +417,16 @@
     <!-- 4. REVIEWS VIEW -->
     <div id="tab-reviews" class="tab-content">
       <div class="card">
-        <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:16px;">Packages to review</h3>
-        <div style="display:flex; gap:8px; margin-bottom:20px;">
-          <button class="btn-gold" style="width:auto; padding:6px 16px; font-size:0.7rem;">All (0)</button>
-          <button class="quick-nav-btn" style="padding:6px 16px; font-size:0.7rem;">Approved (0)</button>
-          <button class="quick-nav-btn" style="padding:6px 16px; font-size:0.7rem;">Pending (0)</button>
+        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:14px;">Packages to review</h3>
+        <div style="display:flex; gap:8px; margin-bottom:18px;">
+          <button class="btn-gold" style="width:auto; padding:6px 14px; font-size:0.68rem;">All (0)</button>
+          <button class="quick-nav-btn" style="padding:6px 14px; font-size:0.68rem;">Approved (0)</button>
+          <button class="quick-nav-btn" style="padding:6px 14px; font-size:0.68rem;">Pending (0)</button>
         </div>
         <table class="data-table">
           <thead><tr><th>PRODUCT</th><th>PACKAGE</th><th>RATING</th><th>STATUS</th><th>COMMISSION</th><th>SUBMITTED</th></tr></thead>
           <tbody>
-            <tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:32px;">No reviews submitted yet.</td></tr>
+            <tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:30px;">No reviews submitted yet.</td></tr>
           </tbody>
         </table>
       </div>
@@ -449,23 +438,23 @@
         <div>
           <div class="balance-title">AVAILABLE TO WITHDRAW</div>
           <div class="balance-amount">USD 2500.00</div>
-          <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Total balance: $2500.00 &bull; Locked: $0.00</div>
+          <div style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">Total balance: $2500.00 &bull; Locked: $0.00</div>
         </div>
       </div>
 
       <div class="grid-2col">
         <div class="card">
-          <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:12px;">Bank Details</h3>
-          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:16px;">Where you'd like to receive your withdrawals.</p>
+          <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:10px;">Bank Details</h3>
+          <p style="font-size:0.72rem; color:var(--text-muted); margin-bottom:14px;">Where you'd like to receive your withdrawals.</p>
           <div class="form-group"><label class="form-label">Bank name</label><input type="text" class="form-input" placeholder="e.g. HBL"></div>
           <div class="form-group"><label class="form-label">Account holder name</label><input type="text" class="form-input" placeholder="Full name on account"></div>
           <div class="form-group"><label class="form-label">Account number / IBAN</label><input type="text" class="form-input" placeholder="Account number"></div>
-          <button class="btn-gold" style="width:auto; padding:10px 20px;">Save bank details</button>
+          <button class="btn-gold" style="width:auto; padding:10px 18px;">Save bank details</button>
         </div>
 
         <div class="card">
-          <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:12px;">Request a Withdrawal</h3>
-          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:16px;">Funds are sent after support approval.</p>
+          <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:10px;">Request a Withdrawal</h3>
+          <p style="font-size:0.72rem; color:var(--text-muted); margin-bottom:14px;">Funds are sent after support approval.</p>
           <button class="btn-gold" style="opacity:0.6;">Request Withdrawal</button>
         </div>
       </div>
@@ -475,21 +464,21 @@
     <div id="tab-chat" class="tab-content">
       <div class="chat-box">
         <div class="chat-header">
-          <div class="user-avatar" style="background:#facc15;">D</div>
+          <div class="user-avatar" style="background:#eab308; color:#000;">D</div>
           <div>
-            <div style="font-size:0.85rem; font-weight:800;">LIVE SUPPORT</div>
+            <div style="font-size:0.8rem; font-weight:800;">LIVE SUPPORT</div>
             <div class="chat-status">&bull; ONLINE - 24/7</div>
           </div>
         </div>
         <div class="chat-messages">
           <div class="msg-bubble">
-            <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:4px;">CUSTOMER SUPPORT</div>
+            <div style="font-size:0.62rem; color:var(--text-muted); margin-bottom:4px;">CUSTOMER SUPPORT</div>
             Welcome to SOGO Reviews. How can we help?
           </div>
         </div>
         <div class="chat-footer">
           <input type="text" class="form-input" placeholder="Type a message...">
-          <button class="btn-gold" style="width:auto; padding:0 24px;">SEND</button>
+          <button class="btn-gold" style="width:auto; padding:0 22px;">SEND</button>
         </div>
       </div>
     </div>
@@ -497,17 +486,15 @@
     <!-- 7. PROFILE SETTINGS VIEW -->
     <div id="tab-profile" class="tab-content">
       <div class="card">
-        <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:16px;">Profile details</h3>
+        <h3 style="font-size:0.8rem; font-weight:800; margin-bottom:14px;">Profile details</h3>
         <div class="grid-2col">
           <div class="form-group"><label class="form-label">Full name</label><input type="text" class="form-input" value="Shiz"></div>
           <div class="form-group"><label class="form-label">Email</label><input type="text" class="form-input" value="shiz1198@gmail.com" disabled></div>
         </div>
-        <button class="btn-gold" style="width:auto; padding:10px 24px;">Save changes</button>
+        <button class="btn-gold" style="width:auto; padding:10px 22px;">Save changes</button>
       </div>
     </div>
   </main>
-
-  <button class="floating-chat-btn" onclick="switchTab('chat')">&#128172;</button>
 
   <script>
     function switchTab(tabId, btn) {
@@ -515,7 +502,13 @@
       document.querySelectorAll('.nav-item button').forEach(b => b.classList.remove('active'));
       const selectedTab = document.getElementById('tab-' + tabId);
       if (selectedTab) selectedTab.classList.add('active');
-      if (btn) btn.classList.add('active');
+      
+      if (btn) {
+        btn.classList.add('active');
+      } else {
+        const pkgBtn = document.querySelector('button[onclick*="packages"]');
+        if (pkgBtn) pkgBtn.classList.add('active');
+      }
 
       const titleMap = {
         'dashboard': 'HOME',
@@ -527,48 +520,47 @@
         'profile': 'PROFILE SETTINGS'
       };
       document.getElementById('current-page-title').innerText = titleMap[tabId] || 'DASHBOARD';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* Live Earnings Smooth Ticker & Dynamic Updates */
-  const sampleNames = ["Chl***", "Oli***", "Mic***", "Eth***", "And***", "Pie***", "Mat***", "Adi***", "Har***", "Rya***", "Mad***", "Emm***", "Ali***", "Zia***"];
-  const sampleAmounts = ["+$40000", "+$6000", "+$30000", "+$2500", "+$5000", "+$7000", "+$18000", "+$12000", "+$15000", "+$22000"];
+    const sampleNames = ["Chl***", "Oli***", "Mic***", "Eth***", "And***", "Pie***", "Mat***", "Adi***", "Har***", "Rya***", "Mad***", "Emm***", "Ali***", "Zia***"];
+    const sampleAmounts = ["+$40000", "+$6000", "+$30000", "+$2500", "+$5000", "+$7000", "+$18000", "+$12000", "+$15000", "+$22000"];
 
-  function updateLiveEarnings() {
-    const list = document.querySelector('.live-earnings-list');
-    if (!list) return;
+    function updateLiveEarnings() {
+      const list = document.querySelector('.live-earnings-list');
+      if (!list) return;
 
-    const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
-    const randomAmount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
-    const today = "20/09/2026";
+      const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+      const randomAmount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
+      const today = "20/09/2026";
 
-    const newRow = document.createElement('div');
-    newRow.className = 'earnings-row';
-    newRow.style.opacity = '0';
-    newRow.style.transform = 'translateY(-10px)';
-    newRow.style.transition = 'all 0.4s ease';
-    
-    newRow.innerHTML = `
-      <div class="earnings-user-date">
-        <span class="earnings-name">${randomName}</span>
-        <span class="earnings-date">${today}</span>
-      </div>
-      <div class="earnings-amount">${randomAmount}</div>
-    `;
+      const newRow = document.createElement('div');
+      newRow.className = 'earnings-row';
+      newRow.style.opacity = '0';
+      newRow.style.transform = 'translateY(-10px)';
+      newRow.style.transition = 'all 0.4s ease';
+      
+      newRow.innerHTML = `
+        <div class="earnings-user-date">
+          <span class="earnings-name">${randomName}</span>
+          <span class="earnings-date">${today}</span>
+        </div>
+        <div class="earnings-amount">${randomAmount}</div>
+      `;
 
-    list.insertBefore(newRow, list.firstChild);
+      list.insertBefore(newRow, list.firstChild);
 
-    setTimeout(() => {
-      newRow.style.opacity = '1';
-      newRow.style.transform = 'translateY(0)';
-    }, 50);
+      setTimeout(() => {
+        newRow.style.opacity = '1';
+        newRow.style.transform = 'translateY(0)';
+      }, 50);
 
-    if (list.children.length > 10) {
-      list.removeChild(list.lastChild);
+      if (list.children.length > 10) {
+        list.removeChild(list.lastChild);
+      }
     }
-  }
 
-  // Har 3 seconds baad naya name aur amount update hoga
-  setInterval(updateLiveEarnings, 3000);
+    setInterval(updateLiveEarnings, 3000);
   </script>
 </body>
 </html>
