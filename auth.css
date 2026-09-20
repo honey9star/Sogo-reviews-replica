@@ -1,14 +1,14 @@
-/* Auth Luxury Styling - Exact Original Match & HD Crisp */
+/* SOGO REVIEWS - Ultra-Transparent Glassmorphic Auth Styles */
 :root {
   --bg-dark: #070709;
-  --bg-light: #ffffff;
-  --text-dark: #111827;
-  --text-muted: #6b7280;
+  --text-light: #ffffff;
+  --text-muted: #9ca3af;
   --accent-gold: #dca855;
   --accent-gold-hover: #c89544;
-  --border-color: #d1d5db;
-  --radius-sm: 6px;
-  --transition: all 0.2s ease;
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --bg-glass: rgba(10, 10, 15, 0.35); /* Maximum transparent glass */
+  --radius-sm: 8px;
+  --transition: all 0.25s ease;
 }
 
 * {
@@ -19,8 +19,8 @@
 
 body.auth-body {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: var(--bg-light);
-  color: var(--text-dark);
+  background-color: var(--bg-dark);
+  color: var(--text-light);
   min-height: 100vh;
   display: flex;
   -webkit-font-smoothing: antialiased;
@@ -34,17 +34,17 @@ body.auth-body {
   min-height: 100vh;
 }
 
-/* Left Image Banner */
+/* Left Image Banner with Luxury Dark Gradient Overlay */
 .auth-banner {
-  background-image: linear-gradient(to bottom, rgba(8,8,10,0.1) 0%, rgba(8,8,10,0.5) 70%, rgba(8,8,10,0.85) 100%), url('assets/landing/hero-1.jpg');
+  background-image: linear-gradient(to bottom, rgba(7,7,9,0.2) 0%, rgba(7,7,9,0.5) 70%, rgba(7,7,9,0.8) 100%), url('assets/landing/hero-1.jpg');
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 60px;
-  color: #ffffff;
+  color: var(--text-light);
 }
 
 .auth-banner-content {
@@ -56,6 +56,7 @@ body.auth-body {
   font-weight: 800;
   letter-spacing: 1px;
   margin-bottom: 4px;
+  color: #ffffff;
 }
 
 .auth-tagline {
@@ -66,9 +67,12 @@ body.auth-body {
   font-weight: 700;
 }
 
-/* Right Form Wrapper - Perfectly Centered */
+/* Right Form Wrapper - Ultra Transparent Glassmorphism */
 .auth-form-wrapper {
-  background-color: var(--bg-light);
+  background-color: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-left: 1px solid var(--border-glass);
   padding: 40px 30px;
   display: flex;
   justify-content: center;
@@ -78,7 +82,6 @@ body.auth-body {
   max-height: 100vh;
 }
 
-/* Inner Container for precise alignment and max-width */
 .form-inner-container {
   width: 100%;
   max-width: 390px;
@@ -93,8 +96,9 @@ body.auth-body {
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.8px;
-  color: var(--text-dark);
-  border: 1px solid var(--border-color);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
   padding: 6px 14px;
   border-radius: 50px;
   width: fit-content;
@@ -104,7 +108,8 @@ body.auth-body {
 }
 
 .back-home-btn:hover {
-  border-color: var(--text-dark);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
 }
 
 .mobile-brand-title {
@@ -114,13 +119,12 @@ body.auth-body {
   letter-spacing: 1px;
   text-align: center;
   margin-bottom: 20px;
-  color: var(--text-dark);
+  color: #ffffff;
 }
 
-/* Form Cards */
 .form-card {
   display: none;
-  animation: fadeIn 0.2s ease-in-out forwards;
+  animation: fadeIn 0.25s ease-in-out forwards;
   width: 100%;
 }
 
@@ -129,7 +133,7 @@ body.auth-body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -138,11 +142,11 @@ body.auth-body {
 }
 
 .form-header h2 {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: 0.3px;
   margin-bottom: 4px;
-  color: var(--text-dark);
+  color: #ffffff;
 }
 
 .form-header p {
@@ -150,7 +154,6 @@ body.auth-body {
   color: var(--text-muted);
 }
 
-/* Input Fields */
 .input-group {
   margin-bottom: 14px;
 }
@@ -165,14 +168,14 @@ body.auth-body {
   display: block;
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--text-dark);
+  color: #e5e7eb;
   margin-bottom: 5px;
 }
 
 .forgot-link {
   font-size: 0.7rem;
   font-weight: 600;
-  color: #6366f1;
+  color: #93c5fd;
   text-decoration: none;
 }
 
@@ -182,24 +185,25 @@ body.auth-body {
 
 .input-group input {
   width: 100%;
-  padding: 9px 12px;
+  padding: 10px 12px;
   font-size: 0.82rem;
-  background-color: #ffffff;
-  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.04); /* More transparent inputs */
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-sm);
-  color: var(--text-dark);
+  color: #ffffff;
   outline: none;
   transition: var(--transition);
   font-family: inherit;
 }
 
 .input-group input::placeholder {
-  color: #9ca3af;
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .input-group input:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+  border-color: var(--accent-gold);
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(220, 168, 85, 0.2);
 }
 
 .password-wrap {
@@ -223,21 +227,17 @@ body.auth-body {
   align-items: center;
 }
 
-.input-hint {
-  display: block;
-  font-size: 0.62rem;
-  color: var(--text-muted);
-  margin-top: 4px;
-  line-height: 1.35;
+.eye-btn:hover {
+  color: #ffffff;
 }
 
-/* Submit Button */
+/* Submit & Google Buttons */
 .btn-submit {
   width: 100%;
   background-color: var(--accent-gold);
   color: #070709;
   border: none;
-  padding: 10.5px;
+  padding: 11px;
   border-radius: var(--radius-sm);
   font-size: 0.78rem;
   font-weight: 700;
@@ -245,11 +245,35 @@ body.auth-body {
   cursor: pointer;
   transition: var(--transition);
   margin-top: 6px;
-  box-shadow: 0 4px 12px rgba(220, 168, 85, 0.25);
+  box-shadow: 0 4px 15px rgba(220, 168, 85, 0.3);
 }
 
 .btn-submit:hover {
   background-color: var(--accent-gold-hover);
+  transform: translateY(-1px);
+}
+
+.btn-google {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10.5px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  transition: var(--transition);
+}
+
+.btn-google:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .form-switch-text {
@@ -260,7 +284,7 @@ body.auth-body {
 }
 
 .form-switch-text a {
-  color: #6366f1;
+  color: #93c5fd;
   font-weight: 600;
   text-decoration: none;
 }
@@ -269,26 +293,53 @@ body.auth-body {
   text-decoration: underline;
 }
 
-/* Responsive Design */
+/* Responsive Mobile Ultra-Transparent Glassmorphism View */
 @media (max-width: 900px) {
   .auth-container {
     grid-template-columns: 1fr;
+    position: relative;
+    min-height: 100vh;
   }
+  
+  /* Background image covers full screen with immersive luxury dark shade */
   .auth-banner {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    padding: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    background-image: linear-gradient(to bottom, rgba(7,7,9,0.55) 0%, rgba(7,7,9,0.78) 100%), url('assets/landing/hero-1.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .auth-banner-content {
     display: none;
   }
+
+  /* Floating ultra-transparent glassy card on mobile */
   .auth-form-wrapper {
-    padding: 30px 20px;
+    position: relative;
+    z-index: 2;
+    background-color: rgba(10, 10, 15, 0.35); /* Highly transparent */
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    margin: 30px 16px;
+    padding: 30px 22px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
     max-height: none;
-    align-items: flex-start;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
   }
+
   .form-inner-container {
     max-width: 100%;
   }
+
   .mobile-brand-title {
     display: block;
-  }
-  .back-home-btn {
-    margin-bottom: 16px;
+    color: var(--accent-gold);
   }
 }
