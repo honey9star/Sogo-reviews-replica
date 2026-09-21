@@ -13,7 +13,6 @@
 <body class="auth-body">
 
   <div class="auth-container">
-    <!-- Left Banner with Luxury Background -->
     <div class="auth-banner">
       <div class="auth-banner-content">
         <h1 class="auth-brand">SOGO REVIEWS</h1>
@@ -21,7 +20,6 @@
       </div>
     </div>
 
-    <!-- Right Form Wrapper -->
     <div class="auth-form-wrapper">
       <div class="form-inner-container">
         <a href="index.html" class="back-home-btn">
@@ -31,7 +29,6 @@
 
         <div class="mobile-brand-title">SOGO REVIEWS</div>
 
-        <!-- LOGIN FORM -->
         <div id="loginFormCard" class="form-card active">
           <div class="form-header">
             <h2>WELCOME BACK</h2>
@@ -43,7 +40,10 @@
               <input type="text" id="loginEmail" placeholder="you@example.com" required>
             </div>
             <div class="input-group">
-              <div class="label-row"><label>Password</label><a href="#" class="forgot-link">Forgot password?</a></div>
+              <div class="label-row">
+                <label>Password</label>
+                <a href="#" class="forgot-link" onclick="switchTab('reset')">Forgot password?</a>
+              </div>
               <div class="password-wrap">
                 <input type="password" id="loginPass" required>
                 <button type="button" class="eye-btn" onclick="togglePassword('loginPass', this)">👁</button>
@@ -56,7 +56,23 @@
           </form>
         </div>
 
-        <!-- SIGNUP FORM -->
+        <div id="resetFormCard" class="form-card">
+          <div class="form-header">
+            <h2>RESET PASSWORD</h2>
+            <p>Request a new password</p>
+          </div>
+          <form id="resetForm" onsubmit="handleResetRequest(event)">
+            <div class="input-group">
+              <label>Email or phone</label>
+              <input type="text" id="resetEmail" placeholder="you@example.com" required>
+            </div>
+            <p id="resetMessage" class="form-error" style="display:none;"></p>
+            <button type="submit" class="btn-submit">SEND REQUEST</button>
+
+            <div class="form-switch-text"><a href="#" onclick="switchTab('login')">Back to sign in</a></div>
+          </form>
+        </div>
+
         <div id="signupFormCard" class="form-card">
           <div class="form-header">
             <h2>CREATE ACCOUNT</h2>
@@ -87,11 +103,17 @@
     function switchTab(tab) {
       const loginCard = document.getElementById('loginFormCard');
       const signupCard = document.getElementById('signupFormCard');
-      if(tab === 'signup') {
-        loginCard.classList.remove('active');
+      const resetCard = document.getElementById('resetFormCard');
+
+      loginCard.classList.remove('active');
+      signupCard.classList.remove('active');
+      resetCard.classList.remove('active');
+
+      if (tab === 'signup') {
         signupCard.classList.add('active');
+      } else if (tab === 'reset') {
+        resetCard.classList.add('active');
       } else {
-        signupCard.classList.remove('active');
         loginCard.classList.add('active');
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -122,6 +144,19 @@
       }
       errorEl.style.display = 'none';
       SogoAuth.redirectForRole(result.user.role);
+    }
+
+    function handleResetRequest(event) {
+      event.preventDefault();
+      const email = document.getElementById('resetEmail').value;
+      const msgEl = document.getElementById('resetMessage');
+      
+      // Success response notification
+      msgEl.style.color = '#34d399';
+      msgEl.style.backgroundColor = 'rgba(52, 211, 153, 0.1)';
+      msgEl.style.borderColor = 'rgba(52, 211, 153, 0.25)';
+      msgEl.textContent = 'Password reset request bhej di gayi hai.';
+      msgEl.style.display = 'block';
     }
 
     function handleSignup(event) {
