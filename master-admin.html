@@ -3,24 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOGO REVIEWS - Master Admin Portal</title>
+  <title>SOGO REVIEWS - Admin Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --bg-dark: #f3f4f8;
+      --bg-dark: #f8f9fa;
       --bg-sidebar: #ffffff;
       --bg-card: #ffffff;
-      --bg-input: #f8fafc;
       --accent-purple: #6366f1;
-      --accent-purple-hover: #4f46e5;
+      --accent-hover: #4f46e5;
       --text-main: #0f172a;
       --text-muted: #64748b;
       --border-color: #e2e8f0;
-      --radius-sm: 8px;
-      --radius-md: 12px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,9 +28,9 @@
       color: var(--text-main);
       display: flex;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
+    /* Sidebar Navigation */
     aside {
       width: 260px;
       background-color: var(--bg-sidebar);
@@ -48,42 +45,89 @@
       z-index: 100;
     }
 
-    .brand-logo { font-size: 1.1rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 24px; padding-left: 12px; color: var(--accent-purple); text-transform: uppercase; }
+    .brand-logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      margin-bottom: 24px;
+      padding-left: 12px;
+      color: var(--accent-purple);
+    }
 
-    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; max-height: calc(100vh - 180px); overflow-y: auto; }
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-height: calc(100vh - 180px);
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .nav-list::-webkit-scrollbar { width: 4px; }
+    .nav-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 
     .nav-item button {
       width: 100%;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       padding: 10px 14px;
       background: transparent;
       border: none;
-      color: var(--text-muted);
+      color: #334155;
       font-family: inherit;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      border-radius: var(--radius-sm);
+      border-radius: 10px;
       cursor: pointer;
       transition: all 0.2s ease;
       text-align: left;
     }
 
-    .nav-item button:hover { background-color: #f1f5f9; color: var(--text-main); }
-    .nav-item button.active { background-color: #eeeffe; color: var(--accent-purple); font-weight: 700; }
+    .nav-item button i {
+      font-size: 1rem;
+      width: 20px;
+      color: #64748b;
+      text-align: center;
+    }
 
-    .sidebar-user { border-top: 1px solid var(--border-color); padding-top: 16px; }
+    .nav-item button:hover {
+      background-color: #f1f5f9;
+      color: var(--text-main);
+    }
+
+    .nav-item button.active {
+      background-color: #eef2ff;
+      color: var(--accent-purple);
+      font-weight: 700;
+    }
+
+    .nav-item button.active i {
+      color: var(--accent-purple);
+    }
+
+    .sidebar-user {
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      background: #ffffff;
+    }
     .user-pill { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
     .user-avatar { width: 36px; height: 36px; border-radius: 50%; background-color: #e0e7ff; color: var(--accent-purple); font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
     .user-info { display: flex; flex-direction: column; }
     .user-name { font-size: 0.8rem; font-weight: 700; }
     .user-role { font-size: 0.65rem; color: var(--text-muted); }
 
-    .btn-logout { width: 100%; background: #ffffff; border: 1px solid var(--border-color); color: var(--text-main); padding: 8px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-    .btn-logout:hover { background-color: #f8fafc; }
+    .btn-logout { width: 100%; background: #ffffff; border: 1px solid var(--border-color); color: var(--text-main); padding: 8px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-logout:hover { background-color: #fef2f2; color: #dc2626; border-color: #fca5a5; }
 
-    main { margin-left: 260px; flex: 1; padding: 32px 40px; min-height: 100vh; }
+    /* Main Content Area */
+    main {
+      margin-left: 260px;
+      flex: 1;
+      padding: 32px 40px;
+      min-height: 100vh;
+    }
+
     .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
     .page-title { font-size: 1.5rem; font-weight: 800; }
     .header-actions { display: flex; align-items: center; gap: 16px; }
@@ -93,68 +137,196 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; margin-bottom: 20px; }
-    .card-banner-purple { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #ffffff; padding: 24px; border-radius: var(--radius-md); margin-bottom: 20px; }
-    .card-banner-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: #ffffff; padding: 24px; border-radius: var(--radius-md); margin-bottom: 20px; }
+    /* Cards & Grids */
+    .card { background-color: #ffffff; border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    
+    .stats-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+    .stat-card { background-color: #ffffff; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; cursor: pointer; transition: transform 0.1s; }
+    .stat-card:hover { border-color: var(--accent-purple); }
+    .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; }
+    .stat-value { font-size: 1.75rem; font-weight: 800; color: #0f172a; }
 
-    .filter-bar { display: flex; gap: 8px; margin-bottom: 20px; align-items: center; }
-    .btn-filter { padding: 6px 16px; border-radius: 50px; border: 1px solid var(--border-color); background-color: #ffffff; font-size: 0.75rem; font-weight: 600; cursor: pointer; color: var(--text-muted); }
-    .btn-filter.active { background-color: var(--accent-purple); color: #ffffff; border-color: var(--accent-purple); }
+    /* Invitation Banner */
+    .invitation-banner {
+      background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+      color: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .invitation-banner h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .invitation-banner p { font-size: 0.8rem; margin-bottom: 16px; opacity: 0.9; }
+    .invite-row { display: flex; gap: 10px; align-items: center; }
+    .invite-input-dark { flex: 1; padding: 10px 16px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; font-size: 0.85rem; color: #ffffff; outline: none; }
 
-    .btn-purple { background-color: var(--accent-purple); color: #ffffff; border: none; padding: 10px 20px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: background 0.2s; }
-    .btn-purple:hover { background-color: var(--accent-purple-hover); }
+    /* Filter Tabs */
+    .filter-tabs { display: flex; gap: 6px; margin-bottom: 8px; background: #e2e8f0; padding: 4px; border-radius: 8px; width: fit-content; flex-wrap: wrap; }
+    .filter-tab { padding: 6px 14px; font-size: 0.75rem; font-weight: 600; color: #475569; background: transparent; border: none; border-radius: 6px; cursor: pointer; }
+    .filter-tab.active { background: #ffffff; color: #0f172a; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .filter-info { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 20px; }
 
-    .search-input { padding: 8px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-size: 0.8rem; outline: none; width: 250px; }
+    /* Top-up Requests Specific Styles */
+    .topup-banner {
+      background-color: #ff9800;
+      color: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .topup-banner .banner-subtitle {
+      font-size: 0.8rem;
+      font-weight: 500;
+      opacity: 0.95;
+      margin-bottom: 4px;
+    }
+    .topup-banner .banner-count {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .topup-banner .banner-desc {
+      font-size: 0.8rem;
+      opacity: 0.95;
+    }
+    .topup-pills {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .topup-pill {
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .topup-pill.active {
+      background: #5b50e6;
+      color: #ffffff;
+      border-color: #5b50e6;
+    }
+    .topup-empty-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 80px 20px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.01);
+    }
 
+    /* Charts */
+    .charts-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+    .chart-card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; }
+    .chart-title { font-size: 0.8rem; font-weight: 700; color: #334155; margin-bottom: 12px; }
+    .chart-box { height: 70px; display: flex; align-items: flex-end; position: relative; border-bottom: 1px solid var(--border-color); margin-bottom: 8px; }
+    .chart-line { width: 100%; height: 40px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30" preserveAspectRatio="none"><path d="M0,25 Q25,25 40,10 T70,15 T100,28" fill="none" stroke="%236366f1" stroke-width="2"/></svg>') no-repeat center; background-size: 100% 100%; }
+    .chart-footer { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); }
+
+    /* Forms & Inputs */
+    .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 12px; align-items: end; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-label { font-size: 0.75rem; font-weight: 700; color: #334155; }
+    .form-input { padding: 10px 14px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; outline: none; width: 100%; font-family: inherit; }
+    .form-textarea { padding: 10px 14px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; outline: none; width: 100%; min-height: 80px; font-family: inherit; resize: vertical; }
+
+    /* Tables */
     .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-    .data-table th { text-align: left; padding: 12px 16px; color: var(--text-muted); font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border-color); }
-    .data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); }
+    .data-table th { text-align: left; padding: 12px 16px; color: var(--text-muted); font-size: 0.7rem; letter-spacing: 0.5px; text-transform: uppercase; border-bottom: 1px solid var(--border-color); font-weight: 700; }
+    .data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+    
+    .badge-active { background-color: #dcfce7; color: #15803d; padding: 2px 10px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: lowercase; }
+    .badge-pending { background-color: #fef3c7; color: #d97706; padding: 2px 10px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: lowercase; }
+    .badge-approved { background-color: #dcfce7; color: #15803d; padding: 2px 10px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: lowercase; }
+    .badge-admin { background-color: #e0e7ff; color: #4338ca; padding: 2px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; }
 
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: lowercase; }
-    .badge-approved { background-color: #dcfce7; color: #166534; }
-    .badge-rejected { background-color: #fef2f2; color: #991b1b; }
-    .badge-admin { background-color: #e0e7ff; color: #3730a3; }
+    .action-links { display: flex; gap: 8px; font-size: 0.75rem; flex-wrap: wrap; }
+    .action-links a { color: var(--accent-purple); text-decoration: none; font-weight: 600; cursor: pointer; }
+    .action-links a:hover { text-decoration: underline; }
+    .action-links a.delete { color: #dc2626; }
 
-    .form-group { margin-bottom: 16px; }
-    .form-label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
-    .form-input, .form-textarea { width: 100%; padding: 10px 14px; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-main); font-family: inherit; font-size: 0.85rem; outline: none; }
-    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .btn-purple { background-color: var(--accent-purple); color: #ffffff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .btn-purple:hover { background-color: var(--accent-hover); }
+    .btn-green { background-color: #10b981; color: #ffffff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .btn-red { background-color: #ef4444; color: #ffffff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
 
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
-    .stat-card { background-color: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; }
-    .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; }
-    .stat-value { font-size: 1.5rem; font-weight: 800; }
+    /* Package Builder & Existing Items */
+    .section-title { font-size: 0.85rem; font-weight: 800; color: #1e293b; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+    .product-row-builder { display: grid; grid-template-columns: 50px 1fr 220px 160px; gap: 10px; align-items: center; margin-bottom: 8px; background: #f8fafc; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.8rem; }
+    .existing-product-row { display: grid; grid-template-columns: 40px 1fr 100px 100px 90px 160px 150px 100px; gap: 8px; align-items: center; margin-bottom: 8px; background: #ffffff; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.8rem; }
 
-    .chat-layout { display: grid; grid-template-columns: 240px 1fr; gap: 16px; height: 75vh; background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; }
-    .chat-sidebar { border-right: 1px solid var(--border-color); padding: 16px; }
-    .chat-main { display: flex; flex-direction: column; }
-    .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background-color: #f8fafc; }
-    .chat-input-bar { padding: 16px; border-top: 1px solid var(--border-color); display: flex; gap: 12px; }
+    .btn-sm { padding: 6px 12px; font-size: 0.75rem; border-radius: 6px; font-weight: 600; cursor: pointer; border: 1px solid var(--border-color); background: #ffffff; }
+    .btn-sm-primary { background: var(--accent-purple); color: #fff; border: none; }
+    .btn-sm-danger { background: #fef2f2; color: #dc2626; border-color: #fca5a5; }
+
+    /* Payments Request Cards Styling */
+    .payment-req-card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 10px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
+    .payment-user-info { display: flex; gap: 16px; align-items: center; }
+    .proof-badge { background: #f1f5f9; color: #64748b; font-size: 0.7rem; font-weight: 700; padding: 8px 12px; border-radius: 8px; text-align: center; line-height: 1.1; }
+    .payment-details h4 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 2px; }
+    .payment-details p { font-size: 0.75rem; color: var(--text-muted); }
+    .payment-sub { font-size: 0.8rem; font-weight: 600; color: #334155; margin-top: 4px; }
+    .payment-actions { display: flex; gap: 8px; align-items: center; }
+    .btn-verify { background-color: #10b981; color: #ffffff; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+    .btn-reject { background-color: #ffffff; color: #ef4444; border: 1px solid #fca5a5; padding: 8px 16px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+    .verified-label { color: #10b981; font-size: 0.75rem; font-weight: 700; background: #dcfce7; padding: 4px 10px; border-radius: 6px; }
+
+    /* Chat View Layout */
+    .chat-layout { display: grid; grid-template-columns: 280px 1fr; gap: 16px; min-height: 520px; border: 1px solid var(--border-color); border-radius: 12px; background: #fff; overflow: hidden; }
+    .chat-sidebar { border-right: 1px solid var(--border-color); display: flex; flex-direction: column; }
+    .chat-subtabs { display: flex; padding: 12px; gap: 8px; border-bottom: 1px solid var(--border-color); }
+    .chat-subtab { padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; border: none; cursor: pointer; background: #f1f5f9; color: #64748b; }
+    .chat-subtab.active { background: #6366f1; color: #fff; }
+    .chat-users-list { overflow-y: auto; flex: 1; }
+    .chat-user-item { padding: 12px 16px; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: background 0.15s; }
+    .chat-user-item:hover, .chat-user-item.active { background: #f8fafc; }
+    .chat-user-name { font-size: 0.85rem; font-weight: 700; color: #0f172a; }
+    .chat-user-msg { font-size: 0.75rem; color: #64748b; margin-top: 2px; }
+    .chat-main-area { display: flex; flex-direction: column; justify-content: space-between; background: #f8fafc; }
+    .chat-header { padding: 12px 20px; background: #fff; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.9rem; }
+    .chat-messages { padding: 20px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+    .msg-bubble { max-width: 80%; padding: 12px 16px; border-radius: 12px; font-size: 0.85rem; line-height: 1.4; }
+    .msg-left { background: #fff; border: 1px solid var(--border-color); align-self: flex-start; color: #0f172a; }
+    .msg-right { background: #6366f1; color: #fff; align-self: flex-end; }
+    .chat-input-row { padding: 12px 16px; background: #fff; border-top: 1px solid var(--border-color); display: flex; gap: 10px; align-items: center; }
+
+    /* Modal Styles */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+    .modal-box { background: #ffffff; border-radius: 12px; width: 550px; max-width: 90%; max-height: 85vh; overflow-y: auto; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); position: relative; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-weight: 800; font-size: 1.1rem; }
+    .modal-close { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted); }
   </style>
 </head>
-<body class="admin-theme">
+<body>
 
   <!-- Sidebar Navigation -->
   <aside>
     <div>
       <div class="brand-logo">SOGO REVIEWS</div>
       <ul class="nav-list">
-        <li class="nav-item"><button onclick="switchTab('dashboard', this)"><span>&#8862;</span> Dashboard</button></li>
-        <li class="nav-item"><button onclick="switchTab('packages', this)"><span>&#9055;</span> Packages</button></li>
-        <li class="nav-item"><button onclick="switchTab('payments', this)"><span>&#128179;</span> Payments</button></li>
-        <li class="nav-item"><button onclick="switchTab('subscriptions', this)"><span>&#128195;</span> Subscriptions</button></li>
-        <li class="nav-item"><button onclick="switchTab('received-reviews', this)"><span>&#9734;</span> Received Reviews</button></li>
-        <li class="nav-item"><button onclick="switchTab('topup-requests', this)"><span>&#43;</span> Top-up Requests</button></li>
-        <li class="nav-item"><button class="active" onclick="switchTab('withdrawals', this)"><span>&#8618;</span> Withdrawals</button></li>
-        <li class="nav-item"><button onclick="switchTab('password-requests', this)"><span>&#128065;</span> Password Requests</button></li>
-        <li class="nav-item"><button onclick="switchTab('invitations', this)"><span>&#127873;</span> Invitations</button></li>
-        <li class="nav-item"><button onclick="switchTab('support', this)"><span>&#9888;</span> Support</button></li>
-        <li class="nav-item"><button onclick="switchTab('chat', this)"><span>&#128172;</span> Chat</button></li>
-        <li class="nav-item"><button onclick="switchTab('activity', this)"><span>&#128200;</span> Activity</button></li>
-        <li class="nav-item"><button onclick="switchTab('access-log', this)"><span>&#128196;</span> Access Log</button></li>
-        <li class="nav-item"><button onclick="switchTab('reports', this)"><span>&#128202;</span> Reports</button></li>
-        <li class="nav-item"><button onclick="switchTab('uploads', this)"><span>&#128194;</span> Uploads</button></li>
-        <li class="nav-item"><button onclick="switchTab('profile-settings', this)"><span>&#9881;</span> Profile Settings</button></li>
+        <li class="nav-item"><button onclick="switchTab('dashboard', this)" class="active"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button></li>
+        <li class="nav-item"><button onclick="switchTab('packages', this)"><i class="fa-solid fa-box"></i> Packages</button></li>
+        <li class="nav-item"><button onclick="switchTab('payments', this)"><i class="fa-solid fa-credit-card"></i> Payments</button></li>
+        <li class="nav-item"><button onclick="switchTab('subscriptions', this)"><i class="fa-solid fa-layer-group"></i> Subscriptions</button></li>
+        <li class="nav-item"><button onclick="switchTab('received-reviews', this)" id="nav-reviews-btn"><i class="fa-regular fa-star"></i> Received Reviews</button></li>
+        <li class="nav-item"><button onclick="switchTab('topup-requests', this)"><i class="fa-solid fa-circle-plus"></i> Top-up Requests</button></li>
+        <li class="nav-item"><button onclick="switchTab('withdrawals', this)"><i class="fa-solid fa-wallet"></i> Withdrawals</button></li>
+        <li class="nav-item"><button onclick="switchTab('password-requests', this)"><i class="fa-solid fa-key"></i> Password Requests</button></li>
+        <li class="nav-item"><button onclick="switchTab('invitations', this)"><i class="fa-solid fa-gift"></i> Invitations</button></li>
+        <li class="nav-item"><button onclick="switchTab('support', this)"><i class="fa-solid fa-life-ring"></i> Support</button></li>
+        <li class="nav-item"><button onclick="switchTab('chat', this)" id="nav-chat-btn"><i class="fa-regular fa-comment"></i> Chat</button></li>
+        <li class="nav-item"><button onclick="switchTab('activity', this)"><i class="fa-solid fa-bolt"></i> Activity</button></li>
+        <li class="nav-item"><button onclick="switchTab('access-log', this)"><i class="fa-solid fa-file-lines"></i> Access Log</button></li>
+        <li class="nav-item"><button onclick="switchTab('reports', this)"><i class="fa-solid fa-chart-column"></i> Reports</button></li>
+        <li class="nav-item"><button onclick="switchTab('uploads', this)"><i class="fa-solid fa-folder-open"></i> Uploads</button></li>
+        <li class="nav-item"><button onclick="switchTab('profile-settings', this)"><i class="fa-solid fa-gear"></i> Profile Settings</button></li>
       </ul>
     </div>
 
@@ -166,135 +338,940 @@
           <span class="user-role">Admin</span>
         </div>
       </div>
-      <button class="btn-logout" onclick="window.location.href='auth.html'">&rarr; Logout</button>
+      <button class="btn-logout" onclick="window.location.href='login.html'"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
     </div>
   </aside>
 
   <!-- Main Content Area -->
   <main>
     <div class="header-top">
-      <div class="page-title" id="current-page-title">Withdrawals</div>
+      <div class="page-title" id="current-page-title">Admin Dashboard</div>
       <div class="header-actions">
-        <button class="icon-btn">&#128276;</button>
-        <button class="icon-btn" onclick="window.location.href='auth.html'">&#128682;</button>
+        <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+        <button class="icon-btn" onclick="window.location.href='login.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
       </div>
     </div>
 
-    <!-- 1. WITHDRAWALS VIEW -->
-    <div id="tab-withdrawals" class="tab-content active">
-      <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-          <div class="filter-bar" style="margin-bottom:0;">
-            <button class="btn-filter active">All</button>
-            <button class="btn-filter">Pending 0</button>
-            <button class="btn-filter">Approved</button>
-            <button class="btn-filter">Rejected</button>
-          </div>
-          <input type="text" class="search-input" placeholder="Search by name, email, bank...">
-        </div>
+    <!-- 1. DASHBOARD VIEW -->
+    <div id="tab-dashboard" class="tab-content active">
+      <div class="stats-grid-4">
+        <div class="stat-card" onclick="openStatModal('Total Users')"><div class="stat-label">Total Users</div><div class="stat-value" style="color: #6366f1;">7</div></div>
+        <div class="stat-card" onclick="openStatModal('Active Users')"><div class="stat-label">Active Users</div><div class="stat-value" style="color: #10b981;">7</div></div>
+        <div class="stat-card" onclick="openStatModal('Active Chats')"><div class="stat-label">Active Chats</div><div class="stat-value" style="color: #f59e0b;">8</div></div>
+        <div class="stat-card" onclick="openStatModal('Unread Messages')"><div class="stat-label">Unread Messages</div><div class="stat-value" style="color: #ef4444;">14</div></div>
+      </div>
 
+      <div class="invitation-banner">
+        <h4>Your Invitation</h4>
+        <p>Share your code or link — anyone who signs up through it is tracked to you.<br>5 accounts joined through you</p>
+        <div class="invite-row">
+          <input type="text" class="invite-input-dark" value="https://sogoreview.online/register?ref=Y66C6U2J" readonly>
+          <button class="btn-purple" style="background:#ffffff; color:#4f46e5;">Copy</button>
+          <button class="btn-green">Y66C6U2J Copy</button>
+        </div>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="filter-tab">Today</button>
+        <button class="filter-tab">Yesterday</button>
+        <button class="filter-tab">Last 7 Days</button>
+        <button class="filter-tab active">Last 14 Days</button>
+        <button class="filter-tab">Last 30 Days</button>
+        <button class="filter-tab">This Month</button>
+        <button class="filter-tab">Last Month</button>
+        <button class="filter-tab">Custom</button>
+      </div>
+      <div class="filter-info">Showing 2026-09-07 – 2026-09-20 (14 days). Click any card for details.</div>
+
+      <div class="stats-grid-4">
+        <div class="stat-card" onclick="openStatModal('Total Signups')"><div class="stat-label">Total Signups</div><div class="stat-value" style="color: #6366f1;">2</div></div>
+        <div class="stat-card" onclick="openStatModal('Active Users')"><div class="stat-label">Active Users</div><div class="stat-value" style="color: #10b981;">7</div></div>
+        <div class="stat-card" onclick="openStatModal('Blocked Users')"><div class="stat-label">Blocked Users</div><div class="stat-value" style="color: #64748b;">0</div></div>
+        <div class="stat-card" onclick="openStatModal('Packages Purchased')"><div class="stat-label">Packages Purchased</div><div class="stat-value" style="color: #8b5cf6;">0</div></div>
+      </div>
+
+      <div class="stats-grid-4">
+        <div class="stat-card"><div class="stat-label">Revenue Generated</div><div class="stat-value" style="color: #059669;">$0.00</div></div>
+        <div class="stat-card"><div class="stat-label">Manual Amount Added</div><div class="stat-value" style="color: #059669;">$11710.00</div></div>
+        <div class="stat-card"><div class="stat-label">Withdrawal Requests</div><div class="stat-value" style="color: #d97706;">1</div></div>
+        <div class="stat-card"><div class="stat-label">Approved Withdrawals</div><div class="stat-value" style="color: #10b981;">1</div></div>
+      </div>
+
+      <div class="charts-grid-3">
+        <div class="chart-card">
+          <div class="chart-title">New signups</div>
+          <div class="chart-box"><div class="chart-line"></div></div>
+          <div class="chart-footer"><span>09-07</span><span>Latest: 0</span><span>09-20</span></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Revenue</div>
+          <div class="chart-box"><div class="chart-line"></div></div>
+          <div class="chart-footer"><span>09-07</span><span>Latest: $0</span><span>09-20</span></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Product reviews</div>
+          <div class="chart-box"><div class="chart-line"></div></div>
+          <div class="chart-footer"><span>09-07</span><span>Latest: 0</span><span>09-20</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 16px;">Create a new User</h3>
+        <div class="form-grid-3">
+          <div class="form-group"><label class="form-label">Full name</label><input type="text" class="form-input"></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input"></div>
+          <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input"></div>
+          <button class="btn-purple">Create User</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="font-size: 1rem; font-weight: 800;">All Users (7)</h3>
+          <input type="text" class="form-input" placeholder="Search by name, email, code" style="width: 240px;">
+        </div>
         <table class="data-table">
-          <thead><tr><th>USER</th><th>AMOUNT</th><th>BANK DETAILS</th><th>REQUESTED</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Status</th>
+              <th>Wallet</th>
+              <th>Earned</th>
+              <th>Reviews</th>
+              <th>Active</th>
+              <th>Referred By</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
-              <td><div style="font-weight:700;">Chris</div><div style="font-size:0.75rem; color:var(--text-muted);">chrislesolang@gmail.com</div></td>
-              <td style="font-weight:800;">$14400.00</td>
-              <td><div style="font-weight:700;">Luno wallet</div><div style="font-size:0.7rem; color:var(--text-muted);">TNUBwXiytAigk7252Ci3sKAXgwCNf8rj9B</div></td>
-              <td>9/18/2026, 11:59:00 AM</td>
-              <td><span class="badge badge-approved">approved</span></td>
-              <td>&mdash;</td>
-            </tr>
-            <tr>
-              <td><div style="font-weight:700;">Chris</div><div style="font-size:0.75rem; color:var(--text-muted);">chrislesolang@gmail.com</div></td>
-              <td style="font-weight:800;">$3500.00</td>
-              <td><div style="font-weight:700;">Luno wallet</div><div style="font-size:0.7rem; color:var(--text-muted);">TNUBwXiytAigk7252Ci3sKAXgwCNf8rj9B</div></td>
-              <td>9/1/2026, 1:54:13 PM</td>
-              <td><span class="badge badge-rejected">rejected</span></td>
-              <td>&mdash;</td>
+              <td><strong>Shiz</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">shiz1198@gmail.com</span></td>
+              <td><span class="badge-active">active</span></td>
+              <td>$2500.00</td>
+              <td>$0.00</td>
+              <td>0</td>
+              <td>1</td>
+              <td>—</td>
+              <td>
+                <div class="action-links">
+                  <a onclick="openMessageTab('Shiz')">Message</a>
+                  <a onclick="openBalanceModal('Shiz', '2500.00')">Balance</a>
+                  <a onclick="openMonitorModal('Shiz', 'shiz1198@gmail.com', '2500.00')">Monitor</a>
+                  <a onclick="switchTab('received-reviews', document.getElementById('nav-reviews-btn'))">Reviews</a>
+                  <a onclick="openClientSite('Shiz')">Access</a>
+                  <a onclick="openPasswordModal('Shiz', 'shiz1198@gmail.com')">Password</a>
+                  <a onclick="blockUser(this)" style="color: #d97706;">Block</a>
+                  <a class="delete" onclick="deleteUserRow(this)">Delete</a>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- Additional Tab views kept intact -->
-    <div id="tab-dashboard" class="tab-content"><div class="card"><h3>Dashboard Overview</h3></div></div>
-    <div id="tab-packages" class="tab-content"><div class="card"><h3>Manage Packages</h3></div></div>
-    <div id="tab-payments" class="tab-content"><div class="card"><h3>Payments List</h3></div></div>
-    <div id="tab-subscriptions" class="tab-content"><div class="card"><h3>Subscriptions</h3></div></div>
-    <div id="tab-received-reviews" class="tab-content"><div class="card"><h3>Received Reviews</h3></div></div>
-    <div id="tab-topup-requests" class="tab-content"><div class="card"><h3>Top-up Requests</h3></div></div>
-    
-    <!-- 2. PASSWORD REQUESTS -->
+    <!-- 2. PACKAGES VIEW -->
+    <div id="tab-packages" class="tab-content">
+      <div class="card">
+        <div style="font-size: 1.1rem; font-weight: 800; margin-bottom: 4px;">Create a new package</div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 20px;">Upload each product photo here — these same photos show on the user side.</div>
+
+        <div class="section-title">1 · PACKAGE BASICS</div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label class="form-label">Package name</label>
+            <input type="text" class="form-input" placeholder="e.g. Starter Package">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Price ($)</label>
+            <input type="number" class="form-input" id="pkg-price" value="100" oninput="calculateAutoSplit()">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea class="form-textarea" placeholder="Package description..."></textarea>
+        </div>
+
+        <div class="section-title" style="margin-top: 24px;">
+          <span>2 · PRODUCTS & COMMISSION</span>
+          <span style="font-size: 0.7rem; font-weight: normal; color: var(--text-muted);">Total commission ($) — auto-split, you can still type each product yourself</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-bottom: 16px;">
+          <div class="form-group">
+            <label class="form-label">How many products?</label>
+            <input type="number" class="form-input" id="pkg-count" value="15" min="1" max="30" oninput="generateProductRows()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total commission ($)</label>
+            <input type="number" class="form-input" id="pkg-total-comm" value="2400" oninput="calculateAutoSplit()">
+          </div>
+        </div>
+
+        <div id="builder-product-rows" style="margin-bottom: 20px;"></div>
+
+        <div class="section-title" style="margin-top: 24px;">3 · REVIEW LOCK & DEPOSIT (REQUIRED)</div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px;">After this many reviews the user is locked until they top up.</div>
+        
+        <div id="locks-container">
+          <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 10px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">#1 After review</span>
+            <input type="number" class="form-input" value="5" style="width: 100px;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">— deposit $</span>
+            <input type="number" class="form-input" value="400" style="width: 140px;">
+          </div>
+        </div>
+        <button class="btn-sm" style="margin-bottom: 24px;" onclick="addLockRow()">+ Add another lock</button>
+
+        <div>
+          <button class="btn-purple" onclick="alert('Package created successfully!')">Create package</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <div>
+            <h3 style="font-size: 1rem; font-weight: 800; display:inline-block; margin-right: 8px;">Jo Malone London Timeless British Fragrance</h3>
+            <span class="badge-active">active</span>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">20 products · Reward $2000.00 · Price $100.00</div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-sm">Unpublish</button>
+            <button class="btn-sm btn-sm-danger" onclick="this.closest('.card').remove()">Delete</button>
+          </div>
+        </div>
+        
+        <div>
+          <div class="existing-product-row" style="background:#f1f5f9; font-weight:700; color:var(--text-muted); font-size:0.7rem;">
+            <div>#</div>
+            <div>Product</div>
+            <div>Comm</div>
+            <div>Bonus</div>
+            <div>Rating</div>
+            <div>Photo</div>
+            <div>Action</div>
+            <div>Status</div>
+          </div>
+          <div class="existing-product-row">
+            <div>1</div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <input type="text" class="form-input" value="Wood Sage & Sea Salt" style="padding:6px;">
+            </div>
+            <div><input type="number" class="form-input" value="40" style="padding:6px;"></div>
+            <div><input type="number" class="form-input" value="0" style="padding:6px;"></div>
+            <div><input type="number" class="form-input" value="5" style="padding:6px;"></div>
+            <div><input type="file" style="font-size:0.7rem;"></div>
+            <div><button class="btn-sm btn-sm-primary">Set</button> <button class="btn-sm btn-sm-danger" onclick="this.closest('.existing-product-row').remove()">Remove</button></div>
+            <div style="font-size:0.7rem; color:#10b981; font-weight:700;">Saved</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. PAYMENTS VIEW -->
+    <div id="tab-payments" class="tab-content">
+      <div style="margin-bottom: 20px;">
+        <input type="text" class="form-input" placeholder="Search by name, email, package..." style="max-width: 100%;">
+      </div>
+
+      <div class="payment-req-card" id="req-1">
+        <div class="payment-user-info">
+          <div class="proof-badge">No<br>proof</div>
+          <div class="payment-details">
+            <h4>Shiz</h4>
+            <p>shiz1198@gmail.com</p>
+            <div class="payment-sub">Jo Malone London Timeless British Fragrance - $100 · via Manual activation</div>
+            <p style="margin-top: 2px;">9/20/2026, 12:38:20 AM</p>
+          </div>
+        </div>
+        <div class="payment-actions" id="actions-1">
+          <button class="btn-verify" onclick="verifyPayment('1')">Verify & Activate</button>
+          <button class="btn-reject" onclick="rejectPayment('1')">Reject</button>
+        </div>
+      </div>
+
+      <div class="payment-req-card" id="req-2">
+        <div class="payment-user-info">
+          <div class="proof-badge">No<br>proof</div>
+          <div class="payment-details">
+            <h4>Chris</h4>
+            <p>chrisosolang@gmail.com</p>
+            <div class="payment-sub">Jo Malone London Timeless British Fragrance - $100 · via Manual activation</div>
+            <p style="margin-top: 2px;">9/1/2026, 1:22:53 PM</p>
+          </div>
+        </div>
+        <div class="payment-actions">
+          <span class="verified-label">verified</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. SUBSCRIPTIONS VIEW (EXACT MATCH - Subscriptions.png) -->
+    <div id="tab-subscriptions" class="tab-content">
+      <div class="stats-grid-4" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="stat-card">
+          <div class="stat-label">Total Subscriptions</div>
+          <div class="stat-value">3</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Active Packages</div>
+          <div class="stat-value" style="color: #10b981;">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pending</div>
+          <div class="stat-value" style="color: #f59e0b;">2</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="font-size: 0.95rem; font-weight: 800;">All Subscriptions (3)</h3>
+          <input type="text" class="form-input" placeholder="Search by name, email, package..." style="width: 260px;">
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>USER</th>
+              <th>PACKAGE</th>
+              <th>PRICE</th>
+              <th>PROGRESS</th>
+              <th>STATUS</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Shiz</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">shiz1198@gmail.com</span></td>
+              <td>Jo Malone London Timeless British Fragrance</td>
+              <td>$100</td>
+              <td>0/20 reviewed<br><span style="font-size: 0.7rem; color: var(--text-muted);">unlocked 5</span></td>
+              <td><span class="badge-pending">pending payment</span></td>
+              <td>
+                <button class="btn-green" style="padding: 4px 10px; font-size: 0.7rem;" onclick="alert('Package Activated!')">Verify & Activate</button>
+                <a href="#" style="font-size: 0.75rem; color: #6366f1; margin-left: 8px;">Activate</a>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Chris</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">chrisosolang@gmail.com</span></td>
+              <td>Jo Malone London Timeless British Fragrance</td>
+              <td>$100</td>
+              <td>20/20 reviewed<br><span style="font-size: 0.7rem; color: var(--text-muted);">unlocked 20</span></td>
+              <td><span class="badge-active">completed</span></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>vv</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">nnn@gmail.com</span></td>
+              <td>Jo Malone London Timeless British Fragrance</td>
+              <td>$100</td>
+              <td>0/20 reviewed<br><span style="font-size: 0.7rem; color: var(--text-muted);">unlocked 5</span></td>
+              <td><span class="badge-pending">pending payment</span></td>
+              <td>
+                <button class="btn-green" style="padding: 4px 10px; font-size: 0.7rem;" onclick="alert('Package Activated!')">Verify & Activate</button>
+                <a href="#" style="font-size: 0.75rem; color: #6366f1; margin-left: 8px;">Activate</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 5. RECEIVED REVIEWS VIEW (EXACT MATCH - Received Reviews.jpg) -->
+    <div id="tab-received-reviews" class="tab-content">
+      <div class="invitation-banner" style="background: #6366f1; margin-bottom: 16px; padding: 16px 20px;">
+        <h4 style="margin: 0; font-size: 0.9rem;">Received reviews - 20 total</h4>
+        <p style="margin: 4px 0 0 0; font-size: 0.75rem; opacity: 0.9;">Approve, reject, or ask users to rewrite. Commission is credited only when a review is approved.</p>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <div class="filter-tabs" style="margin: 0;">
+          <button class="filter-tab active">All (20)</button>
+          <button class="filter-tab">Pending (0)</button>
+          <button class="filter-tab">Approved (20)</button>
+          <button class="filter-tab">Rejected (0)</button>
+          <button class="filter-tab">Rewrite (0)</button>
+        </div>
+        <input type="text" class="form-input" placeholder="Search user, package, product..." style="width: 240px;">
+      </div>
+
+      <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+        <button class="btn-green" style="font-size: 0.75rem; padding: 6px 14px;">Approve selected</button>
+        <button style="background: #f59e0b; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">Rewrite selected</button>
+        <button class="btn-red" style="font-size: 0.75rem; padding: 6px 14px;">Reject selected</button>
+      </div>
+
+      <div class="card" style="padding: 0; overflow: hidden;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>USER</th>
+              <th>PACKAGE</th>
+              <th>PRODUCT</th>
+              <th>RATING</th>
+              <th>REVIEW</th>
+              <th>STATUS</th>
+              <th>SUBMITTED</th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Chris</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">chrisosolang@gmail.com</span></td>
+              <td>Jo Malone London Timeless British Fragrance</td>
+              <td>#20</td>
+              <td style="color: #f59e0b;">★★★★★</td>
+              <td>—</td>
+              <td><span class="badge-approved">Approved</span></td>
+              <td>9/19/2026, 3:06:01 PM</td>
+              <td><a href="#" style="color: #6366f1; font-weight: 600;">Approved</a></td>
+            </tr>
+            <tr>
+              <td><strong>Chris</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">chrisosolang@gmail.com</span></td>
+              <td>Jo Malone London Timeless British Fragrance</td>
+              <td>#19</td>
+              <td style="color: #f59e0b;">★★★★★</td>
+              <td>—</td>
+              <td><span class="badge-approved">Approved</span></td>
+              <td>9/19/2026, 3:05:55 PM</td>
+              <td><a href="#" style="color: #6366f1; font-weight: 600;">Approved</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 6. TOP-UP REQUESTS VIEW (EXACT MATCH - Top-up Requests.png) -->
+    <div id="tab-topup-requests" class="tab-content">
+      <div class="topup-banner">
+        <div class="banner-subtitle">Pending top-up requests</div>
+        <div class="banner-count">0</div>
+        <div class="banner-desc">Users asking to unlock more product reviews. Check the attached payment proof before approving.</div>
+      </div>
+
+      <div class="topup-pills">
+        <button class="topup-pill active">Pending</button>
+        <button class="topup-pill">Approved</button>
+        <button class="topup-pill">Rejected</button>
+        <button class="topup-pill">All</button>
+      </div>
+
+      <div class="topup-empty-card">
+        No top-up requests.
+      </div>
+    </div>
+
+    <!-- 7. WITHDRAWALS VIEW -->
+    <div id="tab-withdrawals" class="tab-content">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 6px;">Withdrawal Requests</h3>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">Approve or reject pending user cashout requests.</p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>USER</th>
+              <th>AMOUNT</th>
+              <th>ACCOUNT DETAILS</th>
+              <th>REQUESTED</th>
+              <th>STATUS</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Shiz</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">shiz1198@gmail.com</span></td>
+              <td><strong>$2500.00</strong></td>
+              <td>HBL - Shiz<br><span style="font-size: 0.7rem; color: var(--text-muted);">PK12HBL0001234567</span></td>
+              <td>9/20/2026, 10:15:00 AM</td>
+              <td><span class="badge-pending">pending</span></td>
+              <td>
+                <button class="btn-green" style="padding: 4px 10px; font-size: 0.7rem;" onclick="alert('Withdrawal Approved!')">Approve</button>
+                <button class="btn-red" style="padding: 4px 10px; font-size: 0.7rem; margin-left: 4px;" onclick="alert('Withdrawal Rejected!')">Reject</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 8. PASSWORD REQUESTS VIEW (EXACT MATCH - Password Requests.png) -->
     <div id="tab-password-requests" class="tab-content">
-      <div class="card-banner-purple">
-        <div style="font-size:0.8rem; font-weight:700; margin-bottom:4px;">Pending password requests</div>
-        <div style="font-size:2rem; font-weight:800;">0</div>
+      <div class="invitation-banner" style="background: #6366f1; margin-bottom: 20px; padding: 20px;">
+        <h4 style="margin: 0; font-size: 0.9rem;">Pending password requests</h4>
+        <div style="font-size: 2rem; font-weight: 800; margin: 4px 0;">0</div>
+        <p style="margin: 0; font-size: 0.75rem; opacity: 0.9;">Users who forgot their password. Set a new one and share it with them (e.g. via chat) — no email is involved.</p>
       </div>
-      <div class="card"><table class="data-table"><thead><tr><th>USER</th><th>REQUESTED</th><th>STATUS</th></tr></thead><tbody><tr><td colspan="3" style="text-align:center; padding:32px;">No pending requests.</td></tr></tbody></table></div>
+
+      <div class="card" style="padding: 0; overflow: hidden;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>USER</th>
+              <th>REQUESTED</th>
+              <th>STATUS</th>
+              <th>HANDLED BY</th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 40px;">No password reset requests.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- 3. INVITATIONS -->
+    <!-- 9. INVITATIONS VIEW (EXACT MATCH - Invitations.png) -->
     <div id="tab-invitations" class="tab-content">
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-value" style="color:var(--accent-purple)">5</div><div class="stat-label">Signups via invitations</div></div>
-        <div class="stat-card"><div class="stat-value">1</div><div class="stat-label">Active inviters</div></div>
+      <div class="stats-grid-4" style="grid-template-columns: 2fr 1fr; margin-bottom: 20px;">
+        <div class="stat-card">
+          <div class="stat-value" style="color: #6366f1; font-size: 2rem;">5</div>
+          <div class="stat-label">Signups via invitations</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="font-size: 2rem;">1</div>
+          <div class="stat-label">Active inviters</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 20px;">
+        <h3 style="font-size: 0.85rem; font-weight: 800; margin-bottom: 14px;">Signups per inviter</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>INVITER</th>
+              <th>ROLE</th>
+              <th>CODE</th>
+              <th>SIGNUPS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Customer Support</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">kami_12@gmail.com</span></td>
+              <td><span class="badge-admin">admin</span></td>
+              <td><strong>Y66C6U2J</strong></td>
+              <td>5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="font-size: 0.85rem; font-weight: 800;">Signup log</h3>
+          <input type="text" class="form-input" placeholder="Search by name, email, code" style="width: 240px;">
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>NEW USER</th>
+              <th>INVITED BY</th>
+              <th>VIA CODE</th>
+              <th>SIGNED UP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>?!!</strong></td>
+              <td>Customer Support <span class="badge-admin">admin</span></td>
+              <td>Y66C6U2J</td>
+              <td>9/16/2026, 7:11:20 PM</td>
+            </tr>
+            <tr>
+              <td><strong>Chris</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">chrisosolang@gmail.com</span></td>
+              <td>Customer Support <span class="badge-admin">admin</span></td>
+              <td>Y66C6U2J</td>
+              <td>9/1/2026, 1:22:01 PM</td>
+            </tr>
+            <tr>
+              <td><strong>vv</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">nnn@gmail.com</span></td>
+              <td>Customer Support <span class="badge-admin">admin</span></td>
+              <td>Y66C6U2J</td>
+              <td>9/1/2026, 11:32:23 AM</td>
+            </tr>
+            <tr>
+              <td><strong>ess</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">sar@gmail.com</span></td>
+              <td>Customer Support <span class="badge-admin">admin</span></td>
+              <td>Y66C6U2J</td>
+              <td>9/1/2026, 11:23:58 AM</td>
+            </tr>
+            <tr>
+              <td><strong>eefrr</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">eefrr@gmail.com</span></td>
+              <td>Customer Support <span class="badge-admin">admin</span></td>
+              <td>Y66C6U2J</td>
+              <td>9/1/2026, 10:22:05 AM</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px;">Showing 1-5 of 5</div>
       </div>
     </div>
 
-    <!-- 4. SUPPORT -->
+    <!-- 10. SUPPORT VIEW (EXACT MATCH - Support.png) -->
     <div id="tab-support" class="tab-content">
-      <div class="card-banner-red">
-        <div style="font-size:0.8rem; font-weight:700; margin-bottom:4px;">Open support requests</div>
-        <div style="font-size:2rem; font-weight:800;">0</div>
+      <div class="invitation-banner" style="background: #ef4444; margin-bottom: 20px; padding: 20px;">
+        <h4 style="margin: 0; font-size: 0.9rem;">Open support requests</h4>
+        <div style="font-size: 2rem; font-weight: 800; margin: 4px 0;">0</div>
+        <p style="margin: 0; font-size: 0.75rem; opacity: 0.9;">Messages from blocked users asking for help or account reactivation.</p>
+      </div>
+
+      <div class="filter-tabs" style="margin-bottom: 16px;">
+        <button class="filter-tab active">Open</button>
+        <button class="filter-tab">Resolved</button>
+        <button class="filter-tab">All</button>
+      </div>
+
+      <div class="card" style="text-align: center; color: var(--text-muted); padding: 60px; font-size: 0.85rem;">
+        No support requests.
       </div>
     </div>
 
-    <!-- 5. CHAT -->
+    <!-- 11. CHAT VIEW (EXACT MATCH - Chat.png) -->
     <div id="tab-chat" class="tab-content">
+      <div class="card" style="margin-bottom: 16px; padding: 16px;">
+        <label class="form-label">Welcome message</label>
+        <div style="display: flex; gap: 10px; margin-top: 6px;">
+          <input type="text" class="form-input" value="Welcome to SOGO Reviews. How can we help?">
+          <button class="btn-purple">Save</button>
+        </div>
+      </div>
+
       <div class="chat-layout">
         <div class="chat-sidebar">
-          <div style="font-size:0.8rem; font-weight:800; margin-bottom:12px;">Conversations</div>
-          <div style="padding:10px; background:#f1f5f9; border-radius:6px; font-size:0.8rem; font-weight:700; margin-bottom:6px; cursor:pointer;">Chris</div>
-        </div>
-        <div class="chat-main">
-          <div class="chat-messages">
-            <div style="background:#e0e7ff; color:#3730a3; padding:12px; border-radius:8px; font-size:0.8rem; max-width:70%;">Welcome back, Chris!</div>
+          <div class="chat-subtabs">
+            <button class="chat-subtab active">Active</button>
+            <button class="chat-subtab">Archived</button>
           </div>
-          <div class="chat-input-bar"><input type="text" class="form-input" placeholder="Message..."><button class="btn-purple">Send</button></div>
+          <div class="chat-users-list">
+            <div class="chat-user-item active">
+              <div class="chat-user-name">Chris</div>
+              <div class="chat-user-msg">Attachment</div>
+            </div>
+            <div class="chat-user-item">
+              <div class="chat-user-name">Shiz</div>
+              <div class="chat-user-msg">No messages</div>
+            </div>
+            <div class="chat-user-item">
+              <div class="chat-user-name">Customer Support</div>
+              <div class="chat-user-msg">No messages</div>
+            </div>
+            <div class="chat-user-item">
+              <div class="chat-user-name">vv</div>
+              <div class="chat-user-msg">No messages</div>
+            </div>
+            <div class="chat-user-item">
+              <div class="chat-user-name">ess</div>
+              <div class="chat-user-msg">No messages</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-main-area">
+          <div class="chat-header">
+            <span>Chris</span>
+            <a href="#" style="font-size: 0.75rem; color: #6366f1; text-decoration: none;">Archive</a>
+          </div>
+          <div class="chat-messages">
+            <div class="msg-bubble msg-right">
+              THJ2nQmDNt2YTN4p3agiQdPEaSAKClikxA<br>
+              <span style="font-size: 0.65rem; opacity: 0.8;">9/18/2026, 8:16:07 PM</span>
+            </div>
+            <div class="msg-bubble msg-left">
+              Please approve top request<br>
+              <span style="font-size: 0.65rem; color: var(--text-muted);">9/19/2026, 12:57:23 PM</span>
+            </div>
+            <div class="msg-bubble msg-right">
+              Your request for the top up for package has been approved you can now continue to complete your remaining 15 tasks for this package<br>
+              <span style="font-size: 0.65rem; opacity: 0.8;">9/19/2026, 2:06:11 PM</span>
+            </div>
+            <div class="msg-bubble msg-left">
+              Can I send the $350 Blockchain fee to the above wallet? Can I do it in 2 separate payments please<br>
+              <span style="font-size: 0.65rem; color: var(--text-muted);">9/19/2026, 3:08:22 PM</span>
+            </div>
+            <div class="msg-bubble msg-right">
+              Yes you can<br>
+              <span style="font-size: 0.65rem; opacity: 0.8;">9/19/2026, 3:36:11 PM</span>
+            </div>
+          </div>
+          <div class="chat-input-row">
+            <button class="icon-btn"><i class="fa-solid fa-paperclip"></i></button>
+            <input type="text" class="form-input" placeholder="Message..." style="border: none; background: transparent;">
+            <button class="btn-purple">Send</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 6. ACTIVITY -->
-    <div id="tab-activity" class="tab-content"><div class="card"><button class="btn-purple">Download live backup</button></div></div>
-    <div id="tab-access-log" class="tab-content"><div class="card"><p>Access logs record admin views.</p></div></div>
-    <div id="tab-reports" class="tab-content"><div class="stats-grid"><div class="stat-card"><div class="stat-label">Revenue</div><div class="stat-value">$0.00</div></div></div></div>
-    <div id="tab-uploads" class="tab-content"><div class="card" style="text-align:center; padding:64px;">No uploaded files yet.</div></div>
+    <!-- 12. ACTIVITY VIEW (EXACT MATCH - Activity.jpg) -->
+    <div id="tab-activity" class="tab-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-size: 1.1rem; font-weight: 800;">Activity</h3>
+        <button class="btn-purple"><i class="fa-solid fa-download"></i> Download live backup</button>
+      </div>
 
-    <!-- 10. PROFILE SETTINGS -->
+      <div class="card" style="margin-bottom: 20px;">
+        <h4 style="font-size: 0.85rem; font-weight: 800; margin-bottom: 12px;">Daily backups</h4>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>WHEN</th>
+              <th>CONTENTS</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>9/19/2026, 7:00:24 PM</td>
+              <td>8 users, 1 packages, 60 messages, 2 payments</td>
+              <td><a href="#" style="color: #6366f1;">Download</a></td>
+            </tr>
+            <tr>
+              <td>9/18/2026, 7:00:24 PM</td>
+              <td>8 users, 1 packages, 48 messages, 2 payments</td>
+              <td><a href="#" style="color: #6366f1;">Download</a></td>
+            </tr>
+            <tr>
+              <td>9/17/2026, 7:00:24 PM</td>
+              <td>8 users, 1 packages, 31 messages, 2 payments</td>
+              <td><a href="#" style="color: #6366f1;">Download</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <input type="text" class="form-input" placeholder="Search activity..." style="max-width: 300px; margin-bottom: 16px;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ACTION</th>
+              <th>DETAILS</th>
+              <th>WHEN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Backup</strong></td>
+              <td>Daily backup<br><span style="font-size: 0.7rem; color: var(--text-muted);">8 users, 1 packages, 60 messages, 2 payments</span></td>
+              <td>9/19/2026, 7:00:24 PM</td>
+            </tr>
+            <tr>
+              <td><strong>Impersonate</strong></td>
+              <td>Accessed Chris<br><span style="font-size: 0.7rem; color: var(--text-muted);">chrisosolang@gmail.com</span></td>
+              <td>9/19/2026, 4:45:26 PM</td>
+            </tr>
+            <tr>
+              <td><strong>Manual Credit</strong></td>
+              <td>Manual amount added<br><span style="font-size: 0.7rem; color: var(--text-muted);">Manual amount added</span></td>
+              <td>9/19/2026, 4:45:10 PM</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 13. ACCESS LOG VIEW (EXACT MATCH - Access Log.png) -->
+    <div id="tab-access-log" class="tab-content">
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;">Every time an admin uses Access to view a user account, it is recorded here.</p>
+
+      <div class="card" style="padding: 0; overflow: hidden;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ACCOUNT ACCESSED</th>
+              <th>EMAIL</th>
+              <th>WHEN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Accessed Chris</strong></td>
+              <td>chrisosolang@gmail.com</td>
+              <td>9/19/2026, 4:45:26 PM</td>
+            </tr>
+            <tr>
+              <td><strong>Accessed Chris</strong></td>
+              <td>chrisosolang@gmail.com</td>
+              <td>9/19/2026, 4:29:18 PM</td>
+            </tr>
+            <tr>
+              <td><strong>Accessed Chris</strong></td>
+              <td>chrisosolang@gmail.com</td>
+              <td>9/19/2026, 4:29:12 PM</td>
+            </tr>
+            <tr>
+              <td><strong>Accessed Chris</strong></td>
+              <td>chrisosolang@gmail.com</td>
+              <td>9/19/2026, 4:27:34 PM</td>
+            </tr>
+            <tr>
+              <td><strong>Accessed Shiz</strong></td>
+              <td>shiz1198@gmail.com</td>
+              <td>9/17/2026, 7:07:10 AM</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 14. REPORTS VIEW (EXACT MATCH - Reports.png) -->
+    <div id="tab-reports" class="tab-content">
+      <div class="filter-tabs" style="margin-bottom: 20px;">
+        <button class="filter-tab">Today</button>
+        <button class="filter-tab">Yesterday</button>
+        <button class="filter-tab">Last 7 Days</button>
+        <button class="filter-tab active">Last 14 Days</button>
+        <button class="filter-tab">Last 30 Days</button>
+        <button class="filter-tab">This Month</button>
+        <button class="filter-tab">Last Month</button>
+        <button class="filter-tab">Custom</button>
+      </div>
+
+      <div class="stats-grid-4" style="grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        <div class="stat-card">
+          <div class="stat-label">New signups</div>
+          <div class="stat-value" style="font-size: 2rem;">2</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Verified payments</div>
+          <div class="stat-value" style="font-size: 2rem;">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Revenue</div>
+          <div class="stat-value" style="font-size: 2rem;">$0.00</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Approved reviews</div>
+          <div class="stat-value" style="font-size: 2rem;">20</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Withdrawal requests</div>
+          <div class="stat-value" style="font-size: 2rem;">1</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Withdrawal volume</div>
+          <div class="stat-value" style="font-size: 2rem;">$14400.00</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Top-up requests</div>
+          <div class="stat-value" style="font-size: 2rem;">1</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15. UPLOADS VIEW -->
+    <div id="tab-uploads" class="tab-content">
+      <div class="card">
+        <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 6px;">Uploads Directory</h3>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">Manage uploaded assets, proof screenshots, and product images.</p>
+        <input type="file" style="margin-bottom: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+          <div style="border: 1px solid var(--border-color); padding: 10px; border-radius: 8px; text-align: center;">
+            <i class="fa-solid fa-image" style="font-size: 2rem; color: #6366f1;"></i>
+            <div style="font-size: 0.75rem; margin-top: 8px;">proof_1.jpg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 16. PROFILE SETTINGS VIEW (EXACT MATCH - Profile Settings.png) -->
     <div id="tab-profile-settings" class="tab-content">
       <div class="card">
-        <h3 style="font-size:0.85rem; font-weight:800; margin-bottom:16px;">Profile details</h3>
-        <div class="grid-2col">
-          <div class="form-group"><label class="form-label">Full name</label><input type="text" class="form-input" value="Customer Support"></div>
-          <div class="form-group"><label class="form-label">Email</label><input type="text" class="form-input" value="kami_12@gmail.com" disabled></div>
+        <h4 style="font-size: 0.85rem; font-weight: 800; margin-bottom: 16px;">Profile picture</h4>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="user-avatar" style="width: 48px; height: 48px; font-size: 1rem;">CS</div>
+          <label class="btn-sm" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <i class="fa-solid fa-image"></i> CHOOSE PHOTO
+            <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 400;">JPG, PNG, WEBP or GIF - max 5 MB</span>
+            <input type="file" style="display: none;">
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4 style="font-size: 0.85rem; font-weight: 800; margin-bottom: 16px;">Profile details</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;">
+          <div class="form-group">
+            <label class="form-label">Full name</label>
+            <input type="text" class="form-input" value="Customer Support">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" value="kami_12@gmail.com" readonly style="background: #f1f5f9;">
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;">
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="text" class="form-input" placeholder="e.g. +91 300 1234567">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Address</label>
+            <input type="text" class="form-input" placeholder="Your address">
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label class="form-label">Bio</label>
+          <textarea class="form-textarea" placeholder="A few words about you"></textarea>
         </div>
         <button class="btn-purple">Save changes</button>
       </div>
+
+      <div class="card">
+        <h4 style="font-size: 0.85rem; font-weight: 800; margin-bottom: 4px;">Change password</h4>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 16px;">Enter your current password, then choose a new one.</p>
+        
+        <div class="form-group">
+          <label class="form-label">Current password</label>
+          <input type="password" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">New password</label>
+          <input type="password" class="form-input" placeholder="At least 6 characters">
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label class="form-label">Confirm new password</label>
+          <input type="password" class="form-input">
+        </div>
+        <button class="btn-purple">Change password</button>
+      </div>
+
+      <div class="card">
+        <h4 style="font-size: 0.85rem; font-weight: 800; margin-bottom: 4px;">Log out everywhere</h4>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 16px;">Sign out of this account on every device.</p>
+        <button class="btn-sm">Log out all devices</button>
+      </div>
     </div>
+
   </main>
+
+  <!-- UNIVERSAL MODAL POPUP -->
+  <div class="modal-overlay" id="generic-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span id="modal-title">Modal Title</span>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
 
   <script>
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.nav-item button').forEach(b => b.classList.remove('active'));
+      
       const selectedTab = document.getElementById('tab-' + tabId);
       if (selectedTab) selectedTab.classList.add('active');
-      if (btn) btn.classList.add('active');
+      
+      if (btn) {
+        btn.classList.add('active');
+      } else {
+        document.querySelectorAll('.nav-item button').forEach(b => {
+          if(b.getAttribute('onclick')?.includes(tabId)) b.classList.add('active');
+        });
+      }
 
-      const titleMap = {
-        'dashboard': 'Dashboard',
+      const titles = {
+        'dashboard': 'Admin Dashboard',
         'packages': 'Packages',
         'payments': 'Payments',
         'subscriptions': 'Subscriptions',
@@ -311,8 +1288,82 @@
         'uploads': 'Uploads',
         'profile-settings': 'Profile Settings'
       };
-      document.getElementById('current-page-title').innerText = titleMap[tabId] || 'Master Admin';
+      document.getElementById('current-page-title').innerText = titles[tabId] || 'Admin Portal';
     }
+
+    function closeModal() { document.getElementById('generic-modal').style.display = 'none'; }
+    function openModal() { document.getElementById('generic-modal').style.display = 'flex'; }
+
+    function openStatModal(statName) {
+      document.getElementById('modal-title').innerText = statName;
+      document.getElementById('modal-body').innerHTML = `
+        <p style="font-size:0.85rem; color:#64748b; margin-bottom:12px;">Records in selected range:</p>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="padding:10px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between;"><span><strong>Shiz</strong><br><small>shiz1198@gmail.com</small></span><span class="badge-active">Active</span></div>
+          <div style="padding:10px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between;"><span><strong>Chris</strong><br><small>chrisosolang@gmail.com</small></span><span class="badge-active">Active</span></div>
+        </div>
+      `;
+      openModal();
+    }
+
+    // Package Builder Logic
+    function generateProductRows() {
+      const count = parseInt(document.getElementById('pkg-count').value) || 0;
+      const totalComm = parseFloat(document.getElementById('pkg-total-comm').value) || 0;
+      const perProductComm = count > 0 ? (totalComm / count).toFixed(0) : 0;
+      
+      const container = document.getElementById('builder-product-rows');
+      if(!container) return;
+      container.innerHTML = '';
+
+      for (let i = 1; i <= count; i++) {
+        container.innerHTML += `
+          <div class="product-row-builder">
+            <span style="font-weight:700; color:var(--text-muted);">#${i}</span>
+            <input type="text" class="form-input" placeholder="Product ${i}" style="padding:6px;">
+            <input type="file" style="font-size:0.75rem;">
+            <input type="text" class="form-input" value="Commission $ ${perProductComm}" style="padding:6px;">
+          </div>
+        `;
+      }
+    }
+
+    function calculateAutoSplit() {
+      generateProductRows();
+    }
+
+    function addLockRow() {
+      const container = document.getElementById('locks-container');
+      const lockNum = container.children.length + 1;
+      const div = document.createElement('div');
+      div.style = "display: flex; gap: 12px; align-items: center; margin-bottom: 10px;";
+      div.innerHTML = `
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">#${lockNum} After review</span>
+        <input type="number" class="form-input" value="10" style="width: 100px;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">— deposit $</span>
+        <input type="number" class="form-input" value="500" style="width: 140px;">
+        <button class="btn-sm btn-sm-danger" onclick="this.parentElement.remove()">Remove</button>
+      `;
+      container.appendChild(div);
+    }
+
+    // Payments Actions
+    function verifyPayment(id) {
+      const actionsDiv = document.getElementById('actions-' + id);
+      actionsDiv.innerHTML = `<span class="verified-label">verified</span>`;
+      alert('Package activation verified & activated successfully!');
+    }
+
+    function rejectPayment(id) {
+      if(confirm('Are you sure you want to reject this request?')) {
+        document.getElementById('req-' + id).remove();
+        alert('Request rejected successfully.');
+      }
+    }
+
+    window.onload = function() {
+      generateProductRows();
+    };
   </script>
 </body>
 </html>
