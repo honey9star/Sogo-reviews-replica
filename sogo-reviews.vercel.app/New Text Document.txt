@@ -1,0 +1,17 @@
+Hello, main roman urdu me sab bat kro ga, me ek site bana raha, me koi bohat acha nai coding me abhi mera landing page, login signup page and client side page as interface tayar hai , abhi me working kar raha admin side backend pe,  jis side ko me mirror kar raha wo.
+Yeh hai.
+Landing Page: https://sogo-reviews.vercel.app/
+
+Register side page/Signup page: https://sogo-reviews.vercel.app/register
+
+Login Page: https://sogo-reviews.vercel.app/login
+
+Client Side Login
+Email: shiz1198@gmail.con
+Password: ss11223344
+
+Admin Side/Backend Side Login
+Email: kami_12@gmail.com
+Password: admin123
+
+is folder me meri sabhi file pari wo attached kro ga.

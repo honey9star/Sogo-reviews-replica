@@ -206,6 +206,17 @@ body.auth-body {
   box-shadow: 0 0 0 2px rgba(220, 168, 85, 0.2);
 }
 
+.form-error {
+  color: #f87171;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+}
+
 .password-wrap {
   position: relative;
 }

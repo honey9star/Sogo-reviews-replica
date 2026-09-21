@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="auth.js"></script>
   <style>
     :root {
       --bg-dark: #f8f9fa;
@@ -305,6 +306,10 @@
   </style>
 </head>
 <body>
+  <script>
+    // Auth guard: only logged-in admins may view this page.
+    var currentSession = SogoAuth.requireRole('admin');
+  </script>
 
   <!-- Sidebar Navigation -->
   <aside>
@@ -332,13 +337,13 @@
 
     <div class="sidebar-user">
       <div class="user-pill">
-        <div class="user-avatar">CS</div>
+        <div class="user-avatar" id="adminAvatar">A</div>
         <div class="user-info">
-          <span class="user-name">Customer Support</span>
+          <span class="user-name" id="adminName">Admin</span>
           <span class="user-role">Admin</span>
         </div>
       </div>
-      <button class="btn-logout" onclick="window.location.href='login.html'"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      <button class="btn-logout" onclick="SogoAuth.logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
     </div>
   </aside>
 
@@ -348,7 +353,7 @@
       <div class="page-title" id="current-page-title">Admin Dashboard</div>
       <div class="header-actions">
         <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
-        <button class="icon-btn" onclick="window.location.href='login.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+        <button class="icon-btn" onclick="SogoAuth.logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
       </div>
     </div>
 
@@ -1363,7 +1368,17 @@
 
     window.onload = function() {
       generateProductRows();
+      loadAdminInfo();
     };
+
+    function loadAdminInfo() {
+      if (!currentSession) return;
+      const users = SogoAuth.getUsers();
+      const admin = users.find(u => u.email.toLowerCase() === currentSession.email.toLowerCase());
+      if (!admin) return;
+      document.getElementById('adminName').textContent = admin.name || 'Admin';
+      document.getElementById('adminAvatar').textContent = (admin.name || 'A').charAt(0).toUpperCase();
+    }
   </script>
 </body>
 </html>
