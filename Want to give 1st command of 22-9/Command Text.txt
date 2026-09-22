@@ -1,0 +1,74 @@
+1st me jo b code du use deeply parhna koi b mistake missing na ho code me ya kahi b
+
+Ye mene kal command di thi
+
+*Ok ab
+client-dashboard.html ki sabhi options ko master-admin.html k sath integrate karna hai
+master-admin.html k sath
+
+Total Users
+Active Users
+Active Chats
+Unread Messages
+Your Invitation
+main Link k agy ek chota card bane change/regenerate  Invitation code ka 
+Invitation k sare function proper work b kre bagair Invitation code k signup nai ho
+Today yesterday wala calander proper reading show kare
+Total Signups or esky sath k sabhi card Active Users etc work proper karein users activity k lehaz se
+en card k graphs proper work krein as per activity
+Create a new User
+pe proper user create ho sky
+ All Users (7)
+pe real active users show hon
+Message
+Balance
+Monitor
+Reviews
+Access
+Password
+Block
+Delete
+ye sab functions proper work karein enky code me mentioned hain chezain 
+mentioned file deeply code read krye ga kuch missed nai karna ek b code
+or khud b deeply integration kardein dono files k mutabiq)
+Jisky mutabiq apne jo file banae usme ye masle aye
+
+1. Ye working nai kar raha (Your Invitation) Change / Regenerate Invitation Code me se kuch working nai kar raha
+2. Dashboard se bohat se cards ur gae me orignal side ki Dashboard ki image mention kr raha sath complete code b
+3. Kafi files me roman urdu aa rahi that must b english
+4. Create a new User b working nai kar raha testing kia kar
+5. kindly ap purana code deeply read karein mene reply me mentioned kardia ha then again recreate krein sab
+5. baqi sabhi section b sahi se master-admin.html or client-dashboard.html k sath attached hoon Jaise Payments, Subscriptions,Received Reviews,Top-up Requests, Withdrawals, Password Requests/Password reset Requests, Invitations. Support, Chat, Activity, Access Log
+Reports,Uploads or Admin ,Profile Settings koi b chez nai chorni
+
+
+
+
+
+
+
+Side jiske me copy kar raha
+
+Landing Page: https://sogo-reviews.vercel.app/
+
+Register side page/Signup page: https://sogo-reviews.vercel.app/register
+
+Login Page: https://sogo-reviews.vercel.app/login
+
+Client Side Login
+Email: shiz1198@gmail.con
+Password: ss11223344
+
+Admin Side/Backend Side Login
+Email: kami_12@gmail.com
+Password: admin123
+Plus Usky sabhi screenshots again mentioned karne laga
+
+esky sath me apni bnae sabhi files attached karno ga wo b ap dehan se read krlyn
+or jo meri apni site hai uska link ye hai
+https://sogo-reviews-olive.vercel.app/
+Admin login: Vitto@gmail.com / Vitto123
+or client side ban nahi rahi nai to wo b dyta
+
+Es sab ki sab Chezo ko dehan se intigrate kro miner b mistake na ho kuch b miss na ho
+
