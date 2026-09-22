@@ -71,6 +71,7 @@ const SogoAuth = (() => {
   }
 
   function deleteUser(email) {
+    const target = getUsers().find(u => u.email.toLowerCase() === email.toLowerCase());
     const users = getUsers().filter(u => u.email.toLowerCase() !== email.toLowerCase());
     saveUsers(users);
     // Clean up related data too.
@@ -79,13 +80,14 @@ const SogoAuth = (() => {
     localStorage.setItem(CHAT_KEY, JSON.stringify(chats));
     const withdrawals = getWithdrawals().filter(w => w.email.toLowerCase() !== email.toLowerCase());
     localStorage.setItem(WITHDRAWALS_KEY, JSON.stringify(withdrawals));
+    if (target) logActivity('user_deleted', `${target.name} (${target.email}) was deleted by admin`, { email: target.email });
   }
 
   // Admin creates a client account directly (no invitation code needed).
   function adminCreateUser(name, email, password) {
     const users = getUsers();
     if (users.some(u => normalizeEmail(u.email) === normalizeEmail(email))) {
-      return { ok: false, message: 'Ye email pehle se registered hai.' };
+      return { ok: false, message: 'This email is already registered.' };
     }
     const newUser = {
       name: name || 'New User',
@@ -100,6 +102,7 @@ const SogoAuth = (() => {
     };
     users.push(newUser);
     saveUsers(users);
+    logActivity('user_created_by_admin', `Admin created new user ${newUser.name} (${newUser.email})`, { email: newUser.email });
     return { ok: true, user: newUser };
   }
 
@@ -177,6 +180,7 @@ const SogoAuth = (() => {
     };
     list.push(record);
     localStorage.setItem(WITHDRAWALS_KEY, JSON.stringify(list));
+    logActivity('withdrawal_requested', `${name} requested a withdrawal of $${amount.toFixed(2)}`, { email });
     return record;
   }
 
@@ -186,11 +190,122 @@ const SogoAuth = (() => {
     if (idx === -1) return null;
     list[idx].status = status;
     localStorage.setItem(WITHDRAWALS_KEY, JSON.stringify(list));
+    logActivity(
+      status === 'approved' ? 'withdrawal_approved' : 'withdrawal_rejected',
+      `Withdrawal of $${list[idx].amount.toFixed(2)} ${status} for ${list[idx].name}`,
+      { email: list[idx].email }
+    );
+    return list[idx];
+  }
 
-    if (status === 'rejected') {
-      // refund isn't needed since balance was only deducted on approval
+  /* ---------------- Top-up requests ---------------- */
+  const TOPUPS_KEY = 'sogo_topups';
+
+  function getTopups() {
+    try {
+      return JSON.parse(localStorage.getItem(TOPUPS_KEY)) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function requestTopup(email, name, amount, note) {
+    const list = getTopups();
+    const record = {
+      id: 't_' + Date.now(),
+      email, name, amount, note: note || '',
+      status: 'pending',
+      requestedAt: new Date().toISOString()
+    };
+    list.push(record);
+    localStorage.setItem(TOPUPS_KEY, JSON.stringify(list));
+    logActivity('topup_requested', `${name} requested a top-up of $${amount.toFixed(2)}`, { email });
+    return record;
+  }
+
+  function updateTopup(id, status) {
+    const list = getTopups();
+    const idx = list.findIndex(t => t.id === id);
+    if (idx === -1) return null;
+    list[idx].status = status;
+    localStorage.setItem(TOPUPS_KEY, JSON.stringify(list));
+    if (status === 'approved') {
+      const user = getUsers().find(u => u.email.toLowerCase() === list[idx].email.toLowerCase());
+      if (user) updateUser(user.email, { balance: (user.balance || 0) + list[idx].amount });
+      logActivity('topup_approved', `Top-up of $${list[idx].amount.toFixed(2)} approved for ${list[idx].name}`, { email: list[idx].email });
+    } else if (status === 'rejected') {
+      logActivity('topup_rejected', `Top-up of $${list[idx].amount.toFixed(2)} rejected for ${list[idx].name}`, { email: list[idx].email });
     }
     return list[idx];
+  }
+
+  /* ---------------- Password reset requests ---------------- */
+  const PW_REQUESTS_KEY = 'sogo_password_requests';
+
+  function getPasswordRequests() {
+    try {
+      return JSON.parse(localStorage.getItem(PW_REQUESTS_KEY)) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function requestPasswordReset(email) {
+    const users = getUsers();
+    const user = users.find(u => normalizeEmail(u.email) === normalizeEmail(email));
+    if (!user) {
+      return { ok: false, message: 'No account found with that email.' };
+    }
+    const list = getPasswordRequests();
+    const record = {
+      id: 'p_' + Date.now(),
+      email: user.email, name: user.name,
+      status: 'pending',
+      requestedAt: new Date().toISOString()
+    };
+    list.push(record);
+    localStorage.setItem(PW_REQUESTS_KEY, JSON.stringify(list));
+    logActivity('password_reset_requested', `${user.name} requested a password reset`, { email: user.email });
+    return { ok: true, record };
+  }
+
+  function fulfillPasswordRequest(id, newPassword) {
+    const list = getPasswordRequests();
+    const idx = list.findIndex(r => r.id === id);
+    if (idx === -1) return null;
+    list[idx].status = 'fulfilled';
+    localStorage.setItem(PW_REQUESTS_KEY, JSON.stringify(list));
+    updateUser(list[idx].email, { password: newPassword });
+    logActivity('password_reset_fulfilled', `Password reset for ${list[idx].name}`, { email: list[idx].email });
+    return list[idx];
+  }
+
+  function dismissPasswordRequest(id) {
+    const list = getPasswordRequests();
+    const idx = list.findIndex(r => r.id === id);
+    if (idx === -1) return null;
+    list[idx].status = 'dismissed';
+    localStorage.setItem(PW_REQUESTS_KEY, JSON.stringify(list));
+    return list[idx];
+  }
+
+  /* ---------------- Activity / access log ---------------- */
+  const ACTIVITY_KEY = 'sogo_activity';
+
+  function getActivity() {
+    try {
+      return JSON.parse(localStorage.getItem(ACTIVITY_KEY)) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function logActivity(type, message, meta) {
+    const list = getActivity();
+    list.push({ type, message, meta: meta || {}, time: new Date().toISOString() });
+    // Keep the log from growing forever.
+    if (list.length > 300) list.splice(0, list.length - 300);
+    localStorage.setItem(ACTIVITY_KEY, JSON.stringify(list));
   }
 
   function normalizeEmail(email) {
@@ -208,12 +323,13 @@ const SogoAuth = (() => {
       u => normalizeEmail(u.email) === normalizeEmail(email) && u.password === password
     );
     if (!found) {
-      return { ok: false, message: 'Email/phone ya password ghalat hai.' };
+      return { ok: false, message: 'Incorrect email/phone or password.' };
     }
     if (found.blocked) {
-      return { ok: false, message: 'Ye account block kar diya gaya hai. Support se raabta karein.' };
+      return { ok: false, message: 'This account has been blocked. Please contact support.' };
     }
     setSession(found);
+    logActivity('login', `${found.name} logged in`, { email: found.email, role: found.role });
     return { ok: true, user: found };
   }
 
@@ -221,15 +337,15 @@ const SogoAuth = (() => {
   function signup({ name, email, password, invitationCode }) {
     const users = getUsers();
     if (users.some(u => normalizeEmail(u.email) === normalizeEmail(email))) {
-      return { ok: false, message: 'Ye email pehle se registered hai.' };
+      return { ok: false, message: 'This email is already registered.' };
     }
     const code = (invitationCode || '').trim();
     if (!code) {
-      return { ok: false, message: 'Invitation code zaroori hai.' };
+      return { ok: false, message: 'Invitation code is required.' };
     }
     const inviter = users.find(u => (u.myInviteCode || '').toUpperCase() === code.toUpperCase());
     if (!inviter) {
-      return { ok: false, message: 'Invitation code ghalat hai.' };
+      return { ok: false, message: 'Invalid invitation code.' };
     }
     const newUser = {
       name: name || 'New User',
@@ -246,6 +362,7 @@ const SogoAuth = (() => {
     users.push(newUser);
     saveUsers(users);
     setSession(newUser);
+    logActivity('signup', `${newUser.name} signed up using invite code ${code}`, { email: newUser.email, invitedBy: inviter.email });
     return { ok: true, user: newUser };
   }
 
@@ -302,6 +419,7 @@ const SogoAuth = (() => {
     const user = getUsers().find(u => u.email.toLowerCase() === email.toLowerCase());
     if (!user) return false;
     setSession(user);
+    logActivity('admin_access', `Admin accessed ${user.name}'s account (${user.email})`, { email: user.email });
     window.location.href = 'client-dashboard.html';
     return true;
   }
@@ -312,6 +430,9 @@ const SogoAuth = (() => {
     login, signup, logout, getSession, requireRole, redirectForRole, impersonate,
     getUsers, updateUser, deleteUser, adminCreateUser, setInviteCode,
     getChatThread, sendChatMessage, markChatRead, getUnreadMessageCount, getActiveChatsCount,
-    getWithdrawals, requestWithdrawal, updateWithdrawal
+    getWithdrawals, requestWithdrawal, updateWithdrawal,
+    getTopups, requestTopup, updateTopup,
+    getPasswordRequests, requestPasswordReset, fulfillPasswordRequest, dismissPasswordRequest,
+    getActivity, logActivity
   };
 })();

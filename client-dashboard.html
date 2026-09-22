@@ -878,7 +878,7 @@
 
     <!-- 3. MY PACKAGES VIEW (FIT OLD CODE - IMAGE 3) -->
     <div id="tab-mypackages" class="view-section">
-      <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; margin-bottom: 22px;">
+      <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr 1fr; margin-bottom: 22px;">
         <div class="card" style="margin-bottom: 0;">
           <span style="font-size: 11px; color: var(--text-muted); font-weight: 700;">CURRENT BALANCE</span>
           <h2 style="font-size: 32px; font-weight: 800; color: #fff; margin: 6px 0;" id="myPkgBalance">$0.00</h2>
@@ -888,6 +888,15 @@
           <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">Ready to cash out? Withdraw your earnings anytime.</p>
           <button class="btn-gold" style="width: 100%; border-radius: 8px; text-align: center;" onclick="openView('withdraw')">WITHDRAW</button>
         </div>
+        <div class="card" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: center;">
+          <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">Need funds added to your balance? Request a top-up.</p>
+          <button class="btn-dark" style="width: 100%; border-radius: 8px; text-align: center;" onclick="openTopupPrompt()">REQUEST TOP-UP</button>
+        </div>
+      </div>
+
+      <div class="card" id="myTopupsCard" style="display:none;">
+        <h4 style="font-size: 14px; margin-bottom: 10px;">My Top-up Requests</h4>
+        <div id="myTopupsList"></div>
       </div>
 
       <div class="card">
@@ -1278,7 +1287,7 @@
 // Package Reviews Products Renderer with Real Images & Original UI
     const packageProductsList = document.getElementById('packageProductsList');
 
-    // Folder path jahan aap ki images rakhi hain
+    // Folder where your images are stored
     const imageFolderPath = 'assets/client/';
 
     // Original Site Data Structure
@@ -1451,25 +1460,25 @@
       const conf = document.getElementById('confPass').value;
 
       if (curr !== user.password) {
-        msgEl.textContent = 'Current password ghalat hai.';
+        msgEl.textContent = 'Current password is incorrect.';
         msgEl.style.color = '#e74c3c';
         msgEl.style.display = 'block';
         return;
       }
       if (next.length < 6) {
-        msgEl.textContent = 'Naya password kam az kam 6 characters ka ho.';
+        msgEl.textContent = 'New password must be at least 6 characters.';
         msgEl.style.color = '#e74c3c';
         msgEl.style.display = 'block';
         return;
       }
       if (next !== conf) {
-        msgEl.textContent = 'Naya aur confirm password match nahi karte.';
+        msgEl.textContent = 'New password and confirm password do not match.';
         msgEl.style.color = '#e74c3c';
         msgEl.style.display = 'block';
         return;
       }
       SogoAuth.updateUser(user.email, { password: next });
-      msgEl.textContent = 'Password successfully change ho gaya.';
+      msgEl.textContent = 'Password changed successfully.';
       msgEl.style.color = '#2ecc71';
       msgEl.style.display = 'block';
       document.getElementById('currPass').value = '';
@@ -1486,13 +1495,13 @@
       const balance = user.balance || 0;
 
       if (!amount || amount <= 0) {
-        msgEl.textContent = 'Sahi amount likhein.';
+        msgEl.textContent = 'Please enter a valid amount.';
         msgEl.style.color = '#e74c3c';
         msgEl.style.display = 'block';
         return;
       }
       if (amount > balance) {
-        msgEl.textContent = 'Amount aapke available balance se zyada hai.';
+        msgEl.textContent = 'Amount exceeds your available balance.';
         msgEl.style.color = '#e74c3c';
         msgEl.style.display = 'block';
         return;
@@ -1501,7 +1510,7 @@
       const bank = user.bankDetails || {};
       const accountDetails = `${bank.name || ''} - ${bank.holder || ''}${bank.number ? ' - ' + bank.number : ''}`;
       SogoAuth.requestWithdrawal(user.email, user.name, amount, accountDetails);
-      msgEl.textContent = 'Withdrawal request bhej di gayi hai. Admin approve karega.';
+      msgEl.textContent = 'Withdrawal request submitted. Admin will approve it shortly.';
       msgEl.style.color = '#2ecc71';
       msgEl.style.display = 'block';
       amountInput.value = '';
@@ -1539,7 +1548,7 @@
 
       if (txBody) {
         if (list.length === 0) {
-          txBody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding:20px;">Koi transaction nahi hai.</td></tr>';
+          txBody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding:20px;">No transactions yet.</td></tr>';
           if (txCount) txCount.textContent = '';
         } else {
           txBody.innerHTML = list.map(w => `
@@ -1579,10 +1588,53 @@
       renderChat();
     }
 
+    /* ---------------- Top-up requests ---------------- */
+    function openTopupPrompt() {
+      const amountStr = prompt('How much would you like to top up (USD)?');
+      if (amountStr === null) return;
+      const amount = parseFloat(amountStr);
+      if (!amount || amount <= 0) { alert('Please enter a valid amount.'); return; }
+      const note = prompt('Any note for the admin (optional)?') || '';
+      SogoAuth.requestTopup(currentSession.email, currentSession.name, amount, note);
+      alert('Top-up request submitted. Admin will review it shortly.');
+      renderMyTopups();
+    }
+
+    function renderMyTopups() {
+      if (!currentSession) return;
+      const list = SogoAuth.getTopups().filter(t => t.email.toLowerCase() === currentSession.email.toLowerCase()).reverse();
+      const card = document.getElementById('myTopupsCard');
+      const container = document.getElementById('myTopupsList');
+      if (!card || !container) return;
+
+      if (list.length === 0) {
+        card.style.display = 'none';
+        return;
+      }
+      card.style.display = 'block';
+      const statusColor = { pending: '#e67e22', approved: '#2ecc71', rejected: '#e74c3c' };
+      container.innerHTML = `
+        <table class="data-table">
+          <thead><tr><th>AMOUNT</th><th>NOTE</th><th>DATE</th><th>STATUS</th></tr></thead>
+          <tbody>
+            ${list.map(t => `
+              <tr>
+                <td style="color:#fff; font-weight:700;">$${t.amount.toFixed(2)}</td>
+                <td style="color:var(--text-muted); font-size:11px;">${escapeHtmlC(t.note || '—')}</td>
+                <td style="color:var(--text-muted); font-size:11px;">${new Date(t.requestedAt).toLocaleString()}</td>
+                <td style="color:${statusColor[t.status]}; font-weight:700; text-transform:uppercase; font-size:11px;">${t.status}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
     loadUserData();
     renderMyWithdrawals();
+    renderMyTopups();
     renderChat();
-    setInterval(() => { renderChat(); renderMyWithdrawals(); }, 3000);
+    setInterval(() => { renderChat(); renderMyWithdrawals(); renderMyTopups(); }, 3000);
   </script>
 </body>
 </html>

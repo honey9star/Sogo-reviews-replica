@@ -379,11 +379,11 @@
       <div class="card" style="padding:16px 20px; margin-bottom:20px;">
         <h4 style="font-size:0.85rem; font-weight:800; margin-bottom:10px;">Change / Regenerate Invitation Code</h4>
         <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-          <input type="text" class="form-input" id="customInviteInput" placeholder="Naya code likhein (ya khali chhor kar regenerate karein)" style="max-width:280px;">
+          <input type="text" class="form-input" id="customInviteInput" placeholder="Enter a new code (or leave blank to regenerate)" style="max-width:280px;">
           <button class="btn-purple" onclick="applyCustomInviteCode()">Set this code</button>
           <button class="btn-sm" onclick="regenerateInviteCode()">Regenerate random code</button>
         </div>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin-top:8px;">Naya code set karte hi purana code kaam nahi karega — naye signups ke liye ye naya code use hoga.</p>
+        <p style="font-size:0.7rem; color:var(--text-muted); margin-top:8px;">As soon as you set a new code, the old one stops working — new signups will need this new code.</p>
       </div>
 
       <div class="filter-tabs" id="dashboardFilterTabs">
@@ -735,20 +735,18 @@
     <div id="tab-topup-requests" class="tab-content">
       <div class="topup-banner">
         <div class="banner-subtitle">Pending top-up requests</div>
-        <div class="banner-count">0</div>
-        <div class="banner-desc">Users asking to unlock more product reviews. Check the attached payment proof before approving.</div>
+        <div class="banner-count" id="topupPendingCount">0</div>
+        <div class="banner-desc">Users asking to add funds to their balance.</div>
       </div>
 
-      <div class="topup-pills">
-        <button class="topup-pill active">Pending</button>
-        <button class="topup-pill">Approved</button>
-        <button class="topup-pill">Rejected</button>
-        <button class="topup-pill">All</button>
+      <div class="topup-pills" id="topupPills">
+        <button class="topup-pill active" data-status="pending">Pending</button>
+        <button class="topup-pill" data-status="approved">Approved</button>
+        <button class="topup-pill" data-status="rejected">Rejected</button>
+        <button class="topup-pill" data-status="all">All</button>
       </div>
 
-      <div class="topup-empty-card">
-        No top-up requests.
-      </div>
+      <div id="topupListContainer"></div>
     </div>
 
     <!-- 7. WITHDRAWALS VIEW -->
@@ -776,7 +774,7 @@
     <div id="tab-password-requests" class="tab-content">
       <div class="invitation-banner" style="background: #6366f1; margin-bottom: 20px; padding: 20px;">
         <h4 style="margin: 0; font-size: 0.9rem;">Pending password requests</h4>
-        <div style="font-size: 2rem; font-weight: 800; margin: 4px 0;">0</div>
+        <div style="font-size: 2rem; font-weight: 800; margin: 4px 0;" id="pwRequestPendingCount">0</div>
         <p style="margin: 0; font-size: 0.75rem; opacity: 0.9;">Users who forgot their password. Set a new one and share it with them (e.g. via chat) — no email is involved.</p>
       </div>
 
@@ -787,14 +785,11 @@
               <th>USER</th>
               <th>REQUESTED</th>
               <th>STATUS</th>
-              <th>HANDLED BY</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 40px;">No password reset requests.</td>
-            </tr>
+          <tbody id="pwRequestsBody">
+            <tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 40px;">No password reset requests.</td></tr>
           </tbody>
         </table>
       </div>
@@ -804,11 +799,11 @@
     <div id="tab-invitations" class="tab-content">
       <div class="stats-grid-4" style="grid-template-columns: 2fr 1fr; margin-bottom: 20px;">
         <div class="stat-card">
-          <div class="stat-value" style="color: #6366f1; font-size: 2rem;">5</div>
+          <div class="stat-value" style="color: #6366f1; font-size: 2rem;" id="invStatSignups">0</div>
           <div class="stat-label">Signups via invitations</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" style="font-size: 2rem;">1</div>
+          <div class="stat-value" style="font-size: 2rem;" id="invStatInviters">0</div>
           <div class="stat-label">Active inviters</div>
         </div>
       </div>
@@ -824,21 +819,14 @@
               <th>SIGNUPS</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><strong>Customer Support</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">kami_12@gmail.com</span></td>
-              <td><span class="badge-admin">admin</span></td>
-              <td><strong>Y66C6U2J</strong></td>
-              <td>5</td>
-            </tr>
-          </tbody>
+          <tbody id="invInvitersBody"></tbody>
         </table>
       </div>
 
       <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
           <h3 style="font-size: 0.85rem; font-weight: 800;">Signup log</h3>
-          <input type="text" class="form-input" placeholder="Search by name, email, code" style="width: 240px;">
+          <input type="text" class="form-input" id="invSignupSearch" placeholder="Search by name, email, code" style="width: 240px;" oninput="renderInvitationsTab()">
         </div>
         <table class="data-table">
           <thead>
@@ -849,40 +837,9 @@
               <th>SIGNED UP</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><strong>?!!</strong></td>
-              <td>Customer Support <span class="badge-admin">admin</span></td>
-              <td>Y66C6U2J</td>
-              <td>9/16/2026, 7:11:20 PM</td>
-            </tr>
-            <tr>
-              <td><strong>Chris</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">chrisosolang@gmail.com</span></td>
-              <td>Customer Support <span class="badge-admin">admin</span></td>
-              <td>Y66C6U2J</td>
-              <td>9/1/2026, 1:22:01 PM</td>
-            </tr>
-            <tr>
-              <td><strong>vv</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">nnn@gmail.com</span></td>
-              <td>Customer Support <span class="badge-admin">admin</span></td>
-              <td>Y66C6U2J</td>
-              <td>9/1/2026, 11:32:23 AM</td>
-            </tr>
-            <tr>
-              <td><strong>ess</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">sar@gmail.com</span></td>
-              <td>Customer Support <span class="badge-admin">admin</span></td>
-              <td>Y66C6U2J</td>
-              <td>9/1/2026, 11:23:58 AM</td>
-            </tr>
-            <tr>
-              <td><strong>eefrr</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">eefrr@gmail.com</span></td>
-              <td>Customer Support <span class="badge-admin">admin</span></td>
-              <td>Y66C6U2J</td>
-              <td>9/1/2026, 10:22:05 AM</td>
-            </tr>
-          </tbody>
+          <tbody id="invSignupLogBody"></tbody>
         </table>
-        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px;">Showing 1-5 of 5</div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px;" id="invSignupLogCount"></div>
       </div>
     </div>
 
@@ -975,7 +932,7 @@
       </div>
 
       <div class="card">
-        <input type="text" class="form-input" placeholder="Search activity..." style="max-width: 300px; margin-bottom: 16px;">
+        <input type="text" class="form-input" id="activitySearch" placeholder="Search activity..." style="max-width: 300px; margin-bottom: 16px;" oninput="renderActivityTab()">
         <table class="data-table">
           <thead>
             <tr>
@@ -984,23 +941,7 @@
               <th>WHEN</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><strong>Backup</strong></td>
-              <td>Daily backup<br><span style="font-size: 0.7rem; color: var(--text-muted);">8 users, 1 packages, 60 messages, 2 payments</span></td>
-              <td>9/19/2026, 7:00:24 PM</td>
-            </tr>
-            <tr>
-              <td><strong>Impersonate</strong></td>
-              <td>Accessed Chris<br><span style="font-size: 0.7rem; color: var(--text-muted);">chrisosolang@gmail.com</span></td>
-              <td>9/19/2026, 4:45:26 PM</td>
-            </tr>
-            <tr>
-              <td><strong>Manual Credit</strong></td>
-              <td>Manual amount added<br><span style="font-size: 0.7rem; color: var(--text-muted);">Manual amount added</span></td>
-              <td>9/19/2026, 4:45:10 PM</td>
-            </tr>
-          </tbody>
+          <tbody id="activityLogBody"></tbody>
         </table>
       </div>
     </div>
@@ -1018,32 +959,8 @@
               <th>WHEN</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><strong>Accessed Chris</strong></td>
-              <td>chrisosolang@gmail.com</td>
-              <td>9/19/2026, 4:45:26 PM</td>
-            </tr>
-            <tr>
-              <td><strong>Accessed Chris</strong></td>
-              <td>chrisosolang@gmail.com</td>
-              <td>9/19/2026, 4:29:18 PM</td>
-            </tr>
-            <tr>
-              <td><strong>Accessed Chris</strong></td>
-              <td>chrisosolang@gmail.com</td>
-              <td>9/19/2026, 4:29:12 PM</td>
-            </tr>
-            <tr>
-              <td><strong>Accessed Chris</strong></td>
-              <td>chrisosolang@gmail.com</td>
-              <td>9/19/2026, 4:27:34 PM</td>
-            </tr>
-            <tr>
-              <td><strong>Accessed Shiz</strong></td>
-              <td>shiz1198@gmail.com</td>
-              <td>9/17/2026, 7:07:10 AM</td>
-            </tr>
+          <tbody id="accessLogBody">
+            <tr><td colspan="3" style="text-align: center; color: var(--text-muted); padding: 40px;">No access events yet.</td></tr>
           </tbody>
         </table>
       </div>
@@ -1250,7 +1167,7 @@
       }
 
       if (list.length === 0) {
-        document.getElementById('modal-body').innerHTML = '<p style="font-size:0.85rem; color:#64748b; padding:20px 0; text-align:center;">Koi record nahi mila.</p>';
+        document.getElementById('modal-body').innerHTML = '<p style="font-size:0.85rem; color:#64748b; padding:20px 0; text-align:center;">No records found.</p>';
       } else {
         document.getElementById('modal-body').innerHTML = `
           <p style="font-size:0.85rem; color:#64748b; margin-bottom:12px;">${list.length} record(s):</p>
@@ -1330,12 +1247,22 @@
       renderAllUsers();
       renderAdminChatList();
       renderAdminWithdrawals();
+      renderTopupsTab();
+      renderPasswordRequestsTab();
+      renderInvitationsTab();
+      renderActivityTab();
+      renderAccessLogTab();
       setInterval(() => {
         renderAllUsers();
         renderAdminChatList();
         renderAdminChatMessages();
         renderAdminWithdrawals();
         renderDashboardStats();
+        renderTopupsTab();
+        renderPasswordRequestsTab();
+        renderInvitationsTab();
+        renderActivityTab();
+        renderAccessLogTab();
       }, 3000);
     };
 
@@ -1380,18 +1307,18 @@
       const admin = getAdminUser();
       const input = document.getElementById('customInviteInput');
       const value = input.value.trim();
-      if (!value) { alert('Code likhein ya "Regenerate" button use karein.'); return; }
+      if (!value) { alert('Please enter a code, or use the "Regenerate" button.'); return; }
       SogoAuth.setInviteCode(admin.email, value);
       input.value = '';
       setupInviteCard();
-      alert('Invitation code update ho gaya: ' + value.toUpperCase());
+      alert('Invitation code updated: ' + value.toUpperCase());
     }
 
     function regenerateInviteCode() {
       const admin = getAdminUser();
       SogoAuth.setInviteCode(admin.email, '');
       setupInviteCard();
-      alert('Naya invitation code: ' + currentInviteCode);
+      alert('New invitation code: ' + currentInviteCode);
     }
 
     /* ================= DATE RANGE FILTER ================= */
@@ -1535,7 +1462,7 @@
       heading.textContent = 'All Users (' + clients.length + ')';
 
       if (clients.length === 0) {
-        body.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted); padding:30px;">Koi client nahi mila.</td></tr>';
+        body.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted); padding:30px;">No clients found.</td></tr>';
         return;
       }
 
@@ -1571,11 +1498,12 @@
       const users = SogoAuth.getUsers();
       const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
       const current = user ? (user.balance || 0) : 0;
-      const input = prompt('Naya balance dalein (USD):', current);
+      const input = prompt('Enter new balance (USD):', current);
       if (input === null) return;
       const value = parseFloat(input);
-      if (isNaN(value) || value < 0) { alert('Sahi number dalein.'); return; }
+      if (isNaN(value) || value < 0) { alert('Please enter a valid number.'); return; }
       SogoAuth.updateUser(email, { balance: value });
+      SogoAuth.logActivity('manual_credit', `Balance for ${user.name} manually set to $${value.toFixed(2)}`, { email });
       renderAllUsers();
       renderDashboardStats();
     }
@@ -1603,28 +1531,30 @@
     }
 
     function accessAsUser(email) {
-      if (!confirm('Aap is client ke account mein login ho jayenge (isi browser mein). Wapas aane ke liye dobara Admin se login karna hoga. Continue karein?')) return;
+      if (!confirm("You will be logged into this client's account (in this browser). You'll need to log back in as Admin afterwards. Continue?")) return;
       SogoAuth.impersonate(email);
     }
 
     function setUserPassword(email) {
-      const newPass = prompt('Is user ke liye naya password likhein:');
+      const newPass = prompt('Enter a new password for this user:');
       if (newPass === null) return;
       if (newPass.length < 4) { alert('Password kam az kam 4 characters ka ho.'); return; }
       SogoAuth.updateUser(email, { password: newPass });
-      alert('Password update ho gaya. User ko naya password bata dein (chat ke zariye).');
+      alert('Password updated. Let the user know their new password (via chat).');
     }
 
     function toggleBlockUser(email) {
       const user = SogoAuth.getUsers().find(u => u.email.toLowerCase() === email.toLowerCase());
       if (!user) return;
-      SogoAuth.updateUser(email, { blocked: !user.blocked });
+      const newState = !user.blocked;
+      SogoAuth.updateUser(email, { blocked: newState });
+      SogoAuth.logActivity(newState ? 'user_blocked' : 'user_unblocked', `${user.name} was ${newState ? 'blocked' : 'unblocked'}`, { email });
       renderAllUsers();
       renderDashboardStats();
     }
 
     function deleteUserConfirm(email) {
-      if (!confirm('Kya aap waqai is user ko permanently delete karna chahte hain? Ye undo nahi ho sakta.')) return;
+      if (!confirm('Are you sure you want to permanently delete this user? This cannot be undone.')) return;
       SogoAuth.deleteUser(email);
       renderAllUsers();
       renderDashboardStats();
@@ -1639,7 +1569,7 @@
       const clients = SogoAuth.getUsers().filter(u => u.role === 'client');
 
       if (clients.length === 0) {
-        list.innerHTML = '<div style="padding:16px; font-size:12px; color:var(--text-muted);">Koi client nahi hai.</div>';
+        list.innerHTML = '<div style="padding:16px; font-size:12px; color:var(--text-muted);">No clients yet.</div>';
         return;
       }
 
@@ -1677,7 +1607,7 @@
       box.innerHTML = thread.map(m => {
         const fromAdmin = m.from === 'admin';
         return `<div class="msg-bubble ${fromAdmin ? 'msg-right' : 'msg-left'}">${escapeHtmlAdmin(m.text)}<br><span style="font-size:0.65rem; opacity:0.7;">${new Date(m.time).toLocaleString()}</span></div>`;
-      }).join('') || '<p style="color:var(--text-muted); font-size:12px; padding:10px;">Koi message nahi hai.</p>';
+      }).join('') || '<p style="color:var(--text-muted); font-size:12px; padding:10px;">No messages yet.</p>';
     }
 
     function sendAdminChat() {
@@ -1697,7 +1627,7 @@
       const list = SogoAuth.getWithdrawals().slice().reverse();
 
       if (list.length === 0) {
-        body.innerHTML = '<tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:30px;">Koi withdrawal request nahi hai.</td></tr>';
+        body.innerHTML = '<tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:30px;">No withdrawal requests yet.</td></tr>';
         return;
       }
 
@@ -1734,6 +1664,235 @@
       SogoAuth.updateWithdrawal(id, 'rejected');
       renderAdminWithdrawals();
       renderDashboardStats();
+    }
+
+    /* ================= TOP-UP REQUESTS ================= */
+    let currentTopupFilter = 'pending';
+
+    document.addEventListener('click', function (e) {
+      const pill = e.target.closest('#topupPills .topup-pill');
+      if (pill) {
+        currentTopupFilter = pill.dataset.status;
+        document.querySelectorAll('#topupPills .topup-pill').forEach(b => b.classList.toggle('active', b === pill));
+        renderTopupsTab();
+      }
+    });
+
+    function renderTopupsTab() {
+      const countEl = document.getElementById('topupPendingCount');
+      const container = document.getElementById('topupListContainer');
+      if (!container) return;
+
+      const all = SogoAuth.getTopups();
+      countEl.textContent = all.filter(t => t.status === 'pending').length;
+
+      const list = (currentTopupFilter === 'all' ? all : all.filter(t => t.status === currentTopupFilter)).slice().reverse();
+
+      if (list.length === 0) {
+        container.innerHTML = '<div class="topup-empty-card">No top-up requests.</div>';
+        return;
+      }
+
+      const badgeClass = { pending: 'badge-pending', approved: 'badge-active', rejected: 'badge-pending' };
+      container.innerHTML = `
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <table class="data-table">
+            <thead><tr><th>USER</th><th>AMOUNT</th><th>NOTE</th><th>REQUESTED</th><th>STATUS</th><th>ACTION</th></tr></thead>
+            <tbody>
+              ${list.map(t => `
+                <tr>
+                  <td><strong>${escapeHtmlAdmin(t.name)}</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">${escapeHtmlAdmin(t.email)}</span></td>
+                  <td><strong>$${t.amount.toFixed(2)}</strong></td>
+                  <td>${escapeHtmlAdmin(t.note || '—')}</td>
+                  <td>${new Date(t.requestedAt).toLocaleString()}</td>
+                  <td><span class="${badgeClass[t.status]}">${t.status}</span></td>
+                  <td>
+                    ${t.status === 'pending' ? `
+                      <button class="btn-green" style="padding:4px 10px; font-size:0.7rem;" onclick="approveTopup('${t.id}')">Approve</button>
+                      <button class="btn-red" style="padding:4px 10px; font-size:0.7rem; margin-left:4px;" onclick="rejectTopup('${t.id}')">Reject</button>
+                    ` : '—'}
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function approveTopup(id) {
+      SogoAuth.updateTopup(id, 'approved');
+      renderTopupsTab();
+      renderAllUsers();
+      renderDashboardStats();
+    }
+
+    function rejectTopup(id) {
+      SogoAuth.updateTopup(id, 'rejected');
+      renderTopupsTab();
+    }
+
+    /* ================= PASSWORD REQUESTS ================= */
+    function renderPasswordRequestsTab() {
+      const body = document.getElementById('pwRequestsBody');
+      const countEl = document.getElementById('pwRequestPendingCount');
+      if (!body) return;
+      const all = SogoAuth.getPasswordRequests();
+      countEl.textContent = all.filter(r => r.status === 'pending').length;
+
+      if (all.length === 0) {
+        body.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding:40px;">No password reset requests.</td></tr>';
+        return;
+      }
+
+      const badgeClass = { pending: 'badge-pending', fulfilled: 'badge-active', dismissed: 'badge-pending' };
+      body.innerHTML = all.slice().reverse().map(r => `
+        <tr>
+          <td><strong>${escapeHtmlAdmin(r.name)}</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">${escapeHtmlAdmin(r.email)}</span></td>
+          <td>${new Date(r.requestedAt).toLocaleString()}</td>
+          <td><span class="${badgeClass[r.status]}">${r.status}</span></td>
+          <td>
+            ${r.status === 'pending' ? `
+              <button class="btn-green" style="padding:4px 10px; font-size:0.7rem;" onclick="fulfillPwRequest('${r.id}')">Set new password</button>
+              <button class="btn-red" style="padding:4px 10px; font-size:0.7rem; margin-left:4px;" onclick="dismissPwRequest('${r.id}')">Dismiss</button>
+            ` : '—'}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function fulfillPwRequest(id) {
+      const newPass = prompt('Enter a new password for this user:');
+      if (newPass === null) return;
+      if (newPass.length < 4) { alert('Password must be at least 4 characters.'); return; }
+      SogoAuth.fulfillPasswordRequest(id, newPass);
+      renderPasswordRequestsTab();
+      alert('Password updated. Let the user know their new password (via chat).');
+    }
+
+    function dismissPwRequest(id) {
+      SogoAuth.dismissPasswordRequest(id);
+      renderPasswordRequestsTab();
+    }
+
+    /* ================= INVITATIONS TAB ================= */
+    function renderInvitationsTab() {
+      const clients = SogoAuth.getUsers().filter(u => u.role === 'client');
+      const allUsers = SogoAuth.getUsers();
+      const signupsViaInvite = clients.length; // every client signup requires a code
+
+      document.getElementById('invStatSignups').textContent = signupsViaInvite;
+
+      // Group by inviter
+      const inviterCounts = {};
+      clients.forEach(u => {
+        const key = u.invitedByEmail || 'unknown';
+        inviterCounts[key] = (inviterCounts[key] || 0) + 1;
+      });
+      const inviterEmails = Object.keys(inviterCounts).filter(e => e !== 'unknown');
+      document.getElementById('invStatInviters').textContent = inviterEmails.length;
+
+      const invitersBody = document.getElementById('invInvitersBody');
+      if (invitersBody) {
+        if (inviterEmails.length === 0) {
+          invitersBody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding:20px;">No invitations used yet.</td></tr>';
+        } else {
+          invitersBody.innerHTML = inviterEmails.map(email => {
+            const inviter = allUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
+            if (!inviter) return '';
+            return `
+              <tr>
+                <td><strong>${escapeHtmlAdmin(inviter.name)}</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">${escapeHtmlAdmin(inviter.email)}</span></td>
+                <td><span class="${inviter.role === 'admin' ? 'badge-admin' : 'badge-active'}">${inviter.role}</span></td>
+                <td><strong>${escapeHtmlAdmin(inviter.myInviteCode)}</strong></td>
+                <td>${inviterCounts[email]}</td>
+              </tr>
+            `;
+          }).join('');
+        }
+      }
+
+      let log = clients.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      const query = (document.getElementById('invSignupSearch') || {}).value;
+      if (query && query.trim()) {
+        const q = query.trim().toLowerCase();
+        log = log.filter(u => (u.name || '').toLowerCase().includes(q) || (u.email || '').toLowerCase().includes(q) || (u.invitationCode || '').toLowerCase().includes(q));
+      }
+
+      const logBody = document.getElementById('invSignupLogBody');
+      const logCount = document.getElementById('invSignupLogCount');
+      if (logBody) {
+        if (log.length === 0) {
+          logBody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding:20px;">No signups found.</td></tr>';
+        } else {
+          logBody.innerHTML = log.map(u => {
+            const inviter = allUsers.find(x => x.email.toLowerCase() === (u.invitedByEmail || '').toLowerCase());
+            return `
+              <tr>
+                <td><strong>${escapeHtmlAdmin(u.name)}</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">${escapeHtmlAdmin(u.email)}</span></td>
+                <td>${inviter ? escapeHtmlAdmin(inviter.name) + (inviter.role === 'admin' ? ' <span class="badge-admin">admin</span>' : '') : '—'}</td>
+                <td>${escapeHtmlAdmin(u.invitationCode || '—')}</td>
+                <td>${u.createdAt ? new Date(u.createdAt).toLocaleString() : '—'}</td>
+              </tr>
+            `;
+          }).join('');
+        }
+        if (logCount) logCount.textContent = 'Showing 1-' + log.length + ' of ' + log.length;
+      }
+    }
+
+    /* ================= ACTIVITY & ACCESS LOG ================= */
+    function renderActivityTab() {
+      const body = document.getElementById('activityLogBody');
+      if (!body) return;
+      let list = SogoAuth.getActivity().slice().reverse();
+
+      const query = (document.getElementById('activitySearch') || {}).value;
+      if (query && query.trim()) {
+        const q = query.trim().toLowerCase();
+        list = list.filter(a => a.message.toLowerCase().includes(q) || a.type.toLowerCase().includes(q));
+      }
+
+      if (list.length === 0) {
+        body.innerHTML = '<tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding:30px;">No activity yet.</td></tr>';
+        return;
+      }
+
+      const labelMap = {
+        login: 'Login', signup: 'Signup', user_created_by_admin: 'User Created',
+        user_deleted: 'User Deleted', withdrawal_requested: 'Withdrawal Requested',
+        withdrawal_approved: 'Withdrawal Approved', withdrawal_rejected: 'Withdrawal Rejected',
+        topup_requested: 'Top-up Requested', topup_approved: 'Top-up Approved', topup_rejected: 'Top-up Rejected',
+        password_reset_requested: 'Password Reset Requested', password_reset_fulfilled: 'Password Reset',
+        admin_access: 'Impersonate', manual_credit: 'Manual Credit', user_blocked: 'Blocked', user_unblocked: 'Unblocked'
+      };
+
+      body.innerHTML = list.slice(0, 100).map(a => `
+        <tr>
+          <td><strong>${labelMap[a.type] || a.type}</strong></td>
+          <td>${escapeHtmlAdmin(a.message)}</td>
+          <td>${new Date(a.time).toLocaleString()}</td>
+        </tr>
+      `).join('');
+    }
+
+    function renderAccessLogTab() {
+      const body = document.getElementById('accessLogBody');
+      if (!body) return;
+      const list = SogoAuth.getActivity().filter(a => a.type === 'admin_access').slice().reverse();
+
+      if (list.length === 0) {
+        body.innerHTML = '<tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding:40px;">No access events yet.</td></tr>';
+        return;
+      }
+
+      body.innerHTML = list.map(a => `
+        <tr>
+          <td><strong>${escapeHtmlAdmin(a.message.split(' (')[0])}</strong></td>
+          <td>${escapeHtmlAdmin(a.meta.email || '')}</td>
+          <td>${new Date(a.time).toLocaleString()}</td>
+        </tr>
+      `).join('');
     }
   </script>
 </body>

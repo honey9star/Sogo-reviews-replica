@@ -150,13 +150,23 @@
       event.preventDefault();
       const email = document.getElementById('resetEmail').value;
       const msgEl = document.getElementById('resetMessage');
-      
-      // Success response notification
+
+      const result = SogoAuth.requestPasswordReset(email);
+      if (!result.ok) {
+        msgEl.style.color = '#f87171';
+        msgEl.style.backgroundColor = 'rgba(248, 113, 113, 0.1)';
+        msgEl.style.borderColor = 'rgba(248, 113, 113, 0.25)';
+        msgEl.textContent = result.message;
+        msgEl.style.display = 'block';
+        return;
+      }
+
       msgEl.style.color = '#34d399';
       msgEl.style.backgroundColor = 'rgba(52, 211, 153, 0.1)';
       msgEl.style.borderColor = 'rgba(52, 211, 153, 0.25)';
-      msgEl.textContent = 'Password reset request bhej di gayi hai.';
+      msgEl.textContent = 'Password reset request sent. Our support team will contact you shortly.';
       msgEl.style.display = 'block';
+      document.getElementById('resetForm').reset();
     }
 
     function handleSignup(event) {
